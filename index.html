@@ -3,46 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abuja Commuter Chatbot</title>
+    <title>Shekwoni Abuja Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
-        #chat-container { max-width: 600px; margin: auto; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        #chat-box { height: 400px; overflow-y: scroll; padding: 10px; border-bottom: 1px solid #ddd; }
-        #chat-box p { margin: 5px 0; }
-        .user { text-align: right; color: #2c3e50; }
-        .bot { color: #005577; }
-        #input-container { display: flex; padding: 10px; }
-        #user-input { flex: 1; padding: 8px; border: 1px solid #333; border-radius: 4px; font-size: 16px; }
-        #send-btn { padding: 8px 16px; margin-left: 10px; background: #005577; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        #send-btn:hover { background: #003d55; }
-        .error { color: #d32f2f; }
-        #language-selection { padding: 10px; text-align: center; }
-        #language-selection label { margin: 0 10px; }
-        #change-lang-btn { padding: 8px 16px; background: #555; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
-        #change-lang-btn:hover { background: #333; }
-        .hausa { direction: rtl; text-align: right; font-family: 'Noto Sans Arabic', Arial, sans-serif; }
-        @media (max-width: 600px) {
-            #chat-container { width: 90%; }
-            #user-input { font-size: 14px; }
-            #send-btn { font-size: 14px; }
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(to bottom, #e0f2fe, #bfdbfe); 
+            min-height: 100vh; 
+        }
+        .hausa { 
+            font-family: 'Noto Sans Arabic', Arial, sans-serif; 
+            direction: rtl; 
+        }
+        .chat-bubble { 
+            max-width: 75%; 
+            margin: 0.5rem 1rem; 
+            padding: 0.75rem 1rem; 
+            border-radius: 0.75rem; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            position: relative;
+        }
+        .user-bubble { 
+            background: #3b82f6; 
+            color: white; 
+            margin-left: auto; 
+            border-bottom-right-radius: 0; 
+        }
+        .bot-bubble { 
+            background: #e5e7eb; 
+            color: #1f2937; 
+            margin-right: auto; 
+            border-bottom-left-radius: 0; 
+        }
+        .timestamp { 
+            font-size: 0.65rem; 
+            color: #6b7280; 
+            margin-top: 0.25rem; 
+            text-align: right; 
+        }
+        .spinner { 
+            border: 2px solid #f3f3f3; 
+            border-top: 2px solid #3b82f6; 
+            border-radius: 50%; 
+            width: 1.5rem; 
+            height: 1.5rem; 
+            animation: spin 1s linear infinite; 
+            margin: 0.5rem auto; 
+        }
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+        #chat-box::-webkit-scrollbar { 
+            width: 0.5rem; 
+        }
+        #chat-box::-webkit-scrollbar-thumb { 
+            background: #3b82f6; 
+            border-radius: 0.25rem; 
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div id="chat-container" role="region" aria-label="Chatbot interface">
-        <div id="language-selection" role="radiogroup" aria-label="Select language">
-            <p id="lang-prompt">Welcome to Shekwoni Abuja Guide. Please select your preferred language:</p>
-            <label><input type="radio" name="language" value="english" checked tabindex="0"> English</label>
-            <label><input type="radio" name="language" value="hausa" tabindex="0"> Hausa</label>
-            <button id="change-lang-btn" aria-label="Confirm language selection" tabindex="0">Confirm Language</button>
+<body class="flex items-center justify-center">
+    <div id="chat-container" class="w-full max-w-lg bg-white rounded-2xl shadow-xl overflow-hidden" role="region" aria-label="Shekwoni Abuja Guide Chatbot">
+        <div id="language-selection" class="p-4 bg-gray-100 border-b border-gray-200" role="radiogroup" aria-label="Select language">
+            <p id="lang-prompt" class="text-center text-gray-700 font-medium mb-2"></p>
+            <div class="flex justify-center space-x-4">
+                <label class="flex items-center">
+                    <input type="radio" name="language" value="english" checked class="mr-2" tabindex="0">
+                    <span class="text-gray-700">English</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="radio" name="language" value="hausa" class="mr-2" tabindex="0">
+                    <span class="text-gray-700">Hausa</span>
+                </label>
+            </div>
+            <button id="change-lang-btn" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 w-full" aria-label="Confirm language selection" tabindex="0">Confirm Language</button>
         </div>
-        <div id="chat-box" role="log" aria-live="polite" style="display: none;">
-            <p class="bot" id="welcome-message"></p>
-        </div>
-        <div id="input-container" style="display: none;">
-            <input type="text" id="user-input" placeholder="Type your message, e.g., starting address to destination" aria-label="Enter your route query">
-            <button id="send-btn" aria-label="Send message">Send</button>
+        <div id="chat-box" class="h-96 overflow-y-auto p-4" role="log" aria-live="polite"></div>
+        <div id="input-container" class="p-4 bg-gray-50 border-t border-gray-200 flex items-center space-x-2">
+            <button id="toggle-lang-btn" class="px-3 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition duration-200" aria-label="Change language" style="display: none;">Change Language</button>
+            <input type="text" id="user-input" class="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your message..." aria-label="Enter your route query">
+            <button id="send-btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200" aria-label="Send message">Send</button>
         </div>
     </div>
     <script src="chatbot.js"></script>
