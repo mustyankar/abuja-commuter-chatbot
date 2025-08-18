@@ -393,6 +393,7 @@ function setLanguage(language) {
         }
 
         langPrompt.style.color = '';
+        langPrompt.className = 'text-center text-gray-700 font-medium text-sm sm:text-base mb-2';
         languageSelection.style.display = 'none';
         chatBox.style.display = 'block';
         inputContainer.style.display = 'flex';
@@ -402,28 +403,28 @@ function setLanguage(language) {
         welcomeMessage.className = 'bot-bubble';
         if (language === 'hausa') {
             chatContainer.classList.add('hausa');
-            langPrompt.innerHTML = 'Maraba da Shekwoni Abuja Jagora. Zaɓi yaren da kake so:';
-            userInput.placeholder = 'Rubuta tambayarka, misali, Daga Wuse zuwa Asokoro';
-            userInput.setAttribute('aria-label', 'Shigar da tambayar hanya');
+            langPrompt.innerHTML = 'Sannu! Ka zaɓi yaren da ka fi so!';
+            userInput.placeholder = 'Rubuta hanyarka, kamar Daga Wuse zuwa Asokoro';
+            userInput.setAttribute('aria-label', 'Shigar da hanyarka');
             sendBtn.innerHTML = 'Aika';
             sendBtn.setAttribute('aria-label', 'Aika saƙo');
-            changeLangBtn.innerHTML = 'Tabatar da Yare';
-            changeLangBtn.setAttribute('aria-label', 'Tabatar da zaɓin yare');
+            changeLangBtn.innerHTML = 'Tabatar Yare';
+            changeLangBtn.setAttribute('aria-label', 'Tabatar da yare');
             toggleLangBtn.innerHTML = 'Canza Yare';
             toggleLangBtn.setAttribute('aria-label', 'Canza yare');
-            welcomeMessage.innerHTML = 'Sannu! Na ji ka ke son taimako da hanya. Rubuta adireshi kamar “Daga Wuse zuwa Asokoro”, zan ba ka shawarar motocin jama’a (Bas, Keke, Taksi) da e-hailing idan ya kamata, musamman a dare!';
+            welcomeMessage.innerHTML = 'Sannu! Ina nan don taimaka maka da tafiyarka. Rubuta hanyarka kamar “Daga Wuse zuwa Asokoro”, zan nuna maka motocin jama’a (Bas, Keke, Taksi) da kuma e-hailing idan ya dace, musamman a dare!';
         } else {
             chatContainer.classList.remove('hausa');
-            langPrompt.innerHTML = 'Welcome to Shekwoni Abuja Guide. Please select your preferred language:';
-            userInput.placeholder = 'Type your message, e.g., From Wuse to Asokoro';
-            userInput.setAttribute('aria-label', 'Enter your route query');
+            langPrompt.innerHTML = 'Hey! Pick your favorite language!';
+            userInput.placeholder = 'Type your route, like From Wuse to Asokoro';
+            userInput.setAttribute('aria-label', 'Enter your route');
             sendBtn.innerHTML = 'Send';
             sendBtn.setAttribute('aria-label', 'Send message');
-            changeLangBtn.innerHTML = 'Confirm Language';
-            changeLangBtn.setAttribute('aria-label', 'Confirm language selection');
-            toggleLangBtn.innerHTML = 'Change Language';
-            toggleLangBtn.setAttribute('aria-label', 'Change language');
-            welcomeMessage.innerHTML = 'Hi! I’m here to help with your commute. Type your route like “From Wuse to Asokoro”, and I’ll suggest public transport (Bus, Keke, Taxi) and e-hailing options if needed, especially at night!';
+            changeLangBtn.innerHTML = 'Confirm';
+            changeLangBtn.setAttribute('aria-label', 'Confirm language');
+            toggleLangBtn.innerHTML = 'Switch Language';
+            toggleLangBtn.setAttribute('aria-label', 'Switch language');
+            welcomeMessage.innerHTML = 'Hey! Ready to plan your trip? Just type your route like “From Wuse to Asokoro”, and I’ll suggest buses, kekes, taxis, or e-hailing if needed, especially at night!';
         }
         welcomeMessage.innerHTML += `<div class="timestamp">${getFormattedTime()}</div>`;
         chatBox.appendChild(welcomeMessage);
@@ -435,7 +436,7 @@ function setLanguage(language) {
         if (chatBox) {
             const errorMessage = document.createElement('div');
             errorMessage.className = 'bot-bubble text-red-600';
-            errorMessage.innerHTML = 'Oops, something went wrong. Defaulting to English. Try typing your route!';
+            errorMessage.innerHTML = language === 'hausa' ? 'Kai! Wani abu ya faru. Mu koma Turanci!' : 'Oops, something broke. Let’s switch to English!';
             errorMessage.innerHTML += `<div class="timestamp">${getFormattedTime()}</div>`;
             chatBox.appendChild(errorMessage);
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -455,9 +456,9 @@ function showLanguageSelection() {
         const langPrompt = document.getElementById('lang-prompt');
         if (langPrompt) {
             langPrompt.innerHTML = selectedLanguage === 'hausa' 
-                ? 'Maraba da Shekwoni Abuja Jagora. Zaɓi yaren da kake so:'
-                : 'Welcome to Shekwoni Abuja Guide. Please select your preferred language:';
-            langPrompt.style.color = '';
+                ? 'Sannu! Ka zaɓi yaren da ka fi so!'
+                : 'Hey! Pick your favorite language!';
+            langPrompt.className = 'text-center text-gray-700 font-medium text-sm sm:text-base mb-2';
         }
         document.querySelector(`input[name="language"][value="${selectedLanguage || 'english'}"]`).focus();
     }
@@ -475,9 +476,9 @@ function handleLanguageConfirm() {
 
         if (!selectedRadio) {
             langPrompt.innerHTML = selectedLanguage === 'hausa'
-                ? 'Kuskure: Zaɓi yare kafin ci gaba.'
-                : 'Please select a language to continue.';
-            langPrompt.className = 'text-center text-red-600 font-medium mb-2';
+                ? 'Kai! Ka zaɓi yare don ci gaba!'
+                : 'Hey, pick a language to continue!';
+            langPrompt.className = 'text-center text-red-600 font-medium text-sm sm:text-base mb-2';
             return;
         }
 
@@ -487,9 +488,9 @@ function handleLanguageConfirm() {
         const langPrompt = document.getElementById('lang-prompt');
         if (langPrompt) {
             langPrompt.innerHTML = selectedLanguage === 'hausa' 
-                ? 'Kuskure: Ba za a iya canza yare ba. Sake gwadawa.'
-                : 'Error: Could not change language. Please try again.';
-            langPrompt.className = 'text-center text-red-600 font-medium mb-2';
+                ? 'Kai! Ba zan iya canza yare ba. Sake gwadawa!'
+                : 'Oops, couldn’t switch language. Try again!';
+            langPrompt.className = 'text-center text-red-600 font-medium text-sm sm:text-base mb-2';
         }
     }
 }
@@ -507,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (chatBox) {
                     const welcomeMessage = document.createElement('div');
                     welcomeMessage.className = 'bot-bubble';
-                    welcomeMessage.innerHTML = 'Hi! Welcome to Shekwoni Abuja Guide. Please choose a language to start!';
+                    welcomeMessage.innerHTML = 'Hey! Welcome to Shekwoni Abuja Guide. Pick a language to get started!';
                     welcomeMessage.innerHTML += `<div class="timestamp">${getFormattedTime()}</div>`;
                     chatBox.appendChild(welcomeMessage);
                     chatBox.scrollTop = chatBox.scrollHeight;
@@ -611,13 +612,13 @@ function chatbotResponse(userInput) {
         let hasAddress = input.includes("street") || input.includes("close") || input.includes("inwuse2") || input.includes("asokoro") || input.includes("nyanya") || input.includes("gwagwalada") || input.includes("kuje") || input.includes("bwari") || input.includes("abaji") || input.includes("kwali");
 
         if (!selectedLanguage) {
-            return 'Please select a language first!';
+            return 'Hey, pick a language first!';
         }
 
         if (selectedLanguage === 'hausa' && !isHausaInput) {
-            return 'Kai! Don Allah rubuta a Hausa, kamar “Daga Wuse zuwa Asokoro”. <span class="text-red-600">Kuskure: A shigar da Hausa.</span>';
+            return 'Kai! Rubuta a Hausa, kamar “Daga Wuse zuwa Asokoro”! <span class="text-red-600">Ba ka ji Hausa ba?</span>';
         } else if (selectedLanguage === 'english' && isHausaInput) {
-            return 'Oops, please use English, like “From Wuse to Asokoro”. <span class="text-red-600">Error: Use English input.</span>';
+            return 'Oops, stick to English, like “From Wuse to Asokoro”! <span class="text-red-600">Not in English?</span>';
         }
 
         let start, end;
@@ -627,8 +628,8 @@ function chatbotResponse(userInput) {
                 end = input.split("zuwa")[1].trim();
             } catch {
                 return selectedLanguage === 'hausa'
-                    ? 'Kai! Rubuta hanyarka da kyau, kamar “Daga Wuse zuwa Asokoro”. <span class="text-red-600">Kuskure: Tsari ba daidai ba ne.</span>'
-                    : 'Oops, please clarify your route, like “From Wuse to Asokoro”. <span class="text-red-600">Error: Invalid format.</span>';
+                    ? 'Kai! Rubuta hanyarka kamar “Daga Wuse zuwa Asokoro”! <span class="text-red-600">Ba daidai ba ne!</span>'
+                    : 'Oops, try your route like “From Wuse to Asokoro”! <span class="text-red-600">Wrong format!</span>';
             }
         } else if (input.includes("from") && input.includes("to")) {
             try {
@@ -636,21 +637,21 @@ function chatbotResponse(userInput) {
                 end = input.split("to")[1].trim();
             } catch {
                 return selectedLanguage === 'hausa'
-                    ? 'Kai! Rubuta hanyarka da kyau, kamar “Daga Wuse zuwa Asokoro”. <span class="text-red-600">Kuskure: Tsari ba daidai ba ne.</span>'
-                    : 'Oops, please clarify your route, like “From Wuse to Asokoro”. <span class="text-red-600">Error: Invalid format.</span>';
+                    ? 'Kai! Rubuta hanyarka kamar “Daga Wuse zuwa Asokoro”! <span class="text-red-600">Ba daidai ba ne!</span>'
+                    : 'Oops, try your route like “From Wuse to Asokoro”! <span class="text-red-600">Wrong format!</span>';
             }
         } else {
             return selectedLanguage === 'hausa'
-                ? 'Kai! Ka ji “Daga” da “Zuwa”, kamar “Daga Wuse zuwa Asokoro”. <span class="text-red-600">Kuskure: Rashin “daga”/“zuwa”.</span>'
-                : 'Oops, please use “From” and “To”, like “From Wuse to Asokoro”. <span class="text-red-600">Error: Missing “from”/“to”.</span>';
+                ? 'Kai! Ka ji “Daga” da “Zuwa”, kamar “Daga Wuse zuwa Asokoro”! <span class="text-red-600">Ba ka ji “Daga”/“Zuwa” ba?</span>'
+                : 'Oops, use “From” and “To”, like “From Wuse to Asokoro”! <span class="text-red-600">Missing “From”/“To”?</span>';
         }
 
         const startSuggestion = suggestLocation(start);
         const endSuggestion = suggestLocation(end);
         if (!startSuggestion || !endSuggestion) {
             return selectedLanguage === 'hausa'
-                ? `Kai! Shin kana nufin daga ${startSuggestion || start} zuwa ${endSuggestion || end}? Gwada kuma! <span class="text-red-600">Kuskure: Wuri ba a gane shi ba.</span>`
-                : `Oops, did you mean from ${startSuggestion || start} to ${endSuggestion || end}? Try again! <span class="text-red-600">Error: Unrecognized location.</span>`;
+                ? `Kai! Shin kana nufin daga ${startSuggestion || start} zuwa ${endSuggestion || end}? Sake gwadawa! <span class="text-red-600">Ba mu gane wurin ba!</span>`
+                : `Hmm, did you mean from ${startSuggestion || start} to ${endSuggestion || end}? Give it another shot! <span class="text-red-600">Couldn’t find that place!</span>`;
         }
 
         start = startSuggestion;
@@ -664,8 +665,8 @@ function chatbotResponse(userInput) {
         if (routes[key]) {
             const route = routes[key];
             let response = selectedLanguage === 'hausa'
-                ? `Sannu! Mu shirya tafiyarka daga ${start.charAt(0).toUpperCase() + start.slice(1)} zuwa ${end.charAt(0).toUpperCase() + end.slice(1)}! Ga hanyoyinka:<br>`
-                : `Hi! Let’s plan your trip from ${start.charAt(0).toUpperCase() + start.slice(1)} to ${end.charAt(0).toUpperCase() + end.slice(1)}! Here’s how you can go:<br>`;
+                ? `Sannu! Zan taimaka maka daga ${start.charAt(0).toUpperCase() + start.slice(1)} zuwa ${end.charAt(0).toUpperCase() + end.slice(1)}! Ga shawarata:<br>`
+                : `Hey! Let’s get you from ${start.charAt(0).toUpperCase() + start.slice(1)} to ${end.charAt(0).toUpperCase() + end.slice(1)}! Here’s my advice:<br>`;
 
             const currentHour = new Date().getHours();
             const isNightTrip = currentHour < 6 || currentHour >= 20;
@@ -674,8 +675,8 @@ function chatbotResponse(userInput) {
 
             if (hasAddress && route.start_address_details.distance_to_bus_stop <= 1) {
                 response += selectedLanguage === 'hausa'
-                    ? `<b>Fara Adireshi:</b> ${route.start_address_details.hausa_description} <a href="${route.start_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba a Google Maps]</a><br>`
-                    : `<b>Starting Point:</b> ${route.start_address_details.description} <a href="${route.start_address_details.map_link}" target="_blank" class="text-blue-600 underline">[View on Google Maps]</a><br>`;
+                    ? `<b>Fara Adireshi:</b> ${route.start_address_details.hausa_description} <a href="${route.start_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba Google Maps]</a><br>`
+                    : `<b>Starting Point:</b> ${route.start_address_details.description} <a href="${route.start_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Check Google Maps]</a><br>`;
             }
 
             response += selectedLanguage === 'hausa'
@@ -683,26 +684,26 @@ function chatbotResponse(userInput) {
                   `<b>Motoci:</b> ${route.main_route.transport.join(", ")}<br>` +
                   `<b>Kudi (NGN):</b> ${route.main_route.fares.join(", ")}<br>` +
                   `<b>Lokaci:</b> ${route.main_route.hausa_time}<br>` +
-                  `<b>Tambaya Zirga-zirga:</b> ${route.main_route.hausa_traffic}<br><br>` +
-                  `<b>Hanyar Madadin:</b> ${route.alternative_route.hausa_description}<br>` +
+                  `<b>Zirga-zirga:</b> ${route.main_route.hausa_traffic}<br><br>` +
+                  `<b>Wata Hanya:</b> ${route.alternative_route.hausa_description}<br>` +
                   `<b>Motoci:</b> ${route.alternative_route.transport.join(", ")}<br>` +
                   `<b>Kudi (NGN):</b> ${route.alternative_route.fares.join(", ")}<br>` +
                   `<b>Lokaci:</b> ${route.alternative_route.hausa_time}<br>` +
-                  `<b>Tambaya Zirga-zirga:</b> ${route.alternative_route.hausa_traffic}<br><br>`
+                  `<b>Zirga-zirga:</b> ${route.alternative_route.hausa_traffic}<br><br>`
                 : `<b>Main Route:</b> ${route.main_route.description}<br>` +
                   `<b>Transport:</b> ${route.main_route.transport.join(", ")}<br>` +
                   `<b>Fares (NGN):</b> ${route.main_route.fares.join(", ")}<br>` +
                   `<b>Time:</b> ${route.main_route.time}<br>` +
-                  `<b>Traffic Note:</b> ${route.main_route.traffic}<br><br>` +
-                  `<b>Alternative Route:</b> ${route.alternative_route.description}<br>` +
+                  `<b>Traffic:</b> ${route.main_route.traffic}<br><br>` +
+                  `<b>Another Route:</b> ${route.alternative_route.description}<br>` +
                   `<b>Transport:</b> ${route.alternative_route.transport.join(", ")}<br>` +
                   `<b>Fares (NGN):</b> ${route.alternative_route.fares.join(", ")}<br>` +
                   `<b>Time:</b> ${route.alternative_route.time}<br>` +
-                  `<b>Traffic Note:</b> ${route.alternative_route.traffic}<br><br>`;
+                  `<b>Traffic:</b> ${route.alternative_route.traffic}<br><br>`;
 
             if (hasAddress && (isNightTrip && !isSingleModeClose || hasSecurityConcerns)) {
                 response += selectedLanguage === 'hausa'
-                    ? `<b>Shawara kan E-Hailing:</b> ${route.ehailing_advisory.hausa_description}<br>`
+                    ? `<b>Shawara E-Hailing:</b> ${route.ehailing_advisory.hausa_description}<br>`
                     : `<b>E-Hailing Tip:</b> ${route.ehailing_advisory.description}<br>`;
             }
 
@@ -714,26 +715,26 @@ function chatbotResponse(userInput) {
                 }
                 if (route.end_address_details.distance_from_bus_stop <= 1) {
                     response += selectedLanguage === 'hausa'
-                        ? `<b>Adireshin Ƙarshe:</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba a Google Maps]</a><br>`
-                        : `<b>Destination:</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[View on Google Maps]</a><br>`;
+                        ? `<b>Adireshin Ƙarshe:</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba Google Maps]</a><br>`
+                        : `<b>Destination:</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Check Google Maps]</a><br>`;
                 } else {
                     response += selectedLanguage === 'hausa'
-                        ? `<b>Adireshin Ƙarshe:</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba a Google Maps]</a><br>`
-                        : `<b>Destination:</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[View on Google Maps]</a><br>`;
+                        ? `<b>Adireshin Ƙarshe:</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba Google Maps]</a><br>`
+                        : `<b>Destination:</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Check Google Maps]</a><br>`;
                 }
             }
 
-            response += selectedLanguage === 'hausa' ? 'Na gode! Kana son ƙarin taimako?' : 'All set! Need more help?';
+            response += selectedLanguage === 'hausa' ? 'Na gode! Kana bukatar ƙarin taimako?' : 'All set! Need more help?';
             return response;
         } else {
             return selectedLanguage === 'hausa'
-                ? `Kai! Ba mu da cikakken bayani akan wannan hanya. Gwada yankuna kamar Wuse, Asokoro, ko Area Councils. <span class="text-red-600">Kuskure: Ba a samo hanya ba.</span>`
-                : `Sorry, I don’t have details for that route yet. Try areas like Wuse, Asokoro, or Area Councils! <span class="text-red-600">Error: Route not found.</span>`;
+                ? `Kai! Ba ni da bayani akan wannan hanya. Gwada wurare kamar Wuse ko Asokoro! <span class="text-red-600">Ba mu gane hanya ba!</span>`
+                : `Sorry, I don’t have that route yet. Try places like Wuse or Asokoro! <span class="text-red-600">Couldn’t find that route!</span>`;
         }
     } catch (e) {
         console.log('chatbotResponse Error:', e.message);
         return selectedLanguage === 'hausa'
-            ? `Kai! Wani kuskure ya faru. Gwada kuma! <span class="text-red-600">Kuskure: ${e.message}</span>`
-            : `Oops, something went wrong. Please try again! <span class="text-red-600">Error: ${e.message}</span>`;
+            ? `Kai! Wani abu ya faru. Sake gwadawa! <span class="text-red-600">Kuskure: ${e.message}</span>`
+            : `Oops, something went wrong. Try again! <span class="text-red-600">Error: ${e.message}</span>`;
     }
 }
