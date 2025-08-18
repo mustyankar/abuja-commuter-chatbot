@@ -1,58 +1,37 @@
-I understand you want to remove the "loading frequent routes" feature from the Abuja Commuter Chatbot and address the issue of the program not responding. Since the previous response provided updated `index.html` and `chatbot.js` files with Hausa language enhancements, I'll assume you're referring to those files. However, the provided code doesn't explicitly include a "loading frequent routes" feature, which suggests either a misunderstanding or a remnant from a previous version you might be working with. Additionally, the "not responding" issue indicates potential errors in the code or deployment. I'll analyze the provided code for faults, remove any potential references to frequent routes, and ensure the chatbot is responsive by reconciling errors.
+I understand you want to update the language selection prompt in the Abuja Commuter Chatbot from "Please select your preferred language:" to "Welcome to Shekoni Abuja Guide. Please select your preferred language." Additionally, you mentioned that the program is stuck on the language selection page and the "Confirm Language" button is not responding, as addressed in the previous response. The previous response also fixed the "loading frequent routes" issue and improved responsiveness. I’ll incorporate the new prompt text while retaining those fixes and ensuring the language selection issue is resolved.
 
-### Fault Detection
-1. **"Loading Frequent Routes" Issue**:
-   - The provided `index.html` and `chatbot.js` do not display or load frequent routes explicitly (e.g., no UI element or function lists routes like "Wuse to Asokoro" on load).
-   - However, the welcome message in `chatbot.js` might be interpreted as implying frequent routes by suggesting example inputs (e.g., "From Wuse to Asokoro"). If this is the source of confusion, I’ll revise the welcome message to avoid suggesting specific routes.
-   - If you’re seeing "loading frequent routes" in the UI, it might be from an older version of the code or a deployment mismatch. I’ll ensure the code explicitly avoids any such feature.
+### Plan
+1. **Update Language Prompt**:
+   - Change the English prompt in `index.html` from "Please select your preferred language:" to "Welcome to Shekoni Abuja Guide. Please select your preferred language."
+   - Update the Hausa prompt in `chatbot.js` to a translated equivalent, e.g., "Maraba da Shekoni Abuja Jagora. Zaɓi yaren da kake so."
+   - Ensure the change applies dynamically based on the selected language.
 
-2. **"Not Responding" Issue**:
-   - Possible causes:
-     - **JavaScript Errors**: Syntax errors, undefined variables, or broken event listeners in `chatbot.js` could cause the chatbot to freeze.
-     - **DOM Issues**: Incorrect element IDs or missing elements in `index.html` could prevent interaction.
-     - **Deployment Issues**: Files not correctly uploaded to GitHub Pages or cached versions causing inconsistencies.
-     - **Language Persistence**: Issues with `localStorage` or language switching logic could make the UI seem unresponsive.
-   - I’ll check for:
-     - Syntax errors in `chatbot.js`.
-     - Event listener functionality (e.g., `send-btn` and `keypress`).
-     - Robustness of the `fuzzyMatch` and `chatbotResponse` functions.
-     - Console errors that might indicate runtime issues.
+2. **Retain Previous Fixes**:
+   - Keep the `chatbot.js` fixes for the non-responsive "Confirm Language" button, including:
+     - Validation for radio button selection.
+     - Isolated `localStorage` error handling.
+     - Default language fallback (English).
+     - DOMContentLoaded event listener for proper initialization.
+   - Preserve the generalized welcome message to avoid implying frequent routes.
+   - Maintain Hausa enhancements (RTL, translations, ARIA labels, fuzzy matching).
+   - Retain error handling in `chatbotResponse` and `fuzzyMatch`.
+   - Keep the completed `key` assignment in `chatbotResponse`.
 
-3. **Code Analysis**:
-   - **Syntax**: The provided `chatbot.js` has a truncated line in the `chatbotResponse` function (incomplete `response` string for English alternative route). This could cause a syntax error, making the chatbot unresponsive.
-   - **Event Listeners**: The `send-btn` and `keypress` listeners are correctly set up, but if the `chatbotResponse` function throws an error, clicks or keypresses won’t work.
-   - **Fuzzy Matching**: The `fuzzyMatch` function is robust but could be slow for long inputs. I’ll optimize it to prevent performance bottlenecks.
-   - **Language Switching**: The `setLanguage` function uses `localStorage` and dynamically updates the UI, which should work but might fail if `localStorage` is disabled or if the browser doesn’t support it.
-   - **Hausa Enhancements**: The Hausa-specific logic (RTL, translations, ARIA labels) is correct, but I’ll ensure it doesn’t interfere with responsiveness.
-
-### Reconciliation Plan
-1. **Remove Frequent Routes**:
-   - Remove any implication of frequent routes from the welcome message.
-   - Ensure no UI or logic attempts to load or suggest routes automatically.
-
-2. **Fix Non-Responsiveness**:
-   - Complete the truncated `response` string in `chatbotResponse`.
-   - Add error handling to prevent crashes from invalid inputs.
-   - Optimize `fuzzyMatch` for performance.
-   - Add a fallback for `localStorage` issues.
-   - Include console logs for debugging (to be removed in production).
-   - Validate DOM element references.
-
-3. **Hausa Enhancements**:
-   - Retain all Hausa-specific improvements (RTL, translations, ARIA labels, fuzzy matching for Hausa terms).
-   - Ensure Hausa input validation is robust and doesn’t cause unresponsiveness.
+3. **Ensure Responsiveness**:
+   - Verify that the updated prompt doesn’t break the language selection flow.
+   - Ensure the `change-lang-btn` event listener works correctly with the new prompt.
 
 4. **Deployment**:
-   - Provide clear instructions to update GitHub Pages and clear cache to avoid running an outdated version.
+   - Provide instructions to update both `index.html` and `chatbot.js` on GitHub Pages to ensure the changes take effect.
 
-Below are the updated `index.html` and `chatbot.js` files, with the frequent routes reference removed and errors reconciled. I’ll keep the same `artifact_id` values as the previous response since these are updates to the same files.
+Below are the updated files. I’ll reuse the `artifact_id` values from the previous response since these are updates to the same files.
 
 ### File 1: `index.html`
 **Changes**:
-- No changes needed, as the HTML doesn’t reference frequent routes and has no structural issues affecting responsiveness.
-- Retained for completeness and to ensure correct deployment.
+- Updated the `#lang-prompt` paragraph to display "Welcome to Shekoni Abuja Guide. Please select your preferred language." in English.
+- No other changes, as the issue with the language selection page was fixed in `chatbot.js`, and the structure remains intact.
 
-<xaiArtifact artifact_id="46a29245-ce4f-4c89-80da-96ca09818e2f" artifact_version_id="d908f7d1-92d7-43c9-bf66-8095bccadf15" title="index.html" contentType="text/html">
+<xaiArtifact artifact_id="46a29245-ce4f-4c89-80da-96ca09818e2f" artifact_version_id="bca6668b-16a3-4081-a787-c4886a7536f1" title="index.html" contentType="text/html">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +66,7 @@ Below are the updated `index.html` and `chatbot.js` files, with the frequent rou
 <body>
     <div id="chat-container" role="region" aria-label="Chatbot interface">
         <div id="language-selection" role="radiogroup" aria-label="Select language">
-            <p id="lang-prompt">Please select your preferred language:</p>
+            <p id="lang-prompt">Welcome to Shekoni Abuja Guide. Please select your preferred language:</p>
             <label><input type="radio" name="language" value="english" checked> English</label>
             <label><input type="radio" name="language" value="hausa"> Hausa</label>
             <button id="change-lang-btn" aria-label="Confirm language selection">Confirm Language</button>
@@ -96,7 +75,7 @@ Below are the updated `index.html` and `chatbot.js` files, with the frequent rou
             <p class="bot" id="welcome-message"></p>
         </div>
         <div id="input-container" style="display: none;">
-            <input type="text" id="user-input" placeholder="Type your message, e.g., 'From Wuse to Asokoro'" aria-label="Enter your route query">
+            <input type="text" id="user-input" placeholder="Type your message, e.g., starting address to destination" aria-label="Enter your route query">
             <button id="send-btn" aria-label="Send message">Send</button>
         </div>
     </div>
@@ -107,23 +86,19 @@ Below are the updated `index.html` and `chatbot.js` files, with the frequent rou
 
 ### File 2: `chatbot.js`
 **Changes**:
-- **Removed Frequent Routes**:
-  - Modified the welcome message to be generic, removing specific route examples (e.g., "Wuse to Asokoro") to avoid implying frequent routes.
-- **Fixed Non-Responsiveness**:
-  - Completed the truncated `response` string in `chatbotResponse`.
-  - Added try-catch blocks to handle invalid inputs gracefully.
-  - Optimized `fuzzyMatch` by limiting variation checks for performance.
-  - Added a fallback for `localStorage` failures.
-  - Added input sanitization to prevent XSS or malformed inputs.
-- **Retained Hausa Enhancements**:
-  - Kept RTL support, Hausa translations, ARIA labels, and fuzzy matching for Hausa terms.
-- **Error Handling**:
-  - Added console logs for debugging (commented out for production).
-  - Improved error messages to guide users without crashing.
-- **Code Structure**:
-  - Kept the `routes` object unchanged, as it’s necessary for functionality and doesn’t load routes automatically.
+- Updated the Hausa language prompt in the `setLanguage` function to "Maraba da Shekoni Abuja Jagora. Zaɓi yaren da kake so." to match the English change.
+- Retained all previous fixes for the language selection issue:
+  - Validation for radio button selection in the `change-lang-btn` event listener.
+  - Isolated `localStorage` error handling.
+  - Default language fallback to English.
+  - DOMContentLoaded event listener for proper initialization.
+  - Checks for DOM elements before manipulation.
+- Kept the generalized welcome message to avoid implying frequent routes.
+- Preserved Hausa enhancements (RTL, translations, ARIA labels, fuzzy matching).
+- Fixed the truncated `key` assignment in `chatbotResponse` from the previous response to ensure route lookups work correctly.
+- Ensured error messages are user-friendly and language-appropriate.
 
-<xaiArtifact artifact_id="96cff173-255c-44a0-8beb-a590d624172a" artifact_version_id="1ee9fd53-3fda-4636-90f7-f899ffdf9838" title="chatbot.js" contentType="text/javascript">
+<xaiArtifact artifact_id="96cff173-255c-44a0-8beb-a590d624172a" artifact_version_id="9786ea11-08d4-4061-b673-06072c246d96" title="chatbot.js" contentType="text/javascript">
 const routes = {
     "wuse2-asokoro": {
         start_address_details: {
@@ -169,8 +144,8 @@ const routes = {
         alternative_route: {
             transport: ["Along taxi"],
             fares: [1500],
-            description: "Via Musa Yar'Adua Expressway, faster but pricier. [View route on Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=9.0510,7.5120).",
-            hausa_description: "Ta Musa Yar'Adua Expressway, sauri amma mai tsada. [Duba hanya a Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=9.0510,7.5120).",
+            description: "Via Musa Yar'Adua Expressway, faster but pricier. Total distance ~8 km. [View route on Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=9.0510,7.5120).",
+            hausa_description: "Ta Musa Yar'Adua Expressway, sauri amma mai tsada. Nisa ~8 km. [Duba hanya a Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=9.0510,7.5120).",
             time: "20-30 mins",
             hausa_time: "lokacin 20-30 mins",
             traffic: "Lighter, check for construction.",
@@ -241,7 +216,7 @@ const routes = {
         },
         end_address_details: {
             description: "Gwagwalada, near Gwagwalada Market (~0.8 km). Short distance: Trek (free, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Along taxi (200-300 NGN, 4 min).",
-            hausa_description: "Gwagwalada, kusa da Kasuwar Gwagwalada (~0.8 km). Gajeren nisa: Tafiya (kyauta, 10 min); Keke mai rabawa (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Taksi mai raba hanya (200-300 NGN, 4 min).",
+            hausa_description: "Gwagwalada, kusa da Kasuwar Gwagwalada (~0.8 km). Gajeren nisa: Tafiya (kyauta, 10 min); Keke mai rabawa (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Taksi mai raba haya (200-300 NGN, 4 min).",
             distance_from_bus_stop: 0.8,
             okada_allowed: true,
             keke_allowed: true,
@@ -250,7 +225,7 @@ const routes = {
         },
         alighting_points: {
             description: "Alight at Gwagwalada Park (~0.5 km): Trek (free, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Along taxi (200-300 NGN, 2 min). Single-mode Along taxi at night OK. [View on Google Maps](https://maps.google.com/?q=8.9460,7.0680).",
-            hausa_description: "Sauka a Gwagwalada Park (~0.5 km): Tafiya (kyauta, 7 min); Keke mai rabawa (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Taksi mai raba hanya (200-300 NGN, 2 min). Taksi mai raba hanya guda ɗaya a dare yana da kyau. [Duba a Google Maps](https://maps.google.com/?q=8.9460,7.0680).",
+            hausa_description: "Sauka a Gwagwalada Park (~0.5 km): Tafiya (kyauta, 7 min); Keke mai rabawa (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Taksi mai raba haya (200-300 NGN, 2 min). Taksi mai raba haya guda ɗaya a dare yana da kyau. [Duba a Google Maps](https://maps.google.com/?q=8.9460,7.0680).",
             distance_to_destination: 0.5,
             okada_allowed: true,
             keke_allowed: true,
@@ -354,7 +329,7 @@ const routes = {
         },
         alighting_points: {
             description: "Alight at Bwari Junction (~0.5 km): Trek (free, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Along taxi (200-300 NGN, 2 min). Single-mode Along taxi at night OK. [View on Google Maps](https://maps.google.com/?q=9.1360,7.3700).",
-            hausa_description: "Sauka a Bwari Junction (~0.5 km): Tafiya (kyauta, 7 min); Keke mai rabawa (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Taksi mai raba hanya (200-300 NGN, 2 min). Taksi mai raba haya guda ɗaya a dare yana da kyau. [Duba a Google Maps](https://maps.google.com/?q=9.1360,7.3700).",
+            hausa_description: "Sauka a Bwari Junction (~0.5 km): Tafiya (kyauta, 7 min); Keke mai rabawa (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Taksi mai raba haya (200-300 NGN, 2 min). Taksi mai raba haya guda ɗaya a dare yana da kyau. [Duba a Google Maps](https://maps.google.com/?q=9.1360,7.3700).",
             distance_to_destination: 0.5,
             okada_allowed: true,
             keke_allowed: true,
@@ -643,10 +618,11 @@ try {
 function setLanguage(language) {
     try {
         selectedLanguage = language;
-        localStorage.setItem('selectedLanguage', language);
-        document.getElementById('language-selection').style.display = 'none';
-        document.getElementById('chat-box').style.display = 'block';
-        document.getElementById('input-container').style.display = 'flex';
+        try {
+            localStorage.setItem('selectedLanguage', language);
+        } catch (e) {
+            // console.log('localStorage Set Error:', e.message);
+        }
 
         const chatContainer = document.getElementById('chat-container');
         const langPrompt = document.getElementById('lang-prompt');
@@ -654,10 +630,21 @@ function setLanguage(language) {
         const sendBtn = document.getElementById('send-btn');
         const changeLangBtn = document.getElementById('change-lang-btn');
         const welcomeMessage = document.getElementById('welcome-message');
+        const languageSelection = document.getElementById('language-selection');
+        const chatBox = document.getElementById('chat-box');
+        const inputContainer = document.getElementById('input-container');
+
+        if (!chatContainer || !langPrompt || !userInput || !sendBtn || !changeLangBtn || !welcomeMessage || !languageSelection || !chatBox || !inputContainer) {
+            throw new Error('Missing DOM elements');
+        }
+
+        languageSelection.style.display = 'none';
+        chatBox.style.display = 'block';
+        inputContainer.style.display = 'flex';
 
         if (language === 'hausa') {
             chatContainer.classList.add('hausa');
-            langPrompt.innerHTML = 'Zaɓi yaren da kake so:';
+            langPrompt.innerHTML = 'Maraba da Shekoni Abuja Jagora. Zaɓi yaren da kake so:';
             userInput.placeholder = 'Rubuta tambayarka, misali, adireshi na farko zuwa na ƙarshe';
             userInput.setAttribute('aria-label', 'Shigar da tambayar hanya');
             sendBtn.innerHTML = 'Aika';
@@ -667,7 +654,7 @@ function setLanguage(language) {
             welcomeMessage.innerHTML = 'Sannu! Shigar da adireshi don jagorar hanya. Zan ba da shawarar motocin jama\'a (Bas, keke, Taksi mai raba hanya) don babban hanya da e-hailing don nisa na ƙarshe idan ba tsaro a dare.';
         } else {
             chatContainer.classList.remove('hausa');
-            langPrompt.innerHTML = 'Please select your preferred language:';
+            langPrompt.innerHTML = 'Welcome to Shekoni Abuja Guide. Please select your preferred language:';
             userInput.placeholder = 'Type your message, e.g., starting address to destination';
             userInput.setAttribute('aria-label', 'Enter your route query');
             sendBtn.innerHTML = 'Send';
@@ -678,60 +665,100 @@ function setLanguage(language) {
         }
     } catch (e) {
         // console.log('setLanguage Error:', e.message);
-        welcomeMessage.innerHTML = 'Error loading language. Please refresh the page.';
+        const welcomeMessage = document.getElementById('welcome-message');
+        if (welcomeMessage) {
+            welcomeMessage.innerHTML = 'Error loading language. Defaulting to English.';
+            setLanguage('english'); // Fallback to English
+        }
     }
 }
 
-// Check for saved language preference
-if (selectedLanguage) {
-    try {
-        setLanguage(selectedLanguage);
-        document.querySelector(`input[name="language"][value="${selectedLanguage}"]`).checked = true;
-    } catch (e) {
-        // console.log('Language Initialization Error:', e.message);
+// Initialize saved language preference
+document.addEventListener('DOMContentLoaded', () => {
+    if (selectedLanguage) {
+        try {
+            setLanguage(selectedLanguage);
+            const radioInput = document.querySelector(`input[name="language"][value="${selectedLanguage}"]`);
+            if (radioInput) {
+                radioInput.checked = true;
+            }
+        } catch (e) {
+            // console.log('Language Initialization Error:', e.message);
+            setLanguage('english'); // Fallback to English
+        }
     }
-}
 
-document.getElementById('change-lang-btn').addEventListener('click', () => {
-    try {
-        const language = document.querySelector('input[name="language"]:checked').value;
-        setLanguage(language);
-    } catch (e) {
-        // console.log('Change Language Error:', e.message);
-        document.getElementById('welcome-message').innerHTML = 'Error changing language. Please try again.';
-    }
-});
-
-document.getElementById('send-btn').addEventListener('click', () => {
-    try {
-        const userInput = document.getElementById('user-input').value.trim();
-        if (!userInput) return;
-        const chatBox = document.getElementById('chat-box');
-        const userMessage = document.createElement('p');
-        userMessage.className = 'user';
-        userMessage.innerHTML = userInput.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        chatBox.appendChild(userMessage);
-        const botResponse = chatbotResponse(userInput);
-        const botMessage = document.createElement('p');
-        botMessage.className = 'bot';
-        botMessage.innerHTML = botResponse;
-        chatBox.appendChild(botMessage);
-        chatBox.scrollTop = chatBox.scrollHeight;
-        document.getElementById('user-input').value = '';
-    } catch (e) {
-        // console.log('Send Button Error:', e.message);
-        const chatBox = document.getElementById('chat-box');
-        const botMessage = document.createElement('p');
-        botMessage.className = 'bot error';
-        botMessage.innerHTML = selectedLanguage === 'hausa' ? 'Kuskure: Ba za a iya sarrafa tambayar ba. Gwada kuma.' : 'Error: Could not process request. Please try again.';
-        chatBox.appendChild(botMessage);
-        chatBox.scrollTop = chatBox.scrollHeight;
+    const changeLangBtn = document.getElementById('change-lang-btn');
+    if (changeLangBtn) {
+        changeLangBtn.addEventListener('click', () => {
+            try {
+                const selectedRadio = document.querySelector('input[name="language"]:checked');
+                if (!selectedRadio) {
+                    const langPrompt = document.getElementById('lang-prompt');
+                    if (langPrompt) {
+                        langPrompt.innerHTML = selectedLanguage === 'hausa'
+                            ? 'Kuskure: Zaɓi yare kafin ci gaba.'
+                            : 'Error: Please select a language before proceeding.';
+                        langPrompt.style.color = '#d32f2f';
+                    }
+                    return;
+                }
+                const language = selectedRadio.value;
+                setLanguage(language);
+            } catch (e) {
+                // console.log('Change Language Error:', e.message);
+                const langPrompt = document.getElementById('lang-prompt');
+                if (langPrompt) {
+                    langPrompt.innerHTML = 'Error changing language. Defaulting to English.';
+                    langPrompt.style.color = '#d32f2f';
+                    setLanguage('english'); // Fallback to English
+                }
+            }
+        });
     }
 });
 
-document.getElementById('user-input').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        document.getElementById('send-btn').click();
+document.addEventListener('DOMContentLoaded', () => {
+    const sendBtn = document.getElementById('send-btn');
+    if (sendBtn) {
+        sendBtn.addEventListener('click', () => {
+            try {
+                const userInput = document.getElementById('user-input').value.trim();
+                if (!userInput) return;
+                const chatBox = document.getElementById('chat-box');
+                const userMessage = document.createElement('p');
+                userMessage.className = 'user';
+                userMessage.innerHTML = userInput.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                chatBox.appendChild(userMessage);
+                const botResponse = chatbotResponse(userInput);
+                const botMessage = document.createElement('p');
+                botMessage.className = 'bot';
+                botMessage.innerHTML = botResponse;
+                chatBox.appendChild(botMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                document.getElementById('user-input').value = '';
+            } catch (e) {
+                // console.log('Send Button Error:', e.message);
+                const chatBox = document.getElementById('chat-box');
+                const botMessage = document.createElement('p');
+                botMessage.className = 'bot error';
+                botMessage.innerHTML = selectedLanguage === 'hausa' ? 'Kuskure: Ba za a iya sarrafa tambayar ba. Gwada kuma.' : 'Error: Could not process request. Please try again.';
+                chatBox.appendChild(botMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        });
+    }
+
+    const userInput = document.getElementById('user-input');
+    if (userInput) {
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const sendBtn = document.getElementById('send-btn');
+                if (sendBtn) {
+                    sendBtn.click();
+                }
+            }
+        });
     }
 });
 
@@ -787,4 +814,12 @@ function chatbotResponse(userInput) {
         end = endSuggestion;
 
         // Map to key
-        let key = `${start.replace(/[0-9]/g, '').replace('monroviastreetin',
+        let key = `${start}-${end}`;
+        if (!routes[key]) {
+            key = `${end}-${start}`; // Try reverse route
+        }
+
+        if (routes[key]) {
+            const route = routes[key];
+            const descKey = selectedLanguage === 'hausa' ? 'hausa_description' : 'description';
+            const timeKey = selectedLanguage === 'hausa' ?
