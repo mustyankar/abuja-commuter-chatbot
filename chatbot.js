@@ -319,7 +319,6 @@ function fuzzyMatch(input, target) {
         const cleanInput = input.toLowerCase().replace(/[^a-z0-9]/g, '');
         const cleanTarget = target.toLowerCase().replace(/[^a-z0-9]/g, '');
         if (cleanInput.includes(cleanTarget)) return true;
-        // Hausa-specific transliterations and common misspellings
         const hausaVariations = {
             'wuse': ['wushe', 'wuse2', 'wuseii'],
             'asokoro': ['asokor', 'asokoru'],
@@ -341,7 +340,6 @@ function fuzzyMatch(input, target) {
         }
         return true;
     } catch (e) {
-        // console.log('FuzzyMatch Error:', e.message);
         return false;
     }
 }
@@ -352,9 +350,8 @@ function suggestLocation(input) {
 }
 
 let selectedLanguage = null;
-let isProcessing = false; // Debounce flag
+let isProcessing = false;
 
-// Check for localStorage availability
 function isLocalStorageAvailable() {
     try {
         const test = '__storage_test__';
@@ -366,99 +363,110 @@ function isLocalStorageAvailable() {
     }
 }
 
-// Initialize saved language preference
-if (isLocalStorageAvailable()) {
-    try {
-        selectedLanguage = localStorage.getItem('selectedLanguage') || null;
-    } catch (e) {
-        // console.log('localStorage Get Error:', e.message);
-    }
+function getFormattedTime() {
+    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
 function setLanguage(language) {
     try {
         selectedLanguage = language;
-
-        // Save language preference if localStorage is available
         if (isLocalStorageAvailable()) {
             try {
                 localStorage.setItem('selectedLanguage', language);
             } catch (e) {
-                // console.log('localStorage Set Error:', e.message);
+                console.log('localStorage Set Error:', e.message);
             }
         }
 
-        // Get DOM elements
         const chatContainer = document.getElementById('chat-container');
         const langPrompt = document.getElementById('lang-prompt');
         const userInput = document.getElementById('user-input');
         const sendBtn = document.getElementById('send-btn');
         const changeLangBtn = document.getElementById('change-lang-btn');
-        const welcomeMessage = document.getElementById('welcome-message');
-        const languageSelection = document.getElementById('language-selection');
+        const toggleLangBtn = document.getElementById('toggle-lang-btn');
         const chatBox = document.getElementById('chat-box');
+        const languageSelection = document.getElementById('language-selection');
         const inputContainer = document.getElementById('input-container');
 
-        // Validate DOM elements
-        if (!chatContainer || !langPrompt || !userInput || !sendBtn || !changeLangBtn || !welcomeMessage || !languageSelection || !chatBox || !inputContainer) {
+        if (!chatContainer || !langPrompt || !userInput || !sendBtn || !changeLangBtn || !toggleLangBtn || !chatBox || !languageSelection || !inputContainer) {
             throw new Error('Missing critical DOM elements');
         }
 
-        // Reset error color
         langPrompt.style.color = '';
-
-        // Perform UI transition
         languageSelection.style.display = 'none';
         chatBox.style.display = 'block';
         inputContainer.style.display = 'flex';
+        toggleLangBtn.style.display = 'inline-block';
 
-        // Update UI based on language
+        const welcomeMessage = document.createElement('div');
+        welcomeMessage.className = 'bot-bubble';
         if (language === 'hausa') {
             chatContainer.classList.add('hausa');
             langPrompt.innerHTML = 'Maraba da Shekwoni Abuja Jagora. Zaɓi yaren da kake so:';
-            userInput.placeholder = 'Rubuta tambayarka, misali, adireshi na farko zuwa na ƙarshe';
+            userInput.placeholder = 'Rubuta tambayarka, misali, Daga Wuse zuwa Asokoro';
             userInput.setAttribute('aria-label', 'Shigar da tambayar hanya');
             sendBtn.innerHTML = 'Aika';
             sendBtn.setAttribute('aria-label', 'Aika saƙo');
-            changeLangBtn.innerHTML = 'Zaɓi Yare';
-            changeLangBtn.setAttribute('aria-label', 'Zaɓi yaren da kake so');
-            welcomeMessage.innerHTML = 'Sannu! Shigar da adireshi don jagorar hanya. Zan ba da shawarar motocin jama\'a (Bas, keke, Taksi mai raba haya) don babban haya da e-hailing don nisa na ƙarshe idan ba tsaro a dare.';
-            // Focus on input for keyboard accessibility
-            userInput.focus();
+            changeLangBtn.innerHTML = 'Tabatar da Yare';
+            changeLangBtn.setAttribute('aria-label', 'Tabatar da zaɓin yare');
+            toggleLangBtn.innerHTML = 'Canza Yare';
+            toggleLangBtn.setAttribute('aria-label', 'Canza yare');
+            welcomeMessage.innerHTML = 'Sannu! Na ji ka ke son taimako da hanya. Rubuta adireshi kamar “Daga Wuse zuwa Asokoro”, zan ba ka shawarar motocin jama’a (Bas, Keke, Taksi) da e-hailing idan ya kamata, musamman a dare!';
         } else {
             chatContainer.classList.remove('hausa');
             langPrompt.innerHTML = 'Welcome to Shekwoni Abuja Guide. Please select your preferred language:';
-            userInput.placeholder = 'Type your message, e.g., starting address to destination';
+            userInput.placeholder = 'Type your message, e.g., From Wuse to Asokoro';
             userInput.setAttribute('aria-label', 'Enter your route query');
             sendBtn.innerHTML = 'Send';
             sendBtn.setAttribute('aria-label', 'Send message');
             changeLangBtn.innerHTML = 'Confirm Language';
             changeLangBtn.setAttribute('aria-label', 'Confirm language selection');
-            welcomeMessage.innerHTML = 'Welcome! Enter addresses for route guidance. I\'ll suggest public transport (Bus, keke, Along taxi) for main routes and e-hailing for last-mile in destination Area Councils at night or if less safe.';
-            // Focus on input for keyboard accessibility
-            userInput.focus();
+            toggleLangBtn.innerHTML = 'Change Language';
+            toggleLangBtn.setAttribute('aria-label', 'Change language');
+            welcomeMessage.innerHTML = 'Hi! I’m here to help with your commute. Type your route like “From Wuse to Asokoro”, and I’ll suggest public transport (Bus, Keke, Taxi) and e-hailing options if needed, especially at night!';
         }
+        welcomeMessage.innerHTML += `<div class="timestamp">${getFormattedTime()}</div>`;
+        chatBox.appendChild(welcomeMessage);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        userInput.focus();
     } catch (e) {
-        // console.log('setLanguage Error:', e.message);
-        const welcomeMessage = document.getElementById('welcome-message');
-        const languageSelection = document.getElementById('language-selection');
+        console.log('setLanguage Error:', e.message);
         const chatBox = document.getElementById('chat-box');
-        const inputContainer = document.getElementById('input-container');
-        if (welcomeMessage && languageSelection && chatBox && inputContainer) {
-            welcomeMessage.innerHTML = 'Error loading language. Defaulting to English.';
-            languageSelection.style.display = 'none';
-            chatBox.style.display = 'block';
-            inputContainer.style.display = 'flex';
-            setLanguage('english'); // Fallback to English
+        if (chatBox) {
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'bot-bubble text-red-600';
+            errorMessage.innerHTML = 'Oops, something went wrong. Defaulting to English. Try typing your route!';
+            errorMessage.innerHTML += `<div class="timestamp">${getFormattedTime()}</div>`;
+            chatBox.appendChild(errorMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            setLanguage('english');
         }
     }
 }
 
-// Handle language confirmation click
+function showLanguageSelection() {
+    const languageSelection = document.getElementById('language-selection');
+    const chatBox = document.getElementById('chat-box');
+    const inputContainer = document.getElementById('input-container');
+    if (languageSelection && chatBox && inputContainer) {
+        languageSelection.style.display = 'block';
+        chatBox.style.display = 'none';
+        inputContainer.style.display = 'none';
+        const langPrompt = document.getElementById('lang-prompt');
+        if (langPrompt) {
+            langPrompt.innerHTML = selectedLanguage === 'hausa' 
+                ? 'Maraba da Shekwoni Abuja Jagora. Zaɓi yaren da kake so:'
+                : 'Welcome to Shekwoni Abuja Guide. Please select your preferred language:';
+            langPrompt.style.color = '';
+        }
+        document.querySelector(`input[name="language"][value="${selectedLanguage || 'english'}"]`).focus();
+    }
+}
+
 function handleLanguageConfirm() {
-    if (isProcessing) return; // Prevent multiple clicks
+    if (isProcessing) return;
     isProcessing = true;
-    setTimeout(() => { isProcessing = false; }, 300); // Debounce for 300ms
+    setTimeout(() => { isProcessing = false; }, 300);
 
     try {
         const selectedRadio = document.querySelector('input[name="language"]:checked');
@@ -468,102 +476,131 @@ function handleLanguageConfirm() {
         if (!selectedRadio) {
             langPrompt.innerHTML = selectedLanguage === 'hausa'
                 ? 'Kuskure: Zaɓi yare kafin ci gaba.'
-                : 'Error: Please select a language before proceeding.';
-            langPrompt.style.color = '#d32f2f';
+                : 'Please select a language to continue.';
+            langPrompt.className = 'text-center text-red-600 font-medium mb-2';
             return;
         }
 
-        const language = selectedRadio.value;
-        setLanguage(language);
+        setLanguage(selectedRadio.value);
     } catch (e) {
-        // console.log('handleLanguageConfirm Error:', e.message);
+        console.log('handleLanguageConfirm Error:', e.message);
         const langPrompt = document.getElementById('lang-prompt');
         if (langPrompt) {
-            langPrompt.innerHTML = 'Error changing language. Defaulting to English.';
-            langPrompt.style.color = '#d32f2f';
+            langPrompt.innerHTML = selectedLanguage === 'hausa' 
+                ? 'Kuskure: Ba za a iya canza yare ba. Sake gwadawa.'
+                : 'Error: Could not change language. Please try again.';
+            langPrompt.className = 'text-center text-red-600 font-medium mb-2';
         }
-        setLanguage('english'); // Fallback to English
     }
 }
 
-// Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize saved language preference
-    if (selectedLanguage) {
+    if (isLocalStorageAvailable()) {
         try {
-            setLanguage(selectedLanguage);
-            const radioInput = document.querySelector(`input[name="language"][value="${selectedLanguage}"]`);
-            if (radioInput) {
-                radioInput.checked = true;
+            selectedLanguage = localStorage.getItem('selectedLanguage') || null;
+            if (selectedLanguage) {
+                setLanguage(selectedLanguage);
+                const radioInput = document.querySelector(`input[name="language"][value="${selectedLanguage}"]`);
+                if (radioInput) radioInput.checked = true;
+            } else {
+                const chatBox = document.getElementById('chat-box');
+                if (chatBox) {
+                    const welcomeMessage = document.createElement('div');
+                    welcomeMessage.className = 'bot-bubble';
+                    welcomeMessage.innerHTML = 'Hi! Welcome to Shekwoni Abuja Guide. Please choose a language to start!';
+                    welcomeMessage.innerHTML += `<div class="timestamp">${getFormattedTime()}</div>`;
+                    chatBox.appendChild(welcomeMessage);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }
             }
         } catch (e) {
-            // console.log('Language Initialization Error:', e.message);
-            setLanguage('english'); // Fallback to English
+            console.log('Language Initialization Error:', e.message);
+            setLanguage('english');
         }
     }
 
-    // Bind language confirmation button
     const changeLangBtn = document.getElementById('change-lang-btn');
     if (changeLangBtn) {
+        changeLangBtn.removeEventListener('click', handleLanguageConfirm);
         changeLangBtn.addEventListener('click', handleLanguageConfirm);
-    } else {
-        // console.log('Error: change-lang-btn not found');
-        setLanguage('english'); // Fallback to English if button is missing
     }
 
-    // Keyboard accessibility for radio buttons
+    const toggleLangBtn = document.getElementById('toggle-lang-btn');
+    if (toggleLangBtn) {
+        toggleLangBtn.removeEventListener('click', showLanguageSelection);
+        toggleLangBtn.addEventListener('click', showLanguageSelection);
+    }
+
     const radioButtons = document.querySelectorAll('input[name="language"]');
     radioButtons.forEach(radio => {
-        radio.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                radio.checked = true;
-                handleLanguageConfirm();
-            }
-        });
+        radio.removeEventListener('keydown', handleRadioKeydown);
+        radio.addEventListener('keydown', handleRadioKeydown);
     });
 
-    // Bind send button
-    const sendBtn = document.getElementById('send-btn');
-    if (sendBtn) {
-        sendBtn.addEventListener('click', () => {
-            try {
-                const userInput = document.getElementById('user-input').value.trim();
-                if (!userInput) return;
-                const chatBox = document.getElementById('chat-box');
-                const userMessage = document.createElement('p');
-                userMessage.className = 'user';
-                userMessage.innerHTML = userInput.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                chatBox.appendChild(userMessage);
-                const botResponse = chatbotResponse(userInput);
-                const botMessage = document.createElement('p');
-                botMessage.className = 'bot';
-                botMessage.innerHTML = botResponse;
-                chatBox.appendChild(botMessage);
-                chatBox.scrollTop = chatBox.scrollHeight;
-                document.getElementById('user-input').value = '';
-            } catch (e) {
-                // console.log('Send Button Error:', e.message);
-                const chatBox = document.getElementById('chat-box');
-                const botMessage = document.createElement('p');
-                botMessage.className = 'bot error';
-                botMessage.innerHTML = selectedLanguage === 'hausa' ? 'Kuskure: Ba za a iya sarrafa tambayar ba. Gwada kuma.' : 'Error: Could not process request. Please try again.';
-                chatBox.appendChild(botMessage);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
-        });
+    function handleRadioKeydown(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            radio.checked = true;
+            handleLanguageConfirm();
+        }
     }
 
-    // Bind keypress for user input
+    const sendBtn = document.getElementById('send-btn');
+    if (sendBtn) {
+        sendBtn.removeEventListener('click', handleSendMessage);
+        sendBtn.addEventListener('click', handleSendMessage);
+    }
+
+    function handleSendMessage() {
+        if (isProcessing) return;
+        isProcessing = true;
+
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        if (!chatBox || !userInput) return;
+
+        const inputValue = userInput.value.trim();
+        if (!inputValue) {
+            isProcessing = false;
+            return;
+        }
+
+        const userMessage = document.createElement('div');
+        userMessage.className = 'user-bubble';
+        userMessage.innerHTML = inputValue.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        userMessage.innerHTML += `<div class="timestamp">${getFormattedTime()}</div>`;
+        chatBox.appendChild(userMessage);
+
+        const spinner = document.createElement('div');
+        spinner.className = 'spinner';
+        chatBox.appendChild(spinner);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        setTimeout(() => {
+            chatBox.removeChild(spinner);
+            const botResponse = chatbotResponse(inputValue);
+            const botMessage = document.createElement('div');
+            botMessage.className = 'bot-bubble';
+            botMessage.innerHTML = botResponse;
+            botMessage.innerHTML += `<div class="timestamp">${getFormattedTime()}</div>`;
+            chatBox.appendChild(botMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            userInput.value = '';
+            userInput.focus();
+            isProcessing = false;
+        }, 500);
+    }
+
     const userInput = document.getElementById('user-input');
     if (userInput) {
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const sendBtn = document.getElementById('send-btn');
-                if (sendBtn) {
-                    sendBtn.click();
-                }
-            }
-        });
+        userInput.removeEventListener('keypress', handleInputKeypress);
+        userInput.addEventListener('keypress', handleInputKeypress);
+    }
+
+    function handleInputKeypress(e) {
+        if (e.key === 'Enter' && !isProcessing) {
+            handleSendMessage();
+        }
     }
 });
 
@@ -573,14 +610,16 @@ function chatbotResponse(userInput) {
         let isHausaInput = input.includes("daga") && input.includes("zuwa");
         let hasAddress = input.includes("street") || input.includes("close") || input.includes("inwuse2") || input.includes("asokoro") || input.includes("nyanya") || input.includes("gwagwalada") || input.includes("kuje") || input.includes("bwari") || input.includes("abaji") || input.includes("kwali");
 
-        // Validate language consistency
-        if (selectedLanguage === 'hausa' && !isHausaInput) {
-            return 'Don Allah shigar da tambaya cikin Hausa, misali, "Daga Wuse zuwa Asokoro". <span class="error">Kuskure: A shigar da Hausa.</span>';
-        } else if (selectedLanguage === 'english' && isHausaInput) {
-            return 'Please use English, e.g., "From Wuse to Asokoro". <span class="error">Error: Use English input.</span>';
+        if (!selectedLanguage) {
+            return 'Please select a language first!';
         }
 
-        // Parse input
+        if (selectedLanguage === 'hausa' && !isHausaInput) {
+            return 'Kai! Don Allah rubuta a Hausa, kamar “Daga Wuse zuwa Asokoro”. <span class="text-red-600">Kuskure: A shigar da Hausa.</span>';
+        } else if (selectedLanguage === 'english' && isHausaInput) {
+            return 'Oops, please use English, like “From Wuse to Asokoro”. <span class="text-red-600">Error: Use English input.</span>';
+        }
+
         let start, end;
         if (isHausaInput) {
             try {
@@ -588,8 +627,8 @@ function chatbotResponse(userInput) {
                 end = input.split("zuwa")[1].trim();
             } catch {
                 return selectedLanguage === 'hausa'
-                    ? 'Don Allah fayyace hanyarka, misali, "Daga Wuse zuwa Asokoro". <span class="error">Kuskure: Tsari ba daidai ba ne.</span>'
-                    : 'Please clarify your route, e.g., "From Wuse to Asokoro". <span class="error">Error: Invalid format.</span>';
+                    ? 'Kai! Rubuta hanyarka da kyau, kamar “Daga Wuse zuwa Asokoro”. <span class="text-red-600">Kuskure: Tsari ba daidai ba ne.</span>'
+                    : 'Oops, please clarify your route, like “From Wuse to Asokoro”. <span class="text-red-600">Error: Invalid format.</span>';
             }
         } else if (input.includes("from") && input.includes("to")) {
             try {
@@ -597,62 +636,57 @@ function chatbotResponse(userInput) {
                 end = input.split("to")[1].trim();
             } catch {
                 return selectedLanguage === 'hausa'
-                    ? 'Don Allah fayyace hanyarka, misali, "Daga Wuse zuwa Asokoro". <span class="error">Kuskure: Tsari ba daidai ba ne.</span>'
-                    : 'Please clarify your route, e.g., "From Wuse to Asokoro". <span class="error">Error: Invalid format.</span>';
+                    ? 'Kai! Rubuta hanyarka da kyau, kamar “Daga Wuse zuwa Asokoro”. <span class="text-red-600">Kuskure: Tsari ba daidai ba ne.</span>'
+                    : 'Oops, please clarify your route, like “From Wuse to Asokoro”. <span class="text-red-600">Error: Invalid format.</span>';
             }
         } else {
             return selectedLanguage === 'hausa'
-                ? 'Don Allah ka ji "Daga" da "Zuwa", misali, "Daga Wuse zuwa Asokoro". <span class="error">Kuskure: Rashin "daga"/"zuwa".</span>'
-                : 'Please use "From" and "To", e.g., "From Wuse to Asokoro". <span class="error">Error: Missing "from"/"to".</span>';
+                ? 'Kai! Ka ji “Daga” da “Zuwa”, kamar “Daga Wuse zuwa Asokoro”. <span class="text-red-600">Kuskure: Rashin “daga”/“zuwa”.</span>'
+                : 'Oops, please use “From” and “To”, like “From Wuse to Asokoro”. <span class="text-red-600">Error: Missing “from”/“to”.</span>';
         }
 
-        // Fuzzy matching for locations
         const startSuggestion = suggestLocation(start);
         const endSuggestion = suggestLocation(end);
         if (!startSuggestion || !endSuggestion) {
             return selectedLanguage === 'hausa'
-                ? `Shin kana nufin daga ${startSuggestion || start} zuwa ${endSuggestion || end}? Gwada kuma. <span class="error">Kuskure: Wuri ba a gane shi ba.</span>`
-                : `Did you mean from ${startSuggestion || start} to ${endSuggestion || end}? Please try again. <span class="error">Error: Unrecognized location.</span>`;
+                ? `Kai! Shin kana nufin daga ${startSuggestion || start} zuwa ${endSuggestion || end}? Gwada kuma! <span class="text-red-600">Kuskure: Wuri ba a gane shi ba.</span>`
+                : `Oops, did you mean from ${startSuggestion || start} to ${endSuggestion || end}? Try again! <span class="text-red-600">Error: Unrecognized location.</span>`;
         }
 
         start = startSuggestion;
         end = endSuggestion;
 
-        // Map to key
         let key = `${start}-${end}`;
         if (!routes[key]) {
-            key = `${end}-${start}`; // Try reverse route
+            key = `${end}-${start}`;
         }
 
         if (routes[key]) {
             const route = routes[key];
             let response = selectedLanguage === 'hausa'
-                ? `Daga ${start.charAt(0).toUpperCase() + start.slice(1)} zuwa ${end.charAt(0).toUpperCase() + end.slice(1)}:<br>`
-                : `From ${start.charAt(0).toUpperCase() + start.slice(1)} to ${end.charAt(0).toUpperCase() + end.slice(1)}:<br>`;
+                ? `Sannu! Mu shirya tafiyarka daga ${start.charAt(0).toUpperCase() + start.slice(1)} zuwa ${end.charAt(0).toUpperCase() + end.slice(1)}! Ga hanyoyinka:<br>`
+                : `Hi! Let’s plan your trip from ${start.charAt(0).toUpperCase() + start.slice(1)} to ${end.charAt(0).toUpperCase() + end.slice(1)}! Here’s how you can go:<br>`;
 
-            // Check for night trip (outside 6 AM-8 PM) or security concerns
             const currentHour = new Date().getHours();
             const isNightTrip = currentHour < 6 || currentHour >= 20;
             const hasSecurityConcerns = route.end_address_details.security_concerns;
             const isSingleModeClose = route.alighting_points && route.alighting_points.distance_to_destination <= 0.5 && route.alighting_points.single_mode;
 
-            // Start address
             if (hasAddress && route.start_address_details.distance_to_bus_stop <= 1) {
                 response += selectedLanguage === 'hausa'
-                    ? `<b>Bayanin Adireshin Farawa:</b> ${route.start_address_details.hausa_description} <a href="${route.start_address_details.map_link}" target="_blank">[Duba a Google Maps]</a><br>`
-                    : `<b>Start Address Info:</b> ${route.start_address_details.description} <a href="${route.start_address_details.map_link}" target="_blank">[View on Google Maps]</a><br>`;
+                    ? `<b>Fara Adireshi:</b> ${route.start_address_details.hausa_description} <a href="${route.start_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba a Google Maps]</a><br>`
+                    : `<b>Starting Point:</b> ${route.start_address_details.description} <a href="${route.start_address_details.map_link}" target="_blank" class="text-blue-600 underline">[View on Google Maps]</a><br>`;
             }
 
-            // Main and alternative routes
             response += selectedLanguage === 'hausa'
                 ? `<b>Hanyar Babba:</b> ${route.main_route.hausa_description}<br>` +
                   `<b>Motoci:</b> ${route.main_route.transport.join(", ")}<br>` +
-                  `<b>Kudin Tafiya (NGN):</b> ${route.main_route.fares.join(", ")}<br>` +
+                  `<b>Kudi (NGN):</b> ${route.main_route.fares.join(", ")}<br>` +
                   `<b>Lokaci:</b> ${route.main_route.hausa_time}<br>` +
                   `<b>Tambaya Zirga-zirga:</b> ${route.main_route.hausa_traffic}<br><br>` +
                   `<b>Hanyar Madadin:</b> ${route.alternative_route.hausa_description}<br>` +
                   `<b>Motoci:</b> ${route.alternative_route.transport.join(", ")}<br>` +
-                  `<b>Kudin Tafiya (NGN):</b> ${route.alternative_route.fares.join(", ")}<br>` +
+                  `<b>Kudi (NGN):</b> ${route.alternative_route.fares.join(", ")}<br>` +
                   `<b>Lokaci:</b> ${route.alternative_route.hausa_time}<br>` +
                   `<b>Tambaya Zirga-zirga:</b> ${route.alternative_route.hausa_traffic}<br><br>`
                 : `<b>Main Route:</b> ${route.main_route.description}<br>` +
@@ -666,42 +700,40 @@ function chatbotResponse(userInput) {
                   `<b>Time:</b> ${route.alternative_route.time}<br>` +
                   `<b>Traffic Note:</b> ${route.alternative_route.traffic}<br><br>`;
 
-            // E-hailing advisory
             if (hasAddress && (isNightTrip && !isSingleModeClose || hasSecurityConcerns)) {
                 response += selectedLanguage === 'hausa'
-                    ? `<b>Shawara kan E-Hailing na Ƙarshe:</b> ${route.ehailing_advisory.hausa_description}<br>`
-                    : `<b>Last-Mile E-Hailing Advisory:</b> ${route.ehailing_advisory.description}<br>`;
+                    ? `<b>Shawara kan E-Hailing:</b> ${route.ehailing_advisory.hausa_description}<br>`
+                    : `<b>E-Hailing Tip:</b> ${route.ehailing_advisory.description}<br>`;
             }
 
-            // Alighting point and end address
             if (hasAddress) {
                 if (route.alighting_points && route.alighting_points.distance_to_destination <= 1) {
                     response += selectedLanguage === 'hausa'
-                        ? `<b>Matsayin Sauka da Aka Shawarta:</b> ${route.alighting_points.hausa_description}<br>`
-                        : `<b>Recommended Alighting Point:</b> ${route.alighting_points.description}<br>`;
+                        ? `<b>Sauka:</b> ${route.alighting_points.hausa_description}<br>`
+                        : `<b>Drop-Off Point:</b> ${route.alighting_points.description}<br>`;
                 }
                 if (route.end_address_details.distance_from_bus_stop <= 1) {
                     response += selectedLanguage === 'hausa'
-                        ? `<b>Bayanin Adireshin Karshe (Daga Tashar):</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank">[Duba a Google Maps]</a><br>`
-                        : `<b>End Address Info (Last-Mile from Bus Stop):</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank">[View on Google Maps]</a><br>`;
+                        ? `<b>Adireshin Ƙarshe:</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba a Google Maps]</a><br>`
+                        : `<b>Destination:</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[View on Google Maps]</a><br>`;
                 } else {
                     response += selectedLanguage === 'hausa'
-                        ? `<b>Bayanin Adireshin Karshe (Daga Tashar):</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank">[Duba a Google Maps]</a><br>`
-                        : `<b>End Address Info (Last-Mile from Bus Stop):</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank">[View on Google Maps]</a><br>`;
+                        ? `<b>Adireshin Ƙarshe:</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba a Google Maps]</a><br>`
+                        : `<b>Destination:</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[View on Google Maps]</a><br>`;
                 }
             }
 
-            response += selectedLanguage === 'hausa' ? 'Na gode!' : 'Thank you!';
+            response += selectedLanguage === 'hausa' ? 'Na gode! Kana son ƙarin taimako?' : 'All set! Need more help?';
             return response;
         } else {
             return selectedLanguage === 'hausa'
-                ? 'Ba mu da cikakken bayani akan wannan hanya. Gwada yankunan AMAC ko Area Councils. <span class="error">Kuskure: Ba a samo hanya ba.</span>'
-                : 'Sorry, no detailed route for that yet. Try AMAC areas or Area Councils. <span class="error">Error: Route not found.</span>';
+                ? `Kai! Ba mu da cikakken bayani akan wannan hanya. Gwada yankuna kamar Wuse, Asokoro, ko Area Councils. <span class="text-red-600">Kuskure: Ba a samo hanya ba.</span>`
+                : `Sorry, I don’t have details for that route yet. Try areas like Wuse, Asokoro, or Area Councils! <span class="text-red-600">Error: Route not found.</span>`;
         }
     } catch (e) {
-        // console.log('chatbotResponse Error:', e.message);
+        console.log('chatbotResponse Error:', e.message);
         return selectedLanguage === 'hausa'
-            ? 'Kuskure: Ba za a iya sarrafa tambayar ba. Gwada kuma. <span class="error">Kuskure: ${e.message}</span>'
-            : 'An error occurred: Could not process request. Please try again. <span class="error">Error: ${e.message}</span>';
+            ? `Kai! Wani kuskure ya faru. Gwada kuma! <span class="text-red-600">Kuskure: ${e.message}</span>`
+            : `Oops, something went wrong. Please try again! <span class="text-red-600">Error: ${e.message}</span>`;
     }
 }
