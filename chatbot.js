@@ -1,16 +1,17 @@
 const locations = {
-    "wuse2": { lat: 9.0656, lon: 7.4686, bus_stop: "Wuse Market", bus_stop_distance: 0.5, okada_allowed: false, keke_allowed: true },
-    "asokoro": { lat: 9.0500, lon: 7.5140, bus_stop: "AYA", bus_stop_distance: 1.5, okada_allowed: false, keke_allowed: false },
-    "maitama": { lat: 9.0850, lon: 7.4930, bus_stop: "Maitama Junction", bus_stop_distance: 0.6, okada_allowed: false, keke_allowed: false },
-    "nyanya": { lat: 9.0030, lon: 7.5770, bus_stop: "Nyanya Bridge", bus_stop_distance: 0.9, okada_allowed: true, keke_allowed: true, security_concerns: true },
-    "gwagwalada": { lat: 8.9450, lon: 7.0670, bus_stop: "Gwagwalada Market", bus_stop_distance: 0.8, okada_allowed: true, keke_allowed: true, security_concerns: true },
-    "kuje": { lat: 8.8790, lon: 7.2270, bus_stop: "Kuje Market", bus_stop_distance: 0.7, okada_allowed: true, keke_allowed: true },
-    "garki": { lat: 9.0160, lon: 7.4820, bus_stop: "Area 1 Roundabout", bus_stop_distance: 0.6, okada_allowed: false, keke_allowed: true },
-    "bwari": { lat: 9.1350, lon: 7.3690, bus_stop: "Bwari Market", bus_stop_distance: 0.7, okada_allowed: true, keke_allowed: true },
-    "abaji": { lat: 8.4780, lon: 6.7910, bus_stop: "Abaji Main Market", bus_stop_distance: 0.9, okada_allowed: true, keke_allowed: true },
-    "kwali": { lat: 8.7080, lon: 6.9390, bus_stop: "Kwali Junction", bus_stop_distance: 0.8, okada_allowed: true, keke_allowed: true },
-    "gwako": { lat: 8.9160, lon: 7.1230, bus_stop: "Gwako Park", bus_stop_distance: 0.9, okada_allowed: true, keke_allowed: true, security_concerns: true },
-    "yaba": { lat: 8.9000, lon: 7.2000, bus_stop: "Yaba Market", bus_stop_distance: 0.7, okada_allowed: true, keke_allowed: true }
+    "wuse2": { lat: 9.0656, lon: 7.4686 },
+    "asokoro": { lat: 9.0500, lon: 7.5140 },
+    "maitama": { lat: 9.0850, lon: 7.4930 },
+    "nyanya": { lat: 9.0030, lon: 7.5770 },
+    "gwagwalada": { lat: 8.9450, lon: 7.0670 },
+    "kuje": { lat: 8.8790, lon: 7.2270 },
+    "garki": { lat: 9.0160, lon: 7.4820 },
+    "bwari": { lat: 9.1350, lon: 7.3690 },
+    "abaji": { lat: 8.4780, lon: 6.7910 },
+    "kwali": { lat: 8.7080, lon: 6.9390 },
+    "gwako": { lat: 8.9167, lon: 7.0667 },
+    "yaba": { lat: 8.9, lon: 7.2 },
+    "pai": { lat: 8.75, lon: 7.05 }
 };
 
 const routes = {
@@ -21,13 +22,13 @@ const routes = {
             map_link: "https://maps.google.com/?q=9.0656,7.4686"
         },
         end_address_details: {
-            description: "Asokoro, near AYA (~1.5 km). Along taxi (200-300 NGN, 5-7 min). Okada/keke restricted.",
-            hausa_description: "Asokoro, kusa da AYA (~1.5 km). Taksi mai raba (200-300 NGN, 5-7 min). Okada/keke haram.",
+            description: "Asokoro, near Aso Villa. From bus stop (AYA, ~1.5 km): Along taxi (200-300 NGN, 5-7 min). Okada/keke restricted.",
+            hausa_description: "Asokoro, kusa da Aso Villa. Daga tashar (AYA, ~1.5 km): Taksi mai raba (200-300 NGN, 5-7 min). Okada/keke haram.",
             map_link: "https://maps.google.com/?q=9.0500,7.5140"
         },
         alighting_points: {
-            description: "Alight at Power House/Asokoro Bridge (~0.5 km): Trek (free, 7 min); Along taxi (200-300 NGN, 3 min). Single-mode taxi at night OK. [View on Google Maps](https://maps.google.com/?q=9.0510,7.5120).",
-            hausa_description: "Sauka a Power House/Asokoro Bridge (~0.5 km): Tafiya (kyauta, 7 min); Taksi mai raba (200-300 NGN, 3 min). Taksi guda ɗaya a dare yana da kyau. [Duba Google Maps](https://maps.google.com/?q=9.0510,7.5120).",
+            description: "Alight at Power House/Asokoro Bridge (~0.5 km from destination): Trek (free, 7 min); Along taxi (200-300 NGN, 3 min). Single-mode taxi at night OK. [View on Google Maps](https://maps.google.com/?q=9.0510,7.5120).",
+            hausa_description: "Sauka a Power House/Asokoro Bridge (~0.5 km daga wurin): Tafiya (kyauta, 7 min); Taksi mai raba (200-300 NGN, 3 min). Taksi guda ɗaya a dare yana da kyau. [Duba Google Maps](https://maps.google.com/?q=9.0510,7.5120).",
             distance_to_destination: 0.5,
             single_mode: true
         },
@@ -36,7 +37,7 @@ const routes = {
             hausa_description: "Don nisa na ƙarshe a Asokoro a dare (>0.5 km ko motoci da yawa), yi amfani da e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, ana sasantawa) na ~3 km."
         },
         main_route: {
-            transport: ["Bus", "Keke", "Along taxi"],
+            transport: ["Bus", "keke", "Along taxi"],
             fares: [250, 200, 1200],
             description: "Wuse 2 to Asokoro via Ahmadu Bello Way (~8 km). [View on Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=9.0510,7.5120).",
             hausa_description: "Daga Wuse 2 zuwa Asokoro ta Ahmadu Bello Way (~8 km). [Duba Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=9.0510,7.5120).",
@@ -261,15 +262,15 @@ const routes = {
             map_link: "https://maps.google.com/?q=9.0656,7.4686"
         },
         end_address_details: {
-            description: "Kwali, near Kwali Junction (~0.8 km). Trek (free, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Along taxi (200-300 NGN, 4 min).",
-            hausa_description: "Kwali, kusa da Kwali Junction (~0.8 km). Tafiya (kyauta, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Taksi mai raba (200-300 NGN, 4 min).",
+            description: "Kwali, near Kwali Market (~0.8 km). Trek (free, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Along taxi (200-300 NGN, 4 min).",
+            hausa_description: "Kwali, kusa da Kasuwar Kwali (~0.8 km). Tafiya (kyauta, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Taksi mai raba (200-300 NGN, 4 min).",
             map_link: "https://maps.google.com/?q=8.7080,6.9390"
         },
         alighting_points: {
-            description: "Alight at Kwali Park (~0.5 km): Trek (free, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Along taxi (200-300 NGN, 2 min). E-hailing advised at night. [View on Google Maps](https://maps.google.com/?q=8.7090,6.9400).",
-            hausa_description: "Sauka a Kwali Park (~0.5 km): Tafiya (kyauta, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Taksi mai raba (200-300 NGN, 2 min). E-hailing a dare. [Duba Google Maps](https://maps.google.com/?q=8.7090,6.9400).",
+            description: "Alight at Kwali Junction (~0.5 km): Trek (free, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Along taxi (200-300 NGN, 2 min). Single-mode taxi at night OK. [View on Google Maps](https://maps.google.com/?q=8.7090,6.9400).",
+            hausa_description: "Sauka a Kwali Junction (~0.5 km): Tafiya (kyauta, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Taksi mai raba (200-300 NGN, 2 min). Taksi guda ɗaya a dare yana da kyau. [Duba Google Maps](https://maps.google.com/?q=8.7090,6.9400).",
             distance_to_destination: 0.5,
-            single_mode: false
+            single_mode: true
         },
         ehailing_advisory: {
             description: "For last-mile in Kwali at night (>0.5 km or multi-mode), use e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, negotiable) for ~3 km.",
@@ -294,139 +295,141 @@ const routes = {
             traffic: "Lighter, check road conditions."
         }
     },
-    "wuse2-gwako": {
+    "kuje-gwagwalada": {
         start_address_details: {
-            description: "Wuse 2, near Wuse Market (~0.5 km). Trek (free, 7 min); Keke (50-100 NGN, 5 min); Along taxi (200-300 NGN, 3-5 min). Okada restricted.",
-            hausa_description: "Wuse 2, kusa da Kasuwar Wuse (~0.5 km). Tafiya (kyauta, 7 min); Keke (50-100 NGN, 5 min); Taksi mai raba (200-300 NGN, 3-5 min). Okada haram.",
-            map_link: "https://maps.google.com/?q=9.0656,7.4686"
+            description: "Kuje, near Kuje Market (~0.7 km). Trek (free, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Along taxi (200-300 NGN, 4 min).",
+            hausa_description: "Kuje, kusa da Kasuwar Kuje (~0.7 km). Tafiya (kyauta, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Taksi mai raba (200-300 NGN, 4 min).",
+            map_link: "https://maps.google.com/?q=8.8790,7.2270"
         },
         end_address_details: {
-            description: "Gwako, near Gwako Park (~0.9 km). Trek (free, 12 min); Keke (50-100 NGN, 6 min); Okada (100-200 NGN, 4 min); Along taxi (200-300 NGN, 4 min).",
-            hausa_description: "Gwako, kusa da Gwako Park (~0.9 km). Tafiya (kyauta, 12 min); Keke (50-100 NGN, 6 min); Okada (100-200 NGN, 4 min); Taksi mai raba (200-300 NGN, 4 min).",
-            map_link: "https://maps.google.com/?q=8.9160,7.1230"
+            description: "Gwagwalada, near Gwagwalada Market (~0.8 km). Trek (free, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Along taxi (200-300 NGN, 4 min).",
+            hausa_description: "Gwagwalada, kusa da Kasuwar Gwagwalada (~0.8 km). Tafiya (kyauta, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Taksi mai raba (200-300 NGN, 4 min).",
+            map_link: "https://maps.google.com/?q=8.9450,7.0670"
         },
         alighting_points: {
-            description: "Alight at Gwako Junction (~0.6 km): Trek (free, 8 min); Keke (50-100 NGN, 4 min); Okada (100-200 NGN, 3 min); Along taxi (200-300 NGN, 3 min). E-hailing advised at night. [View on Google Maps](https://maps.google.com/?q=8.9170,7.1240).",
-            hausa_description: "Sauka a Gwako Junction (~0.6 km): Tafiya (kyauta, 8 min); Keke (50-100 NGN, 4 min); Okada (100-200 NGN, 3 min); Taksi mai raba (200-300 NGN, 3 min). E-hailing a dare. [Duba Google Maps](https://maps.google.com/?q=8.9170,7.1240).",
-            distance_to_destination: 0.6,
-            single_mode: false
-        },
-        ehailing_advisory: {
-            description: "For last-mile in Gwako at night (>0.5 km or multi-mode), use e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, negotiable) for ~3 km.",
-            hausa_description: "Don nisa na ƙarshe a Gwako a dare (>0.5 km ko motoci da yawa), yi amfani da e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, ana sasantawa) na ~3 km."
-        },
-        main_route: {
-            transport: ["Bus", "Along taxi"],
-            fares: [500, 2100],
-            description: "Wuse 2 to Gwako via Airport Road and Gwagwalada (~28 km). [View on Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=8.9170,7.1240).",
-            hausa_description: "Daga Wuse 2 zuwa Gwako ta Airport Road da Gwagwalada (~28 km). [Duba Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=8.9170,7.1240).",
-            time: "70-90 mins",
-            hausa_time: "lokacin 70-90 mins",
-            traffic: "Heavy 4-7 PM; avoid rush hours."
-        },
-        alternative_route: {
-            transport: ["Along taxi"],
-            fares: [2600],
-            description: "Via Kuje Road (~30 km, less traffic). [View on Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=8.9170,7.1240).",
-            hausa_description: "Ta Kuje Road (~30 km, ba cunkoso). [Duba Google Maps](https://maps.google.com/?saddr=9.0656,7.4686&daddr=8.9170,7.1240).",
-            time: "75-95 mins",
-            hausa_time: "lokacin 75-95 mins",
-            traffic: "Lighter, check road conditions."
-        }
-    },
-    "garki-yaba": {
-        start_address_details: {
-            description: "Garki, near Area 1 Roundabout (~0.6 km). Trek (free, 8 min); Keke (50-100 NGN, 4 min); Along taxi (200-300 NGN, 3 min). Okada restricted.",
-            hausa_description: "Garki, kusa da Area 1 Roundabout (~0.6 km). Tafiya (kyauta, 8 min); Keke (50-100 NGN, 4 min); Taksi mai raba (200-300 NGN, 3 min). Okada haram.",
-            map_link: "https://maps.google.com/?q=9.0160,7.4820"
-        },
-        end_address_details: {
-            description: "Yaba, near Yaba Market (~0.7 km). Trek (free, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Along taxi (200-300 NGN, 4 min).",
-            hausa_description: "Yaba, kusa da Kasuwar Yaba (~0.7 km). Tafiya (kyauta, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Taksi mai raba (200-300 NGN, 4 min).",
-            map_link: "https://maps.google.com/?q=8.9000,7.2000"
-        },
-        alighting_points: {
-            description: "Alight at Yaba Junction (~0.5 km): Trek (free, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Along taxi (200-300 NGN, 2 min). Single-mode taxi at night OK. [View on Google Maps](https://maps.google.com/?q=8.9010,7.2010).",
-            hausa_description: "Sauka a Yaba Junction (~0.5 km): Tafiya (kyauta, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Taksi mai raba (200-300 NGN, 2 min). Taksi guda ɗaya a dare yana da kyau. [Duba Google Maps](https://maps.google.com/?q=8.9010,7.2010).",
+            description: "Alight at Gwagwalada Park (~0.5 km): Trek (free, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Along taxi (200-300 NGN, 2 min). Single-mode taxi at night OK. [View on Google Maps](https://maps.google.com/?q=8.9460,7.0680).",
+            hausa_description: "Sauka a Gwagwalada Park (~0.5 km): Tafiya (kyauta, 7 min); Keke (50-100 NGN, 3 min); Okada (100-200 NGN, 2 min); Taksi mai raba (200-300 NGN, 2 min). Taksi guda ɗaya a dare yana da kyau. [Duba Google Maps](https://maps.google.com/?q=8.9460,7.0680).",
             distance_to_destination: 0.5,
             single_mode: true
         },
         ehailing_advisory: {
-            description: "For last-mile in Yaba at night (>0.5 km or multi-mode), use e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, negotiable) for ~3 km.",
-            hausa_description: "Don nisa na ƙarshe a Yaba a dare (>0.5 km ko motoci da yawa), yi amfani da e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, ana sasantawa) na ~3 km."
+            description: "For last-mile in Gwagwalada at night or due to security concerns, use e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, negotiable) for ~3 km.",
+            hausa_description: "Don nisa na ƙarshe a Gwagwalada a dare ko saboda tsaro, yi amfani da e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, ana sasantawa) na ~3 km."
         },
         main_route: {
             transport: ["Bus", "Along taxi"],
-            fares: [450, 1900],
-            description: "Garki to Yaba via Airport Road and Kuje (~22 km). [View on Google Maps](https://maps.google.com/?saddr=9.0160,7.4820&daddr=8.9010,7.2010).",
-            hausa_description: "Daga Garki zuwa Yaba ta Airport Road da Kuje (~22 km). [Duba Google Maps](https://maps.google.com/?saddr=9.0160,7.4820&daddr=8.9010,7.2010).",
-            time: "55-75 mins",
-            hausa_time: "lokacin 55-75 mins",
+            fares: [300, 1200],
+            description: "Kuje to Gwagwalada via Gwagwalada Road (~15 km). [View on Google Maps](https://maps.google.com/?saddr=8.8790,7.2270&daddr=8.9460,7.0680).",
+            hausa_description: "Daga Kuje zuwa Gwagwalada ta Gwagwalada Road (~15 km). [Duba Google Maps](https://maps.google.com/?saddr=8.8790,7.2270&daddr=8.9460,7.0680).",
+            time: "40-60 mins",
+            hausa_time: "lokacin 40-60 mins",
             traffic: "Moderate; heavy 4-7 PM."
         },
         alternative_route: {
             transport: ["Along taxi"],
-            fares: [2100],
-            description: "Via Gwagwalada Road (~24 km, less traffic). [View on Google Maps](https://maps.google.com/?saddr=9.0160,7.4820&daddr=8.9010,7.2010).",
-            hausa_description: "Ta Gwagwalada Road (~24 km, ba cunkoso). [Duba Google Maps](https://maps.google.com/?saddr=9.0160,7.4820&daddr=8.9010,7.2010).",
-            time: "60-80 mins",
-            hausa_time: "lokacin 60-80 mins",
+            fares: [1400],
+            description: "Via Airport Road (~17 km, less congested). [View on Google Maps](https://maps.google.com/?saddr=8.8790,7.2270&daddr=8.9460,7.0680).",
+            hausa_description: "Ta Airport Road (~17 km, ba cunkoso). [Duba Google Maps](https://maps.google.com/?saddr=8.8790,7.2270&daddr=8.9460,7.0680).",
+            time: "45-65 mins",
+            hausa_time: "lokacin 45-65 mins",
+            traffic: "Lighter, check road conditions."
+        }
+    },
+    "bwari-abaji": {
+        start_address_details: {
+            description: "Bwari, near Bwari Market (~0.7 km). Trek (free, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Along taxi (200-300 NGN, 4 min).",
+            hausa_description: "Bwari, kusa da Kasuwar Bwari (~0.7 km). Tafiya (kyauta, 10 min); Keke (50-100 NGN, 5 min); Okada (100-200 NGN, 4 min); Taksi mai raba (200-300 NGN, 4 min).",
+            map_link: "https://maps.google.com/?q=9.1350,7.3690"
+        },
+        end_address_details: {
+            description: "Abaji, near Abaji Main Market (~0.9 km). Trek (free, 12 min); Keke (50-100 NGN, 6 min); Okada (100-200 NGN, 4 min); Along taxi (200-300 NGN, 4 min).",
+            hausa_description: "Abaji, kusa da Kasuwar Abaji (~0.9 km). Tafiya (kyauta, 12 min); Keke (50-100 NGN, 6 min); Okada (100-200 NGN, 4 min); Taksi mai raba (200-300 NGN, 4 min).",
+            map_link: "https://maps.google.com/?q=8.4780,6.7910"
+        },
+        alighting_points: {
+            description: "Alight at Abaji Junction (~0.6 km): Trek (free, 8 min); Keke (50-100 NGN, 4 min); Okada (100-200 NGN, 3 min); Along taxi (200-300 NGN, 3 min). E-hailing advised at night. [View on Google Maps](https://maps.google.com/?q=8.4790,6.7920).",
+            hausa_description: "Sauka a Abaji Junction (~0.6 km): Tafiya (kyauta, 8 min); Keke (50-100 NGN, 4 min); Okada (100-200 NGN, 3 min); Taksi mai raba (200-300 NGN, 3 min). E-hailing a dare. [Duba Google Maps](https://maps.google.com/?q=8.4790,6.7920).",
+            distance_to_destination: 0.6,
+            single_mode: false
+        },
+        ehailing_advisory: {
+            description: "For last-mile in Abaji at night (>0.5 km or multi-mode), use e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, negotiable) for ~3 km.",
+            hausa_description: "Don nisa na ƙarshe a Abaji a dare (>0.5 km ko motoci da yawa), yi amfani da e-hailing: Uber (1000-1800 NGN), Bolt (800-1500 NGN), inDriver (700-1300 NGN, ana sasantawa) na ~3 km."
+        },
+        main_route: {
+            transport: ["Bus", "Along taxi"],
+            fares: [500, 2000],
+            description: "Bwari to Abaji via Airport Road (~30 km). [View on Google Maps](https://maps.google.com/?saddr=9.1350,7.3690&daddr=8.4790,6.7920).",
+            hausa_description: "Daga Bwari zuwa Abaji ta Airport Road (~30 km). [Duba Google Maps](https://maps.google.com/?saddr=9.1350,7.3690&daddr=8.4790,6.7920).",
+            time: "70-100 mins",
+            hausa_time: "lokacin 70-100 mins",
+            traffic: "Moderate; heavy 4-7 PM."
+        },
+        alternative_route: {
+            transport: ["Along taxi"],
+            fares: [2300],
+            description: "Via Gwagwalada Road (~32 km, less traffic). [View on Google Maps](https://maps.google.com/?saddr=9.1350,7.3690&daddr=8.4790,6.7920).",
+            hausa_description: "Ta Gwagwalada Road (~32 km, ba cunkoso). [Duba Google Maps](https://maps.google.com/?saddr=9.1350,7.3690&daddr=8.4790,6.7920).",
+            time: "75-105 mins",
+            hausa_time: "lokacin 75-105 mins",
             traffic: "Lighter, check road conditions."
         }
     }
 };
 
-// Haversine formula for distance calculation
+// Haversine formula for distance
 function haversineDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; // Earth's radius in km
+    const R = 6371; // km
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
               Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
               Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return Math.round(R * c * 10) / 10; // Rounded to 1 decimal
+    return R * c;
 }
 
-// Dijkstra's algorithm for shortest path
-function findShortestPath(start, end) {
+// Simple graph for connections (nodes: locations, edges: distances)
+const graph = {};
+for (const loc1 in locations) {
+    graph[loc1] = {};
+    for (const loc2 in locations) {
+        if (loc1 !== loc2) {
+            graph[loc1][loc2] = haversineDistance(locations[loc1].lat, locations[loc1].lon, locations[loc2].lat, locations[loc2].lon);
+        }
+    }
+}
+
+// Dijkstra for shortest path
+function dijkstra(start, end) {
     const distances = {};
     const previous = {};
-    const unvisited = new Set(Object.keys(locations));
-    const path = [];
+    const pq = [];
 
-    for (const loc in locations) {
+    for (const loc in graph) {
         distances[loc] = Infinity;
         previous[loc] = null;
     }
     distances[start] = 0;
+    pq.push({ loc: start, dist: 0 });
 
-    while (unvisited.size > 0) {
-        let closest = null;
-        let minDist = Infinity;
-        for (const loc of unvisited) {
-            if (distances[loc] < minDist) {
-                minDist = distances[loc];
-                closest = loc;
-            }
-        }
-        if (closest === null) break;
-        if (closest === end) break;
+    while (pq.length > 0) {
+        pq.sort((a, b) => a.dist - b.dist);
+        const { loc, dist } = pq.shift();
 
-        unvisited.delete(closest);
-        for (const neighbor of unvisited) {
-            const dist = haversineDistance(
-                locations[closest].lat, locations[closest].lon,
-                locations[neighbor].lat, locations[neighbor].lon
-            );
-            const alt = distances[closest] + dist;
+        if (dist > distances[loc]) continue;
+
+        for (const neighbor in graph[loc]) {
+            const alt = dist + graph[loc][neighbor];
             if (alt < distances[neighbor]) {
                 distances[neighbor] = alt;
-                previous[neighbor] = closest;
+                previous[neighbor] = loc;
+                pq.push({ loc: neighbor, dist: alt });
             }
         }
     }
 
+    let path = [];
     let current = end;
     while (current !== null) {
         path.unshift(current);
@@ -454,7 +457,8 @@ function fuzzyMatch(input, target) {
             'abaji': ['abajii', 'abaje'],
             'kwali': ['kwalli', 'kwale'],
             'gwako': ['gwakoo', 'gwaako'],
-            'yaba': ['yabah', 'yaaba']
+            'yaba': ['yabah', 'yaaba'],
+            'pai': ['paai', 'paee']
         };
         const variations = hausaVariations[target] || [];
         if (variations.some(v => cleanInput.includes(v))) return true;
@@ -529,7 +533,7 @@ function setLanguage(language) {
         if (language === 'hausa') {
             chatContainer.classList.add('hausa');
             langPrompt.innerHTML = 'Sannu! Ka zaɓi yaren da ka fi so!';
-            userInput.placeholder = 'Rubuta hanyarka, kamar Daga Wuse zuwa Kwali';
+            userInput.placeholder = 'Rubuta hanyarka, kamar Daga Wuse zuwa Asokoro';
             userInput.setAttribute('aria-label', 'Shigar da hanyarka');
             sendBtn.innerHTML = 'Aika';
             sendBtn.setAttribute('aria-label', 'Aika saƙo');
@@ -537,11 +541,11 @@ function setLanguage(language) {
             changeLangBtn.setAttribute('aria-label', 'Tabatar da yare');
             toggleLangBtn.innerHTML = 'Canza Yare';
             toggleLangBtn.setAttribute('aria-label', 'Canza yare');
-            welcomeMessage.innerHTML = 'Sannu! Ina nan don taimaka maka da tafiyarka. Rubuta hanyarka kamar “Daga Wuse zuwa Kwali”, zan nuna maka motocin jama’a da e-hailing idan ya dace!';
+            welcomeMessage.innerHTML = 'Sannu! Ina nan don taimaka maka da tafiyarka. Rubuta hanyarka kamar “Daga Wuse zuwa Asokoro”, zan nuna maka motocin jama’a da e-hailing idan ya dace!';
         } else {
             chatContainer.classList.remove('hausa');
             langPrompt.innerHTML = 'Hey! Pick your favorite language!';
-            userInput.placeholder = 'Type your route, like From Wuse to Kwali';
+            userInput.placeholder = 'Type your route, like From Wuse to Asokoro';
             userInput.setAttribute('aria-label', 'Enter your route');
             sendBtn.innerHTML = 'Send';
             sendBtn.setAttribute('aria-label', 'Send message');
@@ -549,7 +553,7 @@ function setLanguage(language) {
             changeLangBtn.setAttribute('aria-label', 'Confirm language');
             toggleLangBtn.innerHTML = 'Switch Language';
             toggleLangBtn.setAttribute('aria-label', 'Switch language');
-            welcomeMessage.innerHTML = 'Hey! Ready to plan your trip? Type your route like “From Wuse to Kwali”, and I’ll suggest buses, kekes, taxis, or e-hailing if needed!';
+            welcomeMessage.innerHTML = 'Hey! Ready to plan your trip? Type your route like “From Wuse to Asokoro”, and I’ll suggest buses, kekes, taxis, or e-hailing if needed!';
         }
         welcomeMessage.innerHTML += `<div class="timestamp">${getFormattedTime()}</div>`;
         chatBox.appendChild(welcomeMessage);
@@ -787,7 +791,73 @@ function chatbotResponse(userInput) {
             key = `${end}-${start}`;
         }
 
-        const { path, distance } = findShortestPath(start, end);
-        let response;
-        if (routes[key]) {
-            const
+        const { path, distance } = dijkstra(start, end);
+        let response = selectedLanguage === 'hausa'
+            ? `Sannu! Hanyarka daga ${start.charAt(0).toUpperCase() + start.slice(1)} zuwa ${end.charAt(0).toUpperCase() + end.slice(1)} shine kamar ${distance ? distance.toFixed(1) : 'unknown'} km. Ga shawarata:<br>`
+            : `Hey! Your trip from ${start.charAt(0).toUpperCase() + start.slice(1)} to ${end.charAt(0).toUpperCase() + end.slice(1)} is about ${distance ? distance.toFixed(1) : 'unknown'} km. Here’s my suggestion:<br>`;
+
+        const currentHour = new Date().getHours();
+        const isNightTrip = currentHour < 6 || currentHour >= 20;
+        const hasSecurityConcerns = route.end_address_details.security_concerns;
+        const isSingleModeClose = route.alighting_points && route.alighting_points.distance_to_destination <= 0.5 && route.alighting_points.single_mode;
+
+        if (hasAddress && route.start_address_details.distance_to_bus_stop <= 1) {
+            response += selectedLanguage === 'hausa'
+                ? `<b>Fara Adireshi:</b> ${route.start_address_details.hausa_description} <a href="${route.start_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba Google Maps]</a><br>`
+                : `<b>Starting Point:</b> ${route.start_address_details.description} <a href="${route.start_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Check Google Maps]</a><br>`;
+        }
+
+        response += selectedLanguage === 'hausa'
+            ? `<b>Hanyar Babba:</b> ${route.main_route.hausa_description}<br>` +
+              `<b>Motoci:</b> ${route.main_route.transport.join(", ")}<br>` +
+              `<b>Kudi (NGN):</b> ${route.main_route.fares.join(", ")}<br>` +
+              `<b>Lokaci:</b> ${route.main_route.hausa_time}<br>` +
+              `<b>Zirga-zirga:</b> ${route.main_route.hausa_traffic}<br><br>` +
+              `<b>Wata Hanya:</b> ${route.alternative_route.hausa_description}<br>` +
+              `<b>Motoci:</b> ${route.alternative_route.transport.join(", ")}<br>` +
+              `<b>Kudi (NGN):</b> ${route.alternative_route.fares.join(", ")}<br>` +
+              `<b>Lokaci:</b> ${route.alternative_route.hausa_time}<br>` +
+              `<b>Zirga-zirga:</b> ${route.alternative_route.hausa_traffic}<br><br>`
+            : `<b>Main Route:</b> ${route.main_route.description}<br>` +
+              `<b>Transport:</b> ${route.main_route.transport.join(", ")}<br>` +
+              `<b>Fares (NGN):</b> ${route.main_route.fares.join(", ")}<br>` +
+              `<b>Time:</b> ${route.main_route.time}<br>` +
+              `<b>Traffic:</b> ${route.main_route.traffic}<br><br>` +
+              `<b>Alternative Route:</b> ${route.alternative_route.description}<br>` +
+              `<b>Transport:</b> ${route.alternative_route.transport.join(", ")}<br>` +
+              `<b>Fares (NGN):</b> ${route.alternative_route.fares.join(", ")}<br>` +
+              `<b>Time:</b> ${route.alternative_route.time}<br>` +
+              `<b>Traffic:</b> ${route.alternative_route.traffic}<br><br>`;
+
+        if (hasAddress && (isNightTrip && !isSingleModeClose || hasSecurityConcerns)) {
+            response += selectedLanguage === 'hausa'
+                ? `<b>Shawara E-Hailing:</b> ${route.ehailing_advisory.hausa_description}<br>`
+                : `<b>E-Hailing Tip:</b> ${route.ehailing_advisory.description}<br>`;
+        }
+
+        if (hasAddress) {
+            if (route.alighting_points && route.alighting_points.distance_to_destination <= 1) {
+                response += selectedLanguage === 'hausa'
+                    ? `<b>Sauka:</b> ${route.alighting_points.hausa_description}<br>`
+                    : `<b>Drop-Off Point:</b> ${route.alighting_points.description}<br>`;
+            }
+            if (route.end_address_details.distance_from_bus_stop <= 1) {
+                response += selectedLanguage === 'hausa'
+                    ? `<b>Adireshin Ƙarshe:</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba Google Maps]</a><br>`
+                    : `<b>Destination:</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Check Google Maps]</a><br>`;
+            } else {
+                response += selectedLanguage === 'hausa'
+                    ? `<b>Adireshin Ƙarshe:</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Duba Google Maps]</a><br>`
+                    : `<b>Destination:</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank" class="text-blue-600 underline">[Check Google Maps]</a><br>`;
+            }
+        }
+
+        response += selectedLanguage === 'hausa' ? 'Na gode! Kana bukatar ƙarin taimako?' : 'All set! Need more help?';
+        return response;
+    } catch (e) {
+        console.log('chatbotResponse Error:', e.message);
+        return selectedLanguage === 'hausa'
+            ? `Kai! Wani kuskure ya faru. Sake gwadawa! <span class="text-red-600">Kuskure: ${e.message}</span>`
+            : `Oops, something went wrong. Try again! <span class="text-red-600">Error: ${e.message}</span>`;
+    }
+}
