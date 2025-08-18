@@ -1,37 +1,68 @@
-I understand you want to update the language selection prompt in the Abuja Commuter Chatbot from "Please select your preferred language:" to "Welcome to Shekoni Abuja Guide. Please select your preferred language." Additionally, you mentioned that the program is stuck on the language selection page and the "Confirm Language" button is not responding, as addressed in the previous response. The previous response also fixed the "loading frequent routes" issue and improved responsiveness. I’ll incorporate the new prompt text while retaining those fixes and ensuring the language selection issue is resolved.
+I understand that the Abuja Commuter Chatbot is still stuck on the language selection page, where the "Confirm Language" button is not responding, and you want to update the prompt text to replace "Shekoni" with "Shekwoni". The previous response updated the prompt to "Welcome to Shekoni Abuja Guide. Please select your preferred language:" and included fixes for the language selection issue, but it seems those changes didn’t fully resolve the problem. The issue likely persists due to a JavaScript error in the `change-lang-btn` event listener or DOM manipulation in `chatbot.js`. Additionally, the previous fixes for removing the "loading frequent routes" implication and ensuring responsiveness should be retained.
 
-### Plan
-1. **Update Language Prompt**:
-   - Change the English prompt in `index.html` from "Please select your preferred language:" to "Welcome to Shekoni Abuja Guide. Please select your preferred language."
-   - Update the Hausa prompt in `chatbot.js` to a translated equivalent, e.g., "Maraba da Shekoni Abuja Jagora. Zaɓi yaren da kake so."
-   - Ensure the change applies dynamically based on the selected language.
+### Fault Detection
+1. **Language Confirmation Not Responding**:
+   - The `change-lang-btn` event listener in `chatbot.js` is responsible for validating the radio button selection, setting the language, and transitioning from the language selection UI to the chat interface.
+   - Potential issues:
+     - The event listener may not be binding correctly if the DOM element `#change-lang-btn` is not found or if the DOM isn’t fully loaded.
+     - The `setLanguage` function might be throwing an uncaught error, possibly due to `localStorage` issues or missing DOM elements, despite the try-catch block.
+     - The radio button validation (`input[name="language"]:checked`) might fail if no default selection is set or if the radio buttons are not properly rendered.
+     - The UI transition (hiding `#language-selection` and showing `#chat-box` and `#input-container`) might fail if the DOM elements are manipulated incorrectly.
+   - The previous fix added validation and a `DOMContentLoaded` listener, but the issue persists, suggesting a deeper problem, such as an unhandled edge case or browser-specific behavior (e.g., `localStorage` restrictions in private mode).
 
-2. **Retain Previous Fixes**:
-   - Keep the `chatbot.js` fixes for the non-responsive "Confirm Language" button, including:
-     - Validation for radio button selection.
-     - Isolated `localStorage` error handling.
-     - Default language fallback (English).
-     - DOMContentLoaded event listener for proper initialization.
-   - Preserve the generalized welcome message to avoid implying frequent routes.
+2. **Prompt Text Update**:
+   - The prompt in `index.html` needs to change from "Welcome to Shekoni Abuja Guide. Please select your preferred language:" to "Welcome to Shekwoni Abuja Guide. Please select your preferred language."
+   - The Hausa prompt in `chatbot.js` needs to update from "Maraba da Shekoni Abuja Jagora. Zaɓi yaren da kake so:" to "Maraba da Shekwoni Abuja Jagora. Zaɓi yaren da kake so."
+
+3. **Retaining Previous Fixes**:
+   - Keep the generalized welcome message to avoid implying frequent routes.
+   - Preserve error handling in `chatbotResponse` and `fuzzyMatch` for responsiveness.
    - Maintain Hausa enhancements (RTL, translations, ARIA labels, fuzzy matching).
-   - Retain error handling in `chatbotResponse` and `fuzzyMatch`.
-   - Keep the completed `key` assignment in `chatbotResponse`.
+   - Retain the completed `key` assignment in `chatbotResponse` to ensure route lookups work.
+   - Keep the `DOMContentLoaded` listener and radio button validation from the previous fix, but enhance them to address the persistent issue.
 
-3. **Ensure Responsiveness**:
-   - Verify that the updated prompt doesn’t break the language selection flow.
-   - Ensure the `change-lang-btn` event listener works correctly with the new prompt.
+### Reconciliation Plan
+1. **Fix Language Confirmation Issue**:
+   - **Enhance Event Listener**:
+     - Ensure the `change-lang-btn` event listener is robust by checking for the button’s existence before binding.
+     - Use `addEventListener` with a named function for better debugging and to prevent multiple bindings.
+     - Add a fallback to trigger `setLanguage('english')` if no radio button is selected, ensuring the UI progresses.
+   - **Improve `setLanguage` Function**:
+     - Add explicit checks for all DOM elements before manipulation.
+     - Wrap `localStorage` operations in a separate try-catch to isolate failures.
+     - Log errors to the console (commented out for production) to aid debugging.
+     - Ensure the UI transition (hiding/showing elements) is foolproof by checking element existence and using `style.display` consistently.
+   - **Force Default Selection**:
+     - Set the English radio button as checked by default in `index.html` to prevent `undefined` errors if no radio button is selected.
+     - Validate radio button selection in JavaScript and display a clear error message if the user clicks "Confirm Language" without selecting a language.
+   - **Debounce Clicks**:
+     - Add a simple debounce mechanism to prevent multiple rapid clicks on the "Confirm Language" button from causing issues.
+   - **Browser Compatibility**:
+     - Test for `localStorage` availability explicitly and handle private browsing mode gracefully.
+
+2. **Update Prompt Text**:
+   - Update `index.html` to change "Shekoni" to "Shekwoni" in the English prompt.
+   - Update `chatbot.js` to change "Shekoni" to "Shekwoni" in the Hausa prompt.
+   - Ensure the prompt updates dynamically when switching languages.
+
+3. **Retain Previous Fixes**:
+   - Keep the generalized welcome message to avoid implying frequent routes.
+   - Preserve error handling in `chatbotResponse` and `fuzzyMatch`.
+   - Maintain Hausa enhancements (RTL, translations, ARIA labels, fuzzy matching).
+   - Retain the completed `key` assignment in `chatbotResponse`.
 
 4. **Deployment**:
    - Provide instructions to update both `index.html` and `chatbot.js` on GitHub Pages to ensure the changes take effect.
 
-Below are the updated files. I’ll reuse the `artifact_id` values from the previous response since these are updates to the same files.
+Below are the updated files, reusing the `artifact_id` values from the previous response since these are updates to the same files.
 
 ### File 1: `index.html`
 **Changes**:
-- Updated the `#lang-prompt` paragraph to display "Welcome to Shekoni Abuja Guide. Please select your preferred language." in English.
-- No other changes, as the issue with the language selection page was fixed in `chatbot.js`, and the structure remains intact.
+- Updated the `#lang-prompt` paragraph to "Welcome to Shekwoni Abuja Guide. Please select your preferred language."
+- Ensured the English radio button is checked by default to prevent `undefined` errors.
+- No other changes, as the language confirmation issue is primarily handled in `chatbot.js`.
 
-<xaiArtifact artifact_id="46a29245-ce4f-4c89-80da-96ca09818e2f" artifact_version_id="bca6668b-16a3-4081-a787-c4886a7536f1" title="index.html" contentType="text/html">
+<xaiArtifact artifact_id="46a29245-ce4f-4c89-80da-96ca09818e2f" artifact_version_id="c1173358-6001-44fe-8e8c-3b77c380d872" title="index.html" contentType="text/html">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +97,7 @@ Below are the updated files. I’ll reuse the `artifact_id` values from the prev
 <body>
     <div id="chat-container" role="region" aria-label="Chatbot interface">
         <div id="language-selection" role="radiogroup" aria-label="Select language">
-            <p id="lang-prompt">Welcome to Shekoni Abuja Guide. Please select your preferred language:</p>
+            <p id="lang-prompt">Welcome to Shekwoni Abuja Guide. Please select your preferred language:</p>
             <label><input type="radio" name="language" value="english" checked> English</label>
             <label><input type="radio" name="language" value="hausa"> Hausa</label>
             <button id="change-lang-btn" aria-label="Confirm language selection">Confirm Language</button>
@@ -86,19 +117,25 @@ Below are the updated files. I’ll reuse the `artifact_id` values from the prev
 
 ### File 2: `chatbot.js`
 **Changes**:
-- Updated the Hausa language prompt in the `setLanguage` function to "Maraba da Shekoni Abuja Jagora. Zaɓi yaren da kake so." to match the English change.
-- Retained all previous fixes for the language selection issue:
-  - Validation for radio button selection in the `change-lang-btn` event listener.
-  - Isolated `localStorage` error handling.
-  - Default language fallback to English.
-  - DOMContentLoaded event listener for proper initialization.
-  - Checks for DOM elements before manipulation.
-- Kept the generalized welcome message to avoid implying frequent routes.
-- Preserved Hausa enhancements (RTL, translations, ARIA labels, fuzzy matching).
-- Fixed the truncated `key` assignment in `chatbotResponse` from the previous response to ensure route lookups work correctly.
-- Ensured error messages are user-friendly and language-appropriate.
+- Updated the Hausa prompt in the `setLanguage` function to "Maraba da Shekwoni Abuja Jagora. Zaɓi yaren da kake so."
+- Enhanced the `change-lang-btn` event listener:
+  - Added a named function `handleLanguageConfirm` to improve debugging.
+  - Implemented a simple debounce mechanism to prevent multiple rapid clicks.
+  - Added explicit validation for radio button selection, displaying a user-friendly error if none is selected.
+  - Ensured fallback to English if an error occurs or no language is selected.
+- Improved `setLanguage` function:
+  - Added explicit checks for all DOM elements before manipulation.
+  - Isolated `localStorage` operations in a separate try-catch block.
+  - Added fallback UI transition if `localStorage` fails.
+- Retained previous fixes:
+  - Generalized welcome message to avoid implying frequent routes.
+  - Error handling in `chatbotResponse` and `fuzzyMatch`.
+  - Hausa enhancements (RTL, translations, ARIA labels, fuzzy matching).
+  - Completed `key` assignment in `chatbotResponse`.
+- Added commented-out console logs for debugging (to be removed in production).
+- Ensured the `DOMContentLoaded` listener is robust and only binds the event listener once.
 
-<xaiArtifact artifact_id="96cff173-255c-44a0-8beb-a590d624172a" artifact_version_id="9786ea11-08d4-4061-b673-06072c246d96" title="chatbot.js" contentType="text/javascript">
+<xaiArtifact artifact_id="96cff173-255c-44a0-8beb-a590d624172a" artifact_version_id="8fe60b0d-748c-41cf-8163-ce7534f9db65" title="chatbot.js" contentType="text/javascript">
 const routes = {
     "wuse2-asokoro": {
         start_address_details: {
@@ -609,21 +646,43 @@ function suggestLocation(input) {
 }
 
 let selectedLanguage = null;
-try {
-    selectedLanguage = localStorage.getItem('selectedLanguage') || null;
-} catch (e) {
-    // console.log('localStorage Error:', e.message);
+let isProcessing = false; // Debounce flag
+
+// Check for localStorage availability
+function isLocalStorageAvailable() {
+    try {
+        const test = '__storage_test__';
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+// Initialize saved language preference
+if (isLocalStorageAvailable()) {
+    try {
+        selectedLanguage = localStorage.getItem('selectedLanguage') || null;
+    } catch (e) {
+        // console.log('localStorage Get Error:', e.message);
+    }
 }
 
 function setLanguage(language) {
     try {
         selectedLanguage = language;
-        try {
-            localStorage.setItem('selectedLanguage', language);
-        } catch (e) {
-            // console.log('localStorage Set Error:', e.message);
+
+        // Save language preference if localStorage is available
+        if (isLocalStorageAvailable()) {
+            try {
+                localStorage.setItem('selectedLanguage', language);
+            } catch (e) {
+                // console.log('localStorage Set Error:', e.message);
+            }
         }
 
+        // Get DOM elements
         const chatContainer = document.getElementById('chat-container');
         const langPrompt = document.getElementById('lang-prompt');
         const userInput = document.getElementById('user-input');
@@ -634,17 +693,20 @@ function setLanguage(language) {
         const chatBox = document.getElementById('chat-box');
         const inputContainer = document.getElementById('input-container');
 
+        // Validate DOM elements
         if (!chatContainer || !langPrompt || !userInput || !sendBtn || !changeLangBtn || !welcomeMessage || !languageSelection || !chatBox || !inputContainer) {
-            throw new Error('Missing DOM elements');
+            throw new Error('Missing critical DOM elements');
         }
 
+        // Perform UI transition
         languageSelection.style.display = 'none';
         chatBox.style.display = 'block';
         inputContainer.style.display = 'flex';
 
+        // Update UI based on language
         if (language === 'hausa') {
             chatContainer.classList.add('hausa');
-            langPrompt.innerHTML = 'Maraba da Shekoni Abuja Jagora. Zaɓi yaren da kake so:';
+            langPrompt.innerHTML = 'Maraba da Shekwoni Abuja Jagora. Zaɓi yaren da kake so:';
             userInput.placeholder = 'Rubuta tambayarka, misali, adireshi na farko zuwa na ƙarshe';
             userInput.setAttribute('aria-label', 'Shigar da tambayar hanya');
             sendBtn.innerHTML = 'Aika';
@@ -654,7 +716,7 @@ function setLanguage(language) {
             welcomeMessage.innerHTML = 'Sannu! Shigar da adireshi don jagorar hanya. Zan ba da shawarar motocin jama\'a (Bas, keke, Taksi mai raba hanya) don babban hanya da e-hailing don nisa na ƙarshe idan ba tsaro a dare.';
         } else {
             chatContainer.classList.remove('hausa');
-            langPrompt.innerHTML = 'Welcome to Shekoni Abuja Guide. Please select your preferred language:';
+            langPrompt.innerHTML = 'Welcome to Shekwoni Abuja Guide. Please select your preferred language:';
             userInput.placeholder = 'Type your message, e.g., starting address to destination';
             userInput.setAttribute('aria-label', 'Enter your route query');
             sendBtn.innerHTML = 'Send';
@@ -666,15 +728,56 @@ function setLanguage(language) {
     } catch (e) {
         // console.log('setLanguage Error:', e.message);
         const welcomeMessage = document.getElementById('welcome-message');
-        if (welcomeMessage) {
+        const languageSelection = document.getElementById('language-selection');
+        const chatBox = document.getElementById('chat-box');
+        const inputContainer = document.getElementById('input-container');
+        if (welcomeMessage && languageSelection && chatBox && inputContainer) {
             welcomeMessage.innerHTML = 'Error loading language. Defaulting to English.';
+            languageSelection.style.display = 'none';
+            chatBox.style.display = 'block';
+            inputContainer.style.display = 'flex';
             setLanguage('english'); // Fallback to English
         }
     }
 }
 
-// Initialize saved language preference
+// Handle language confirmation click
+function handleLanguageConfirm() {
+    if (isProcessing) return; // Prevent multiple clicks
+    isProcessing = true;
+    setTimeout(() => { isProcessing = false; }, 500); // Debounce for 500ms
+
+    try {
+        const selectedRadio = document.querySelector('input[name="language"]:checked');
+        const langPrompt = document.getElementById('lang-prompt');
+        if (!langPrompt) {
+            throw new Error('Language prompt element missing');
+        }
+
+        if (!selectedRadio) {
+            langPrompt.innerHTML = selectedLanguage === 'hausa'
+                ? 'Kuskure: Zaɓi yare kafin ci gaba.'
+                : 'Error: Please select a language before proceeding.';
+            langPrompt.style.color = '#d32f2f';
+            return;
+        }
+
+        const language = selectedRadio.value;
+        setLanguage(language);
+    } catch (e) {
+        // console.log('handleLanguageConfirm Error:', e.message);
+        const langPrompt = document.getElementById('lang-prompt');
+        if (langPrompt) {
+            langPrompt.innerHTML = 'Error changing language. Defaulting to English.';
+            langPrompt.style.color = '#d32f2f';
+        }
+        setLanguage('english'); // Fallback to English
+    }
+}
+
+// Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize saved language preference
     if (selectedLanguage) {
         try {
             setLanguage(selectedLanguage);
@@ -688,37 +791,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Bind language confirmation button
     const changeLangBtn = document.getElementById('change-lang-btn');
     if (changeLangBtn) {
-        changeLangBtn.addEventListener('click', () => {
-            try {
-                const selectedRadio = document.querySelector('input[name="language"]:checked');
-                if (!selectedRadio) {
-                    const langPrompt = document.getElementById('lang-prompt');
-                    if (langPrompt) {
-                        langPrompt.innerHTML = selectedLanguage === 'hausa'
-                            ? 'Kuskure: Zaɓi yare kafin ci gaba.'
-                            : 'Error: Please select a language before proceeding.';
-                        langPrompt.style.color = '#d32f2f';
-                    }
-                    return;
-                }
-                const language = selectedRadio.value;
-                setLanguage(language);
-            } catch (e) {
-                // console.log('Change Language Error:', e.message);
-                const langPrompt = document.getElementById('lang-prompt');
-                if (langPrompt) {
-                    langPrompt.innerHTML = 'Error changing language. Defaulting to English.';
-                    langPrompt.style.color = '#d32f2f';
-                    setLanguage('english'); // Fallback to English
-                }
-            }
-        });
+        // Remove any existing listeners to prevent duplicates
+        changeLangBtn.removeEventListener('click', handleLanguageConfirm);
+        changeLangBtn.addEventListener('click', handleLanguageConfirm);
+    } else {
+        // console.log('Error: change-lang-btn not found');
+        setLanguage('english'); // Fallback to English if button is missing
     }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
+    // Bind send button
     const sendBtn = document.getElementById('send-btn');
     if (sendBtn) {
         sendBtn.addEventListener('click', () => {
@@ -739,87 +823,3 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('user-input').value = '';
             } catch (e) {
                 // console.log('Send Button Error:', e.message);
-                const chatBox = document.getElementById('chat-box');
-                const botMessage = document.createElement('p');
-                botMessage.className = 'bot error';
-                botMessage.innerHTML = selectedLanguage === 'hausa' ? 'Kuskure: Ba za a iya sarrafa tambayar ba. Gwada kuma.' : 'Error: Could not process request. Please try again.';
-                chatBox.appendChild(botMessage);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
-        });
-    }
-
-    const userInput = document.getElementById('user-input');
-    if (userInput) {
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const sendBtn = document.getElementById('send-btn');
-                if (sendBtn) {
-                    sendBtn.click();
-                }
-            }
-        });
-    }
-});
-
-function chatbotResponse(userInput) {
-    try {
-        let input = userInput.toLowerCase().trim().replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        let isHausaInput = input.includes("daga") && input.includes("zuwa");
-        let hasAddress = input.includes("street") || input.includes("close") || input.includes("inwuse2") || input.includes("asokoro") || input.includes("nyanya") || input.includes("gwagwalada") || input.includes("kuje") || input.includes("bwari") || input.includes("abaji") || input.includes("kwali");
-
-        // Validate language consistency
-        if (selectedLanguage === 'hausa' && !isHausaInput) {
-            return 'Don Allah shigar da tambaya cikin Hausa, misali, "Daga Wuse zuwa Asokoro". <span class="error">Kuskure: A shigar da Hausa.</span>';
-        } else if (selectedLanguage === 'english' && isHausaInput) {
-            return 'Please use English, e.g., "From Wuse to Asokoro". <span class="error">Error: Use English input.</span>';
-        }
-
-        // Parse input
-        let start, end;
-        if (isHausaInput) {
-            try {
-                start = input.split("daga")[1].split("zuwa")[0].trim();
-                end = input.split("zuwa")[1].trim();
-            } catch {
-                return selectedLanguage === 'hausa'
-                    ? 'Don Allah fayyace hanyarka, misali, "Daga Wuse zuwa Asokoro". <span class="error">Kuskure: Tsari ba daidai ba ne.</span>'
-                    : 'Please clarify your route, e.g., "From Wuse to Asokoro". <span class="error">Error: Invalid format.</span>';
-            }
-        } else if (input.includes("from") && input.includes("to")) {
-            try {
-                start = input.split("from")[1].split("to")[0].trim();
-                end = input.split("to")[1].trim();
-            } catch {
-                return selectedLanguage === 'hausa'
-                    ? 'Don Allah fayyace hanyarka, misali, "Daga Wuse zuwa Asokoro". <span class="error">Kuskure: Tsari ba daidai ba ne.</span>'
-                    : 'Please clarify your route, e.g., "From Wuse to Asokoro". <span class="error">Error: Invalid format.</span>';
-            }
-        } else {
-            return selectedLanguage === 'hausa'
-                ? 'Don Allah ka ji "Daga" da "Zuwa", misali, "Daga Wuse zuwa Asokoro". <span class="error">Kuskure: Rashin "daga"/"zuwa".</span>'
-                : 'Please use "From" and "To", e.g., "From Wuse to Asokoro". <span class="error">Error: Missing "from"/"to".</span>';
-        }
-
-        // Fuzzy matching for locations
-        const startSuggestion = suggestLocation(start);
-        const endSuggestion = suggestLocation(end);
-        if (!startSuggestion || !endSuggestion) {
-            return selectedLanguage === 'hausa'
-                ? `Shin kana nufin daga ${startSuggestion || start} zuwa ${endSuggestion || end}? Gwada kuma. <span class="error">Kuskure: Wuri ba a gane shi ba.</span>`
-                : `Did you mean from ${startSuggestion || start} to ${endSuggestion || end}? Please try again. <span class="error">Error: Unrecognized location.</span>`;
-        }
-
-        start = startSuggestion;
-        end = endSuggestion;
-
-        // Map to key
-        let key = `${start}-${end}`;
-        if (!routes[key]) {
-            key = `${end}-${start}`; // Try reverse route
-        }
-
-        if (routes[key]) {
-            const route = routes[key];
-            const descKey = selectedLanguage === 'hausa' ? 'hausa_description' : 'description';
-            const timeKey = selectedLanguage === 'hausa' ?
