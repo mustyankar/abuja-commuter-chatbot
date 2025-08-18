@@ -10,20 +10,37 @@
         #chat-box { height: 400px; overflow-y: scroll; padding: 10px; border-bottom: 1px solid #ddd; }
         #chat-box p { margin: 5px 0; }
         .user { text-align: right; color: #2c3e50; }
-        .bot { color: #005577; } /* Higher contrast for accessibility */
+        .bot { color: #005577; }
         #input-container { display: flex; padding: 10px; }
-        #user-input { flex: 1; padding: 8px; border: 1px solid #333; border-radius: 4px; font-size: 16px; } /* Improved contrast */
+        #user-input { flex: 1; padding: 8px; border: 1px solid #333; border-radius: 4px; font-size: 16px; }
         #send-btn { padding: 8px 16px; margin-left: 10px; background: #005577; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         #send-btn:hover { background: #003d55; }
-        .error { color: #d32f2f; } /* Red for error messages */
+        .error { color: #d32f2f; }
+        #language-selection { padding: 10px; text-align: center; }
+        #language-selection label { margin: 0 10px; }
+        #change-lang-btn { padding: 8px 16px; background: #555; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        #change-lang-btn:hover { background: #333; }
+        .hausa { direction: rtl; text-align: right; font-family: 'Noto Sans Arabic', Arial, sans-serif; }
+        @media (max-width: 600px) {
+            #chat-container { width: 90%; }
+            #user-input { font-size: 14px; }
+            #send-btn { font-size: 14px; }
+        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="chat-container" role="region" aria-label="Chatbot interface">
-        <div id="chat-box" role="log" aria-live="polite">
-            <p class="bot" id="welcome-message">Loading frequent routes...</p>
+        <div id="language-selection" role="radiogroup" aria-label="Select language">
+            <p id="lang-prompt">Please select your preferred language:</p>
+            <label><input type="radio" name="language" value="english" checked> English</label>
+            <label><input type="radio" name="language" value="hausa"> Hausa</label>
+            <button id="change-lang-btn" aria-label="Confirm language selection">Confirm Language</button>
         </div>
-        <div id="input-container">
+        <div id="chat-box" role="log" aria-live="polite" style="display: none;">
+            <p class="bot" id="welcome-message"></p>
+        </div>
+        <div id="input-container" style="display: none;">
             <input type="text" id="user-input" placeholder="Type your message, e.g., 'From Wuse to Asokoro'" aria-label="Enter your route query">
             <button id="send-btn" aria-label="Send message">Send</button>
         </div>
