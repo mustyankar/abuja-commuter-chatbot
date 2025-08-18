@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abuja Commuter Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
+        #chat-container { max-width: 600px; margin: auto; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        #chat-box { height: 400px; overflow-y: scroll; padding: 10px; border-bottom: 1px solid #ddd; }
+        #chat-box p { margin: 5px 0; }
+        .user { text-align: right; color: #2c3e50; }
+        .bot { color: #005577; } /* Higher contrast for accessibility */
+        #input-container { display: flex; padding: 10px; }
+        #user-input { flex: 1; padding: 8px; border: 1px solid #333; border-radius: 4px; font-size: 16px; } /* Improved contrast */
+        #send-btn { padding: 8px 16px; margin-left: 10px; background: #005577; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        #send-btn:hover { background: #003d55; }
+        .error { color: #d32f2f; } /* Red for error messages */
+    </style>
+</head>
+<body>
+    <div id="chat-container" role="region" aria-label="Chatbot interface">
+        <div id="chat-box" role="log" aria-live="polite">
+            <p class="bot" id="welcome-message">Loading frequent routes...</p>
+        </div>
+        <div id="input-container">
+            <input type="text" id="user-input" placeholder="Type your message, e.g., 'From Wuse to Asokoro'" aria-label="Enter your route query">
+            <button id="send-btn" aria-label="Send message">Send</button>
+        </div>
+    </div>
+    <script src="chatbot.js"></script>
+</body>
+</html>
