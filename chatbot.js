@@ -509,8 +509,8 @@ function displayFrequentRoutes() {
                 const route = routes[key];
                 if (route) {
                     const [start, end] = key.split('-');
-                    message += ${start.charAt(0).toUpperCase() + start.slice(1)} to ${end.charAt(0).toUpperCase() + end.slice(1)} (used ${count} time${count > 1 ? 's' : ''}): ${route.main_route.description} Fares: ${route.main_route.fares.join(", ")} NGN. Alight at ${route.alighting_points ? route.alighting_points.description.split(':')[0] : 'main bus stop'}.<br>;
-                    hausaMessage += ${start.charAt(0).toUpperCase() + start.slice(1)} zuwa ${end.charAt(0).toUpperCase() + end.slice(1)} (an yi amfani da sau ${count}): ${route.main_route.hausa_description} Kudin Tafiya: ${route.main_route.fares.join(", ")} NGN. Sauka a ${route.alighting_points ? route.alighting_points.hausa_description.split(':')[0] : 'babban tashar'}.<br>;
+                    message += `${start.charAt(0).toUpperCase() + start.slice(1)} to ${end.charAt(0).toUpperCase() + end.slice(1)} (used ${count} time${count > 1 ? 's' : ''}): ${route.main_route.description} Fares: ${route.main_route.fares.join(", ")} NGN. Alight at ${route.alighting_points ? route.alighting_points.description.split(':')[0] : 'main bus stop'}.<br>`;
+                    hausaMessage += `${start.charAt(0).toUpperCase() + start.slice(1)} zuwa ${end.charAt(0).toUpperCase() + end.slice(1)} (an yi amfani da sau ${count}): ${route.main_route.hausa_description} Kudin Tafiya: ${route.main_route.fares.join(", ")} NGN. Sauka a ${route.alighting_points ? route.alighting_points.hausa_description.split(':')[0] : 'babban tashar'}.<br>`;
                 }
             });
         }
@@ -519,7 +519,7 @@ function displayFrequentRoutes() {
         hausaMessage += "<br>Don manta hanya, duba saitunan burauzarka don share bayanan ajiya ko sarrafa bayanai a ƙarƙashin 'Data Controls'.";
         
         const welcomeMessage = document.getElementById("welcome-message");
-        welcomeMessage.innerHTML = ${message}<br>(Hausa:)<br>${hausaMessage};
+        welcomeMessage.innerHTML = `${message}<br>(Hausa:)<br>${hausaMessage}`;
     } catch (e) {
         console.error('Error displaying frequent routes:', e);
         const welcomeMessage = document.getElementById("welcome-message");
@@ -574,7 +574,7 @@ function chatbotResponse(userInput) {
         const startSuggestion = suggestLocation(start);
         const endSuggestion = suggestLocation(end);
         if (!startSuggestion || !endSuggestion) {
-            const suggestion = Did you mean ${startSuggestion || start} to ${endSuggestion || end}? Please try again, e.g., 'From Wuse to Asokoro' or 'Daga Wuse zuwa Asokoro'. <span class='error'>Error: Unrecognized location.</span>;
+            const suggestion = `Did you mean ${startSuggestion || start} to ${endSuggestion || end}? Please try again, e.g., 'From Wuse to Asokoro' or 'Daga Wuse zuwa Asokoro'. <span class='error'>Error: Unrecognized location.</span>`;
             return suggestion;
         }
 
@@ -582,13 +582,13 @@ function chatbotResponse(userInput) {
         end = endSuggestion || end;
 
         // Map to key and save to frequent routes
-        let key = ${start.replace(/[0-9]/g, '').replace('monroviastreetin', '').replace('jfk', 'jfkennedy')}-${end.replace(/[0-9]/g, '').replace('jfkennedystreetin', '').replace('asokoro', 'asokoro').replace('nyanya', 'nyanya').replace('gwagwalada', 'gwagwalada').replace('kuje', 'kuje').replace('bwari', 'bwari').replace('abaji', 'abaji').replace('kwali', 'kwali')};
+        let key = `${start.replace(/[0-9]/g, '').replace('monroviastreetin', '').replace('jfk', 'jfkennedy')}-${end.replace(/[0-9]/g, '').replace('jfkennedystreetin', '').replace('asokoro', 'asokoro').replace('nyanya', 'nyanya').replace('gwagwalada', 'gwagwalada').replace('kuje', 'kuje').replace('bwari', 'bwari').replace('abaji', 'abaji').replace('kwali', 'kwali')}`;
         saveFrequentRoute(key);
 
         if (routes[key]) {
             const route = routes[key];
-            let response = isHausa ? "" : From ${start.charAt(0).toUpperCase() + start.slice(1)} to ${end.charAt(0).toUpperCase() + end.slice(1)}:<br>;
-            let hausaResponse = isHausa ? Daga ${start.charAt(0).toUpperCase() + start.slice(1)} zuwa ${end.charAt(0).toUpperCase() + end.slice(1)}:<br> : "";
+            let response = isHausa ? "" : `From ${start.charAt(0).toUpperCase() + start.slice(1)} to ${end.charAt(0).toUpperCase() + end.slice(1)}:<br>`;
+            let hausaResponse = isHausa ? `Daga ${start.charAt(0).toUpperCase() + start.slice(1)} zuwa ${end.charAt(0).toUpperCase() + end.slice(1)}:<br>` : "";
 
             // Check for night trip (outside 6 AM-8 PM) or security concerns
             const currentHour = new Date().getHours(); // Use real-time hour
@@ -598,44 +598,44 @@ function chatbotResponse(userInput) {
 
             // Start address
             if (hasAddress && route.start_address_details.distance_to_bus_stop <= 1) {
-                if (!isHausa) response += <b>Start Address Info:</b> ${route.start_address_details.description} <a href="${route.start_address_details.map_link}" target="_blank">[View on Google Maps]</a><br>;
-                hausaResponse += <b>Bayanin Adireshin Farawa:</b> ${route.start_address_details.hausa_description} <a href="${route.start_address_details.map_link}" target="_blank">[Duba a Google Maps]</a><br>;
+                if (!isHausa) response += `<b>Start Address Info:</b> ${route.start_address_details.description} <a href="${route.start_address_details.map_link}" target="_blank">[View on Google Maps]</a><br>`;
+                hausaResponse += `<b>Bayanin Adireshin Farawa:</b> ${route.start_address_details.hausa_description} <a href="${route.start_address_details.map_link}" target="_blank">[Duba a Google Maps]</a><br>`;
             }
 
             // Main and alternative routes
             if (!isHausa) {
-                response += <b>Main Route:</b> ${route.main_route.description}<br> +
-                            <b>Transport:</b> ${route.main_route.transport.join(", ")}<br> +
-                            <b>Fares (NGN):</b> ${route.main_route.fares.join(", ")}<br> +
-                            <b>Time:</b> ${route.main_route.time}<br> +
-                            <b>Traffic Note:</b> ${route.main_route.traffic}<br><br> +
-                            <b>Alternative Route:</b> ${route.alternative_route.description}<br> +
-                            <b>Transport:</b> ${route.alternative_route.transport.join(", ")}<br> +
-                            <b>Fares (NGN):</b> ${route.alternative_route.fares.join(", ")}<br> +
-                            <b>Time:</b> ${route.alternative_route.time}<br> +
-                            <b>Traffic Note:</b> ${route.alternative_route.traffic}<br><br>;
+                response += `<b>Main Route:</b> ${route.main_route.description}<br>` +
+                            `<b>Transport:</b> ${route.main_route.transport.join(", ")}<br>` +
+                            `<b>Fares (NGN):</b> ${route.main_route.fares.join(", ")}<br>` +
+                            `<b>Time:</b> ${route.main_route.time}<br>` +
+                            `<b>Traffic Note:</b> ${route.main_route.traffic}<br><br>` +
+                            `<b>Alternative Route:</b> ${route.alternative_route.description}<br>` +
+                            `<b>Transport:</b> ${route.alternative_route.transport.join(", ")}<br>` +
+                            `<b>Fares (NGN):</b> ${route.alternative_route.fares.join(", ")}<br>` +
+                            `<b>Time:</b> ${route.alternative_route.time}<br>` +
+                            `<b>Traffic Note:</b> ${route.alternative_route.traffic}<br><br>`;
             }
-            hausaResponse += <b>Hanyar Babba:</b> ${route.main_route.hausa_description}<br> +
-                             <b>Motoci:</b> ${route.main_route.transport.join(", ")}<br> +
-                             <b>Kudin Tafiya (NGN):</b> ${route.main_route.fares.join(", ")}<br> +
-                             <b>Lokaci:</b> ${route.main_route.hausa_time}<br> +
-                             <b>Tambaya Zirga-zirga:</b> ${route.main_route.hausa_traffic}<br><br> +
-                             <b>Hanyar Madadin:</b> ${route.alternative_route.hausa_description}<br> +
-                             <b>Motoci:</b> ${route.alternative_route.transport.join(", ")}<br> +
-                             <b>Kudin Tafiya (NGN):</b> ${route.alternative_route.fares.join(", ")}<br> +
-                             <b>Lokaci:</b> ${route.alternative_route.hausa_time}<br> +
-                             <b>Tambaya Zirga-zirga:</b> ${route.alternative_route.hausa_traffic}<br><br>;
+            hausaResponse += `<b>Hanyar Babba:</b> ${route.main_route.hausa_description}<br>` +
+                             `<b>Motoci:</b> ${route.main_route.transport.join(", ")}<br>` +
+                             `<b>Kudin Tafiya (NGN):</b> ${route.main_route.fares.join(", ")}<br>` +
+                             `<b>Lokaci:</b> ${route.main_route.hausa_time}<br>` +
+                             `<b>Tambaya Zirga-zirga:</b> ${route.main_route.hausa_traffic}<br><br>` +
+                             `<b>Hanyar Madadin:</b> ${route.alternative_route.hausa_description}<br>` +
+                             `<b>Motoci:</b> ${route.alternative_route.transport.join(", ")}<br>` +
+                             `<b>Kudin Tafiya (NGN):</b> ${route.alternative_route.fares.join(", ")}<br>` +
+                             `<b>Lokaci:</b> ${route.alternative_route.hausa_time}<br>` +
+                             `<b>Tambaya Zirga-zirga:</b> ${route.alternative_route.hausa_traffic}<br><br>`;
 
             // E-hailing advisory
             if (hasAddress && (isNightTrip && !isSingleModeClose || hasSecurityConcerns)) {
-                if (!isHausa) response += <b>Last-Mile E-Hailing Advisory:</b> ${route.ehailing_advisory.description}<br>;
-                hausaResponse += <b>Shawara kan E-Hailing na Ƙarshe:</b> ${route.ehailing_advisory.hausa_description}<br>;
+                if (!isHausa) response += `<b>Last-Mile E-Hailing Advisory:</b> ${route.ehailing_advisory.description}<br>`;
+                hausaResponse += `<b>Shawara kan E-Hailing na Ƙarshe:</b> ${route.ehailing_advisory.hausa_description}<br>`;
             }
 
             // Alighting point and end address
             if (hasAddress) {
                 if (route.alighting_points && route.alighting_points.distance_to_destination <= 1) {
-                    if (!isHausa) response += <b>Recommended Alighting Point:</b> ${route.alighting_points.description}<br>;
-                    hausaResponse += <b>Matsayin Sauka da Aka Shawarta:</b> ${route.alighting_points.hausa_description}<br>;
+                    if (!isHausa) response += `<b>Recommended Alighting Point:</b> ${route.alighting_points.description}<br>`;
+                    hausaResponse += `<b>Matsayin Sauka da Aka Shawarta:</b> ${route.alighting_points.hausa_description}<br>`;
                 }
                 if (route.end_address
