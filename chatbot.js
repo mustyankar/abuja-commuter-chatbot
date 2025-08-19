@@ -1,3 +1,96 @@
+const routes = {
+    "wuse2-asokoro": {
+        start_address_details: {
+            description: "Wuse 2, near Aminu Kano Crescent",
+            hausa_description: "Wuse 2, kusa da Aminu Kano Crescent",
+            map_link: "https://maps.google.com/?q=Wuse+2,+Abuja",
+            distance_to_bus_stop: 0.3
+        },
+        main_route: {
+            description: "Take Aminu Kano Crescent to IBB Way, then proceed to Asokoro. ~8 km.",
+            hausa_description: "Ɗauki Aminu Kano Crescent zuwa IBB Way, sannan ka ci gaba zuwa Asokoro. ~8 km.",
+            transport: ["Keke", "Shared Taxi"],
+            fares: ["200-300", "500-700"],
+            time: "20-30 mins",
+            hausa_time: "Minti 20-30",
+            traffic: "Moderate, heavy during rush hours",
+            hausa_traffic: "Matsakaici, mai nauyi a lokutan cunkoso"
+        },
+        alternative_route: {
+            description: "Via Adetokunbo Ademola Crescent to Maitama, then Asokoro. ~10 km.",
+            hausa_description: "Ta Adetokunbo Ademola Crescent zuwa Maitama, sannan Asokoro. ~10 km.",
+            transport: ["Bus", "Keke"],
+            fares: ["300-400", "200-250"],
+            time: "25-35 mins",
+            hausa_time: "Minti 25-35",
+            traffic: "Light to moderate",
+            hausa_traffic: "Haske zuwa matsakaici"
+        },
+        ehailing_advisory: {
+            description: "Consider Uber or Bolt for faster travel, especially at night.",
+            hausa_description: "Ka ji daɗin amfani da Uber ko Bolt don tafiya cikin sauri, musamman da dare."
+        },
+        alighting_points: {
+            description: "Asokoro Shopping Complex, walk 200m to destination.",
+            hausa_description: "Asokoro Shopping Complex, ka tafi mita 200 zuwa inda za ka.",
+            distance_to_destination: 0.2,
+            single_mode: true
+        },
+        end_address_details: {
+            description: "Asokoro, near AYA Roundabout",
+            hausa_description: "Asokoro, kusa da AYA Roundabout",
+            map_link: "https://maps.google.com/?q=Asokoro,+Abuja",
+            distance_from_bus_stop: 0.2,
+            security_concerns: true
+        }
+    },
+    "garki-maitama": {
+        start_address_details: {
+            description: "Garki Area 11, near Garki Market",
+            hausa_description: "Garki Area 11, kusa da Kasuwar Garki",
+            map_link: "https://maps.google.com/?q=Garki+Area+11,+Abuja",
+            distance_to_bus_stop: 0.4
+        },
+        main_route: {
+            description: "Take Ahmadu Bello Way to Maitama Roundabout. ~6 km.",
+            hausa_description: "Ɗauki Ahmadu Bello Way zuwa Maitama Roundabout. ~6 km.",
+            transport: ["Shared Taxi", "Bus"],
+            fares: ["300-400", "200-300"],
+            time: "15-25 mins",
+            hausa_time: "Minti 15-25",
+            traffic: "Light, moderate in evenings",
+            hausa_traffic: "Haske, matsakaici da yamma"
+        },
+        alternative_route: {
+            description: "Via Musa Yar’Adua Expressway to Maitama. ~7 km.",
+            hausa_description: "Ta Musa Yar’Adua Expressway zuwa Maitama. ~7 km.",
+            transport: ["Keke", "Bolt"],
+            fares: ["200-250", "1000-1200"],
+            time: "20-30 mins",
+            hausa_time: "Minti 20-30",
+            traffic: "Light",
+            hausa_traffic: "Haske"
+        },
+        ehailing_advisory: {
+            description: "Bolt is reliable for this route, especially for late trips.",
+            hausa_description: "Bolt abin dogaro ne ga wannan hanyar, musamman da dare."
+        },
+        alighting_points: {
+            description: "Maitama Roundabout, walk 300m to destination.",
+            hausa_description: "Maitama Roundabout, ka tafi mita 300 zuwa inda za ka.",
+            distance_to_destination: 0.3,
+            single_mode: true
+        },
+        end_address_details: {
+            description: "Maitama, near Transcorp Hilton",
+            hausa_description: "Maitama, kusa da Transcorp Hilton",
+            map_link: "https://maps.google.com/?q=Maitama,+Abuja",
+            distance_from_bus_stop: 0.3,
+            security_concerns: false
+        }
+    }
+};
+
 function normalizeRouteInput(input) {
     if (!input) return "";
     return input
