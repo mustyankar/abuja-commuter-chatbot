@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +42,7 @@
             border-bottom-left-radius: 0; 
         }
         .timestamp { 
-            font-size: 0.6rem; 
+            font-size: 0.75rem; /* Increased for accessibility */
             color: #6b7280; 
             margin-top: 0.25rem; 
             text-align: right; 
@@ -81,7 +82,7 @@
 <body>
     <div id="chat-container" class="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden" role="region" aria-label="Shekwoni Abuja Guide Chatbot">
         <div id="language-selection" class="p-3 bg-gray-100 border-b border-gray-200 sm:p-4" role="radiogroup" aria-label="Select language">
-            <p id="lang-prompt" class="text-center text-gray-700 font-medium text-sm sm:text-base mb-2"></p>
+            <p id="lang-prompt" class="text-center text-gray-700 font-medium text-sm sm:text-base mb-2">Select your language</p>
             <div class="flex justify-center space-x-3 sm:space-x-4">
                 <label class="flex items-center">
                     <input type="radio" name="language" value="english" checked class="mr-1 sm:mr-2" tabindex="0">
@@ -102,5 +103,6 @@
         </div>
     </div>
     <script src="chatbot.js"></script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'971bdeb79b14337c',t:'MTc1NTYyOTc3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
