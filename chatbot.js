@@ -1,5 +1,3 @@
-// --- Abuja Commuter Chatbot ---
-// FULL routes object (replace ... with your actual data)
 const routes = {
     "wuse to asokoro": {
         english: "To get from Wuse to Asokoro, take Bus 34 from Wuse Market Park. The journey typically takes 20 minutes depending on traffic.",
@@ -33,7 +31,6 @@ const routes = {
         english: "You're already in Gwarinpa.",
         hausa: "Kana riga kana Gwarinpa."
     }
-    // Add more routes as needed
 };
 
 let selectedLanguage = "english";
@@ -42,6 +39,7 @@ const inputForm = document.getElementById("input-form");
 const textInput = document.getElementById("textInput");
 const langBtn = document.getElementById("lang-btn");
 const suggestionsDiv = document.getElementById("suggestions");
+const clearBtn = document.getElementById("clear-btn");
 
 function renderMessage(message, sender) {
     const bubble = document.createElement('div');
@@ -143,9 +141,8 @@ inputForm.addEventListener("submit", function (e) {
     suggestionsDiv.classList.add("hidden");
 });
 
-langBtn.addEventListener("click", () => {
-    selectedLanguage = selectedLanguage === "english" ? "hausa" : "english";
-    langBtn.textContent = selectedLanguage === "english" ? "EN/HA" : "HA/EN";
+langBtn.addEventListener("change", (e) => {
+    selectedLanguage = e.target.value;
     renderMessage(
         selectedLanguage === "english"
             ? "Switched to English."
@@ -155,10 +152,25 @@ langBtn.addEventListener("click", () => {
     textInput.focus();
 });
 
+if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+        chatArea.innerHTML = "";
+        renderMessage(
+            selectedLanguage === "english"
+                ? "Chat cleared! Ask for directions, e.g., <i>from Wuse to Asokoro</i>."
+                : "An share sako! Tambayi hanya, misali, <i>daga Wuse zuwa Asokoro</i>.",
+            "bot"
+        );
+        textInput.focus();
+    });
+}
+
 // Initial greeting
 window.addEventListener("DOMContentLoaded", () => {
     renderMessage(
-        "Hello! Ask me for public transport directions in Abuja. For example, type: <i>from Wuse to Asokoro</i>.<br>Click <b>EN/HA</b> to switch language.",
+        selectedLanguage === "english"
+            ? "Hello! Ask me for public transport directions in Abuja. For example, type: <i>from Wuse to Asokoro</i>."
+            : "Sannu! Tambaye ni game da hanyoyin sufuri a Abuja. Misali, rubuta: <i>daga Wuse zuwa Asokoro</i>.",
         "bot"
     );
 });
