@@ -6,15 +6,14 @@
     <title>Abuja Commuter Chatbot</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-green-100 flex items-center justify-center h-screen">
+<body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h1 class="text-2xl font-bold text-center mb-4 text-green-700">Abuja Commuter Chatbot 🚍</h1>
-        <p class="text-center text-gray-600 mb-4">Ask about transport routes (e.g., "from Wuse to Asokoro")</p>
+        <h1 class="text-2xl font-bold text-center mb-4">Case-Insensitive Input</h1>
         <input
             id="textInput"
             type="text"
-            placeholder="Type 'from [place] to [place]'..."
-            class="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            placeholder="Type 'from Wuse to Asokoro'..."
+            class="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
         <p id="result" class="text-center text-gray-700"></p>
     </div>
@@ -24,7 +23,7 @@
 
         // Sample place-to-place transport responses (case-insensitive)
         const responses = {
-            'from wuse to asokoro': 'From Wuse to Asokoro: Take a taxi from Wuse Market (₦500-₦700, 15 mins) or a bus from Banex (₦200, 20-25 mins). 🚖🚍',
+            'from wuse to asokoro': 'From Wuse to Asokoro: Taxi from Wuse Market (₦500-₦700, 15 mins) or bus from Banex (₦200, 20-25 mins). 🚖🚍',
             'from garki to maitama': 'From Garki to Maitama: Keke napep from Area 1 (₦150-₦200, 10 mins) or taxi from Garki Market (₦400-₦600, 12 mins). 🚲🚖',
             'from asokoro to wuse': 'From Asokoro to Wuse: Taxi from AYA Roundabout (₦500-₦700, 15 mins) or bus from Asokoro Junction (₦200, 20-25 mins). 🚖🚍',
             'from maitama to airport': 'From Maitama to Airport: Airport shuttle from Maitama Junction (₦1000-₦1500, 30 mins) or Bolt ride (₦2000-₦2500, 25 mins). ✈️🚗'
@@ -32,14 +31,14 @@
 
         input.addEventListener('input', () => {
             const userInput = input.value.toLowerCase().trim();
-            const response = responses[userInput] || 'Sorry, I don’t recognize that route. Try "from Wuse to Asokoro" or "from Garki to Maitama".';
+            const response = responses[userInput] || 'No match. Try "from Wuse to Asokoro" or "from Garki to Maitama".';
             
             result.textContent = response;
             if (responses[userInput]) {
                 result.classList.remove('text-red-500');
-                result.classList.add('text-green-700');
+                result.classList.add('text-green-500');
             } else {
-                result.classList.remove('text-green-700');
+                result.classList.remove('text-green-500');
                 result.classList.add('text-red-500');
             }
         });
