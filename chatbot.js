@@ -7,22 +7,22 @@ const routes = {
             distance_to_bus_stop: 0.2
         },
         main_route: {
-            description: "Take Bus 34 from Wuse Market Park to Asokoro. ~5 km.",
-            hausa_description: "Hau Bus 34 daga Wuse Market Park zuwa Asokoro. ~5 km.",
-            transport: ["Bus", "Shared Taxi"],
+            description: "Take Bus 34 from Wuse Market Park to Asokoro. ~8 km.",
+            hausa_description: "Hau Bus 34 daga Wuse Market Park zuwa Asokoro. ~8 km.",
+            transport: ["Bus", "Shared Taxi", "Keke"],
             fares: ["100-200"],
-            time: "20 mins",
-            hausa_time: "Minti 20",
+            time: "17-20 mins",
+            hausa_time: "Minti 17-20",
             traffic: "Moderate",
             hausa_traffic: "Matsakaici"
         },
         alternative_route: {
-            description: "Via Ahmadu Bello Way to Asokoro. ~6 km.",
-            hausa_description: "Ta Ahmadu Bello Way zuwa Asokoro. ~6 km.",
+            description: "Via Ahmadu Bello Way to Asokoro. ~9 km.",
+            hausa_description: "Ta Ahmadu Bello Way zuwa Asokoro. ~9 km.",
             transport: ["Keke", "Bus"],
             fares: ["150-250"],
-            time: "25 mins",
-            hausa_time: "Minti 25",
+            time: "19-25 mins",
+            hausa_time: "Minti 19-25",
             traffic: "Heavy during rush",
             hausa_traffic: "Nauyi a lokacin cunkoso"
         },
@@ -52,12 +52,12 @@ const routes = {
             distance_to_bus_stop: 0.1
         },
         main_route: {
-            description: "Take a direct bus from Berger Junction to Kubwa. ~10 km.",
-            hausa_description: "Hau bus kai tsaye daga Berger Junction zuwa Kubwa. ~10 km.",
+            description: "Take a direct bus from Berger Junction to Kubwa. ~25 km.",
+            hausa_description: "Hau bus kai tsaye daga Berger Junction zuwa Kubwa. ~25 km.",
             transport: ["Bus"],
-            fares: ["200-300"],
-            time: "30 mins",
-            hausa_time: "Minti 30",
+            fares: ["500-600"],
+            time: "28 mins",
+            hausa_time: "Minti 28",
             traffic: "Moderate",
             hausa_traffic: "Matsakaici"
         },
@@ -97,22 +97,22 @@ const routes = {
             distance_to_bus_stop: 0.3
         },
         main_route: {
-            description: "Board a taxi or keke from Garki to Maitama. ~4 km.",
-            hausa_description: "Hau taxi ko keke daga Garki zuwa Maitama. ~4 km.",
+            description: "Board a taxi or keke from Garki to Maitama. ~8 km.",
+            hausa_description: "Hau taxi ko keke daga Garki zuwa Maitama. ~8 km.",
             transport: ["Shared Taxi", "Keke"],
             fares: ["200-300"],
-            time: "15 mins",
-            hausa_time: "Minti 15",
+            time: "11-15 mins",
+            hausa_time: "Minti 11-15",
             traffic: "Moderate",
             hausa_traffic: "Matsakaici"
         },
         alternative_route: {
-            description: "Via Area 1 to Maitama. ~5 km.",
-            hausa_description: "Ta Area 1 zuwa Maitama. ~5 km.",
+            description: "Via Area 1 to Maitama. ~9 km.",
+            hausa_description: "Ta Area 1 zuwa Maitama. ~9 km.",
             transport: ["Bus", "Keke"],
             fares: ["150-250"],
-            time: "20 mins",
-            hausa_time: "Minti 20",
+            time: "14-20 mins",
+            hausa_time: "Minti 14-20",
             traffic: "Light",
             hausa_traffic: "Sauƙi"
         },
@@ -142,22 +142,22 @@ const routes = {
             distance_to_bus_stop: 0.2
         },
         main_route: {
-            description: "Board a bus from Central Area terminal to Gwarinpa. ~8 km.",
-            hausa_description: "Hau bus daga tashar Central Area zuwa Gwarinpa. ~8 km.",
+            description: "Board a bus from Central Area terminal to Gwarinpa. ~15 km.",
+            hausa_description: "Hau bus daga tashar Central Area zuwa Gwarinpa. ~15 km.",
             transport: ["Bus"],
             fares: ["200-300"],
-            time: "25 mins",
-            hausa_time: "Minti 25",
+            time: "20-27 mins",
+            hausa_time: "Minti 20-27",
             traffic: "Moderate",
             hausa_traffic: "Matsakaici"
         },
         alternative_route: {
-            description: "Via Katampe to Gwarinpa. ~9 km.",
-            hausa_description: "Ta Katampe zuwa Gwarinpa. ~9 km.",
+            description: "Via Katampe to Gwarinpa. ~16 km.",
+            hausa_description: "Ta Katampe zuwa Gwarinpa. ~16 km.",
             transport: ["Keke", "Bus"],
             fares: ["250-350"],
-            time: "30 mins",
-            hausa_time: "Minti 30",
+            time: "25-30 mins",
+            hausa_time: "Minti 25-30",
             traffic: "Light",
             hausa_traffic: "Sauƙi"
         },
@@ -187,22 +187,22 @@ const routes = {
             distance_to_bus_stop: 0.1
         },
         main_route: {
-            description: "Take a bus from Nyanya Park to Utako. ~7 km.",
-            hausa_description: "Hau bus daga Nyanya Park zuwa Utako. ~7 km.",
+            description: "Take a bus from Nyanya Park to Utako. ~22 km.",
+            hausa_description: "Hau bus daga Nyanya Park zuwa Utako. ~22 km.",
             transport: ["Bus"],
             fares: ["150-250"],
-            time: "25 mins",
-            hausa_time: "Minti 25",
+            time: "31 mins",
+            hausa_time: "Minti 31",
             traffic: "Moderate",
             hausa_traffic: "Matsakaici"
         },
         alternative_route: {
-            description: "Via Mararaba to Utako. ~8 km.",
-            hausa_description: "Ta Mararaba zuwa Utako. ~8 km.",
+            description: "Via Mararaba to Utako. ~23 km.",
+            hausa_description: "Ta Mararaba zuwa Utako. ~23 km.",
             transport: ["Keke", "Bus"],
             fares: ["200-300"],
-            time: "30 mins",
-            hausa_time: "Minti 30",
+            time: "35 mins",
+            hausa_time: "Minti 35",
             traffic: "Heavy during rush",
             hausa_traffic: "Nauyi a lokacin cunkoso"
         },
@@ -232,22 +232,22 @@ const routes = {
             distance_to_bus_stop: 0.2
         },
         main_route: {
-            description: "Take a bus from FHA Bus Stop to Area 1. ~6 km.",
-            hausa_description: "Hau bus daga Tashar FHA zuwa Area 1. ~6 km.",
+            description: "Take a bus from FHA Bus Stop to Area 1. ~18 km.",
+            hausa_description: "Hau bus daga Tashar FHA zuwa Area 1. ~18 km.",
             transport: ["Bus"],
             fares: ["150-250"],
-            time: "20 mins",
-            hausa_time: "Minti 20",
+            time: "41 mins",
+            hausa_time: "Minti 41",
             traffic: "Moderate",
             hausa_traffic: "Matsakaici"
         },
         alternative_route: {
-            description: "Via Airport Road to Area 1. ~7 km.",
-            hausa_description: "Ta Hanyar Airport zuwa Area 1. ~7 km.",
+            description: "Via Airport Road to Area 1. ~19 km.",
+            hausa_description: "Ta Hanyar Airport zuwa Area 1. ~19 km.",
             transport: ["Keke", "Bus"],
             fares: ["200-300"],
-            time: "25 mins",
-            hausa_time: "Minti 25",
+            time: "45 mins",
+            hausa_time: "Minti 45",
             traffic: "Light",
             hausa_traffic: "Sauƙi"
         },
@@ -277,22 +277,22 @@ const routes = {
             distance_to_bus_stop: 0.2
         },
         main_route: {
-            description: "Board a bus from Apo Roundabout to Wuse Market. ~5 km.",
-            hausa_description: "Hau bus daga Apo Roundabout zuwa Kasuwar Wuse. ~5 km.",
+            description: "Board a bus from Apo Roundabout to Wuse Market. ~13 km.",
+            hausa_description: "Hau bus daga Apo Roundabout zuwa Kasuwar Wuse. ~13 km.",
             transport: ["Bus", "Shared Taxi"],
             fares: ["100-200"],
-            time: "18 mins",
-            hausa_time: "Minti 18",
+            time: "21 mins",
+            hausa_time: "Minti 21",
             traffic: "Moderate",
             hausa_traffic: "Matsakaici"
         },
         alternative_route: {
-            description: "Via Gudu to Wuse. ~6 km.",
-            hausa_description: "Ta Gudu zuwa Wuse. ~6 km.",
+            description: "Via Gudu to Wuse. ~14 km.",
+            hausa_description: "Ta Gudu zuwa Wuse. ~14 km.",
             transport: ["Keke", "Bus"],
             fares: ["150-250"],
-            time: "22 mins",
-            hausa_time: "Minti 22",
+            time: "25 mins",
+            hausa_time: "Minti 25",
             traffic: "Light",
             hausa_traffic: "Sauƙi"
         },
@@ -371,8 +371,8 @@ const routes = {
             hausa_description: "Hau Adetokunbo Ademola Crescent zuwa Maitama. ~4 km.",
             transport: ["Shared Taxi", "Keke"],
             fares: ["200-300"],
-            time: "10-15 mins",
-            hausa_time: "Minti 10-15",
+            time: "8-10 mins",
+            hausa_time: "Minti 8-10",
             traffic: "Moderate",
             hausa_traffic: "Matsakaici"
         },
@@ -381,8 +381,8 @@ const routes = {
             hausa_description: "Ta Aminu Kano Crescent zuwa Maitama. ~5 km.",
             transport: ["Bus", "Keke"],
             fares: ["150-250"],
-            time: "15-20 mins",
-            hausa_time: "Minti 15-20",
+            time: "10-15 mins",
+            hausa_time: "Minti 10-15",
             traffic: "Light",
             hausa_traffic: "Sauƙi"
         },
@@ -412,8 +412,8 @@ const routes = {
             distance_to_bus_stop: 0.3
         },
         main_route: {
-            description: "Take Ahmadu Bello Way to Asokoro. ~5 km.",
-            hausa_description: "Hau Ahmadu Bello Way zuwa Asokoro. ~5 km.",
+            description: "Take Ahmadu Bello Way to Asokoro. ~8 km.",
+            hausa_description: "Hau Ahmadu Bello Way zuwa Asokoro. ~8 km.",
             transport: ["Bus", "Shared Taxi"],
             fares: ["100-200"],
             time: "15 mins",
@@ -422,8 +422,8 @@ const routes = {
             hausa_traffic: "Matsakaici"
         },
         alternative_route: {
-            description: "Via Area 1 to AYA. ~6 km.",
-            hausa_description: "Ta Area 1 zuwa AYA. ~6 km.",
+            description: "Via Area 1 to AYA. ~9 km.",
+            hausa_description: "Ta Area 1 zuwa AYA. ~9 km.",
             transport: ["Keke", "Bus"],
             fares: ["150-250"],
             time: "20 mins",
@@ -457,22 +457,22 @@ const routes = {
             distance_to_bus_stop: 0.1
         },
         main_route: {
-            description: "Take Karu Road to Karu Market. ~2 km.",
-            hausa_description: "Hau Karu Road zuwa Kasuwar Karu. ~2 km.",
+            description: "Take Karu Road to Karu Market. ~6 km.",
+            hausa_description: "Hau Karu Road zuwa Kasuwar Karu. ~6 km.",
             transport: ["Mini Bus", "Keke"],
             fares: ["100-200"],
-            time: "5-10 mins",
-            hausa_time: "Minti 5-10",
+            time: "10 mins",
+            hausa_time: "Minti 10",
             traffic: "Light",
             hausa_traffic: "Sauƙi"
         },
         alternative_route: {
-            description: "Via Nyanya Underpass to Karu. ~3 km.",
-            hausa_description: "Ta Nyanya Underpass zuwa Karu. ~3 km.",
+            description: "Via Nyanya Underpass to Karu. ~7 km.",
+            hausa_description: "Ta Nyanya Underpass zuwa Karu. ~7 km.",
             transport: ["Keke"],
             fares: ["100-150"],
-            time: "10 mins",
-            hausa_time: "Minti 10",
+            time: "15 mins",
+            hausa_time: "Minti 15",
             traffic: "Moderate",
             hausa_traffic: "Matsakaici"
         },
@@ -505,6 +505,8 @@ const suggestionsDiv = document.getElementById("suggestions");
 const clearBtn = document.getElementById("clear-btn");
 const loadingDiv = document.getElementById("loading");
 
+let typingTimeout = null;
+
 function levenshteinDistance(s, t) {
     if (!s.length) return t.length;
     if (!t.length) return s.length;
@@ -533,10 +535,9 @@ function normalizeInput(input) {
 function getRouteKey(input) {
     const normalized = normalizeInput(input);
     if (!normalized) return null;
-    
-    // Split input into words for better matching
+
     const inputWords = normalized.split(' ').filter(word => word);
-    if (inputWords.length < 2) return null; // Require at least two words (start and end)
+    if (inputWords.length < 2) return null;
 
     let bestKey = null;
     let minDist = Infinity;
@@ -544,7 +545,6 @@ function getRouteKey(input) {
         const keyWords = key.split(' to ');
         if (keyWords.length !== 2) return;
 
-        // Calculate distance for start and end points
         const startDist = Math.min(
             levenshteinDistance(inputWords[0], keyWords[0]),
             levenshteinDistance(inputWords[inputWords.length - 1], keyWords[0])
@@ -555,25 +555,24 @@ function getRouteKey(input) {
         );
         const totalDist = startDist + endDist;
 
-        // Stricter threshold: max 2 edits per word
-        if (totalDist < minDist && startDist <= 2 && endDist <= 2) {
+        if (totalDist < minDist && startDist <= 3 && endDist <= 3) {
             minDist = totalDist;
             bestKey = key;
         }
     });
 
-    return minDist < 5 ? bestKey : null; // Threshold for total distance
+    return minDist <= 6 ? bestKey : null;
 }
 
 function getRouteSuggestions(input) {
     const normalized = normalizeInput(input);
-    if (!normalized) return [];
+    if (!normalized || normalized.split(' ').filter(word => word).length < 2) return [];
     return Object.keys(routes)
         .map(key => ({
             key,
             dist: levenshteinDistance(normalized, key)
         }))
-        .filter(item => item.dist <= Math.max(3, normalized.length / 2))
+        .filter(item => item.dist <= Math.max(4, normalized.length / 2))
         .sort((a, b) => a.dist - b.dist)
         .slice(0, 5)
         .map(item => item.key);
@@ -601,24 +600,20 @@ function formatRoute(route, lang) {
         ? `Sannu! Hanyarka daga ${start} zuwa ${end} shine kamar ${distance} km. Ga shawarata:<br>`
         : `Hey! Your trip from ${start} to ${end} is about ${distance} km. Here’s my suggestion:<br>`;
 
-    // Start details
     response += isHausa 
         ? `<b>Fara Adireshi:</b> ${route.start_address_details.hausa_description} <a href="${route.start_address_details.map_link}" target="_blank">[Duba Google Maps]</a><br>`
         : `<b>Starting Point:</b> ${route.start_address_details.description} <a href="${route.start_address_details.map_link}" target="_blank">[Check Google Maps]</a><br>`;
 
-    // Main route
     const main = route.main_route;
     response += isHausa 
-        ? `<b>Hanyar Babba:</b> ${main.hausa_description}<br><b>Motoci:</b> ${main.transport.join(", ") || "None"}<br><b>Kudi (NGN):</b> ${main.fares.join(", ") || "N/A"}<br><b>Lokaci:</b> ${main.hausa_time}<br><b>Zirga-zirga:</b> ${main.hausa_traffic}<br><br>`
+        ? `<b>Hanyar Babba:</b> ${main.hausa_description}<br><b>Motoci:</b> ${main.transport.join(", ") || "Babu"}<br><b>Kudi (NGN):</b> ${main.fares.join(", ") || "N/A"}<br><b>Lokaci:</b> ${main.hausa_time}<br><b>Zirga-zirga:</b> ${main.hausa_traffic}<br><br>`
         : `<b>Main Route:</b> ${main.description}<br><b>Transport:</b> ${main.transport.join(", ") || "None"}<br><b>Fares (NGN):</b> ${main.fares.join(", ") || "N/A"}<br><b>Time:</b> ${main.time}<br><b>Traffic:</b> ${main.traffic}<br><br>`;
 
-    // Alternative route
     const alt = route.alternative_route;
     response += isHausa 
-        ? `<b>Wata Hanya:</b> ${alt.hausa_description}<br><b>Motoci:</b> ${alt.transport.join(", ") || "None"}<br><b>Kudi (NGN):</b> ${alt.fares.join(", ") || "N/A"}<br><b>Lokaci:</b> ${alt.hausa_time}<br><b>Zirga-zirga:</b> ${alt.hausa_traffic}<br><br>`
+        ? `<b>Wata Hanya:</b> ${alt.hausa_description}<br><b>Motoci:</b> ${alt.transport.join(", ") || "Babu"}<br><b>Kudi (NGN):</b> ${alt.fares.join(", ") || "N/A"}<br><b>Lokaci:</b> ${alt.hausa_time}<br><b>Zirga-zirga:</b> ${alt.hausa_traffic}<br><br>`
         : `<b>Alternative Route:</b> ${alt.description}<br><b>Transport:</b> ${alt.transport.join(", ") || "None"}<br><b>Fares (NGN):</b> ${alt.fares.join(", ") || "N/A"}<br><b>Time:</b> ${alt.time}<br><b>Traffic:</b> ${alt.traffic}<br><br>`;
 
-    // E-hailing
     const currentHour = new Date().getHours();
     const isNight = currentHour < 6 || currentHour >= 20;
     const hasSecurity = route.end_address_details.security_concerns;
@@ -629,12 +624,10 @@ function formatRoute(route, lang) {
             : `<b>E-Hailing Tip:</b> ${route.ehailing_advisory.description}<br>`;
     }
 
-    // Alighting
     response += isHausa 
         ? `<b>Sauka:</b> ${route.alighting_points.hausa_description}<br>`
         : `<b>Drop-Off Point:</b> ${route.alighting_points.description}<br>`;
 
-    // End
     response += isHausa 
         ? `<b>Adireshin Ƙarshe:</b> ${route.end_address_details.hausa_description} <a href="${route.end_address_details.map_link}" target="_blank">[Duba Google Maps]</a><br>`
         : `<b>Destination:</b> ${route.end_address_details.description} <a href="${route.end_address_details.map_link}" target="_blank">[Check Google Maps]</a><br>`;
@@ -644,25 +637,28 @@ function formatRoute(route, lang) {
 }
 
 function showSuggestions(input) {
-    const suggestions = getRouteSuggestions(input);
-    suggestionsDiv.innerHTML = "";
-    if (suggestions.length > 0) {
-        suggestionsDiv.classList.remove("hidden");
-        suggestions.forEach((key, idx) => {
-            const item = document.createElement("div");
-            item.className = "suggestion-item" + (idx === 0 ? " active" : "");
-            item.textContent = key.replace(/\b\w/g, l => l.toUpperCase());
-            item.onclick = () => {
-                textInput.value = key;
-                suggestionsDiv.classList.add("hidden");
-                textInput.focus();
-                inputForm.dispatchEvent(new Event("submit"));
-            };
-            suggestionsDiv.appendChild(item);
-        });
-    } else {
-        suggestionsDiv.classList.add("hidden");
-    }
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+        const suggestions = getRouteSuggestions(input);
+        suggestionsDiv.innerHTML = "";
+        if (suggestions.length > 0) {
+            suggestionsDiv.classList.remove("hidden");
+            suggestions.forEach((key, idx) => {
+                const item = document.createElement("div");
+                item.className = "suggestion-item" + (idx === 0 ? " active" : "");
+                item.textContent = key.replace(/\b\w/g, l => l.toUpperCase());
+                item.onclick = () => {
+                    textInput.value = key;
+                    suggestionsDiv.classList.add("hidden");
+                    textInput.focus();
+                    inputForm.dispatchEvent(new Event("submit"));
+                };
+                suggestionsDiv.appendChild(item);
+            });
+        } else {
+            suggestionsDiv.classList.add("hidden");
+        }
+    }, 300); // Reduced debounce to 300ms for better responsiveness
 }
 
 textInput.addEventListener("input", (e) => {
@@ -692,10 +688,12 @@ inputForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const input = textInput.value.trim();
     if (!input) return;
+    console.log("Processing input:", input); // Debug log
     renderMessage(input, "user");
     loadingDiv.style.display = 'block';
     try {
         const routeKey = getRouteKey(input);
+        console.log("Matched route key:", routeKey); // Debug log
         let reply = "";
         if (routeKey && routes[routeKey]) {
             reply = formatRoute(routes[routeKey], selectedLanguage);
@@ -709,6 +707,7 @@ inputForm.addEventListener("submit", function (e) {
             renderMessage(reply, "bot");
         }, 400);
     } catch (error) {
+        console.error("Error in submit handler:", error); // Debug log
         loadingDiv.style.display = 'none';
         renderMessage(
             selectedLanguage === "english"
@@ -746,7 +745,6 @@ if (clearBtn) {
     });
 }
 
-// Initial setup
 window.addEventListener("DOMContentLoaded", () => {
     langBtn.value = selectedLanguage;
     renderMessage(
