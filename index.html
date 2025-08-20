@@ -19,6 +19,27 @@
         .user-bubble { background: #dcf8c6; color: #000; margin-left: auto; border-bottom-right-radius: 0; }
         .bot-bubble { background: #fff; color: #111; margin-right: auto; border-bottom-left-radius: 0; }
         .timestamp { font-size: 0.7rem; color: #8b8b8b; margin-top: 0.25rem; text-align: right; }
+        .suggestion-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            max-height: 10rem;
+            overflow-y: auto;
+            z-index: 10;
+        }
+        .suggestion-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .suggestion-item:hover, .suggestion-item.active {
+            background-color: #f1f5f9;
+            color: #15803d;
+        }
         @media (max-width: 640px) {
             .chat-area { height: 15rem; }
         }
@@ -38,8 +59,12 @@
                 autofocus
                 autocomplete="off"
             />
-            <button type="button" id="lang-btn" class="px-2 py-1 bg-gray-200 rounded text-xs" title="Switch Language">EN/HA</button>
+            <select id="lang-btn" class="px-2 py-1 bg-gray-200 rounded text-xs" title="Select Language">
+                <option value="english">English</option>
+                <option value="hausa">Hausa</option>
+            </select>
             <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Send</button>
+            <button type="button" id="clear-btn" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">Clear</button>
             <div id="suggestions" class="suggestion-list hidden"></div>
         </form>
     </div>
