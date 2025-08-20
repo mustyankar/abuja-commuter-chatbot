@@ -44,322 +44,6 @@ const routes = {
             security_concerns: true
         }
     },
-    "berger to kubwa": {
-        start_address_details: {
-            description: "Berger, near Berger Junction",
-            hausa_description: "Berger, kusa da Berger Junction",
-            map_link: "https://maps.google.com/?q=Berger,+Abuja",
-            distance_to_bus_stop: 0.1
-        },
-        main_route: {
-            description: "Take direct bus from Berger Junction to Kubwa. ~10 km.",
-            hausa_description: "Hau bus kai tsaye daga Berger Junction zuwa Kubwa. ~10 km.",
-            transport: ["Bus"],
-            fares: ["200-300"],
-            time: "30 mins",
-            hausa_time: "Minti 30",
-            traffic: "Moderate",
-            hausa_traffic: "Matsakaici"
-        },
-        alternative_route: {
-            description: "Via Dutse to Kubwa. ~12 km.",
-            hausa_description: "Ta Dutse zuwa Kubwa. ~12 km.",
-            transport: ["Keke", "Bus"],
-            fares: ["250-350"],
-            time: "35 mins",
-            hausa_time: "Minti 35",
-            traffic: "Light",
-            hausa_traffic: "Sauƙi"
-        },
-        ehailing_advisory: {
-            description: "Use Uber for reliable trips.",
-            hausa_description: "Yi amfani da Uber don tafiye-tafiye masu aminci."
-        },
-        alighting_points: {
-            description: "Kubwa Market, walk 100m.",
-            hausa_description: "Kasuwar Kubwa, tafi mita 100.",
-            distance_to_destination: 0.1,
-            single_mode: true
-        },
-        end_address_details: {
-            description: "Kubwa, near Kubwa Market",
-            hausa_description: "Kubwa, kusa da Kasuwar Kubwa",
-            map_link: "https://maps.google.com/?q=Kubwa,+Abuja",
-            distance_from_bus_stop: 0.1,
-            security_concerns: false
-        }
-    },
-    "garki to maitama": {
-        start_address_details: {
-            description: "Garki, near Garki Market",
-            hausa_description: "Garki, kusa da Kasuwar Garki",
-            map_link: "https://maps.google.com/?q=Garki,+Abuja",
-            distance_to_bus_stop: 0.3
-        },
-        main_route: {
-            description: "Board a taxi or keke from Garki to Maitama. ~4 km.",
-            hausa_description: "Hau taxi ko keke daga Garki zuwa Maitama. ~4 km.",
-            transport: ["Shared Taxi", "Keke"],
-            fares: ["200-300"],
-            time: "15 mins",
-            hausa_time: "Minti 15",
-            traffic: "Moderate",
-            hausa_traffic: "Matsakaici"
-        },
-        alternative_route: {
-            description: "Via Area 1 to Maitama. ~5 km.",
-            hausa_description: "Ta Area 1 zuwa Maitama. ~5 km.",
-            transport: ["Bus", "Keke"],
-            fares: ["150-250"],
-            time: "20 mins",
-            hausa_time: "Minti 20",
-            traffic: "Light",
-            hausa_traffic: "Sauƙi"
-        },
-        ehailing_advisory: {
-            description: "Bolt for short trips.",
-            hausa_description: "Bolt don gajerun tafiye-tafiye."
-        },
-        alighting_points: {
-            description: "Maitama Roundabout, walk 100m.",
-            hausa_description: "Maitama Roundabout, tafi mita 100.",
-            distance_to_destination: 0.1,
-            single_mode: true
-        },
-        end_address_details: {
-            description: "Maitama, near Maitama Roundabout",
-            hausa_description: "Maitama, kusa da Maitama Roundabout",
-            map_link: "https://maps.google.com/?q=Maitama,+Abuja",
-            distance_from_bus_stop: 0.1,
-            security_concerns: false
-        }
-    },
-    "central area to gwarinpa": {
-        start_address_details: {
-            description: "Central Area, near terminal",
-            hausa_description: "Central Area, kusa da tasha",
-            map_link: "https://maps.google.com/?q=Central+Area,+Abuja",
-            distance_to_bus_stop: 0.2
-        },
-        main_route: {
-            description: "Board a bus from Central Area terminal to Gwarinpa. ~8 km.",
-            hausa_description: "Hau bus daga tashar Central Area zuwa Gwarinpa. ~8 km.",
-            transport: ["Bus"],
-            fares: ["200-300"],
-            time: "25 mins",
-            hausa_time: "Minti 25",
-            traffic: "Moderate",
-            hausa_traffic: "Matsakaici"
-        },
-        alternative_route: {
-            description: "Via Katampe to Gwarinpa. ~9 km.",
-            hausa_description: "Ta Katampe zuwa Gwarinpa. ~9 km.",
-            transport: ["Keke", "Bus"],
-            fares: ["250-350"],
-            time: "30 mins",
-            hausa_time: "Minti 30",
-            traffic: "Light",
-            hausa_traffic: "Sauƙi"
-        },
-        ehailing_advisory: {
-            description: "Use Uber for comfort.",
-            hausa_description: "Yi amfani da Uber don jin daɗi."
-        },
-        alighting_points: {
-            description: "Gwarinpa Estate Gate, walk 150m.",
-            hausa_description: "Ƙofar Gwarinpa Estate, tafi mita 150.",
-            distance_to_destination: 0.15,
-            single_mode: true
-        },
-        end_address_details: {
-            description: "Gwarinpa, near Estate Gate",
-            hausa_description: "Gwarinpa, kusa da Ƙofar Estate",
-            map_link: "https://maps.google.com/?q=Gwarinpa,+Abuja",
-            distance_from_bus_stop: 0.15,
-            security_concerns: false
-        }
-    },
-    "nyanya to utako": {
-        start_address_details: {
-            description: "Nyanya, near Nyanya Park",
-            hausa_description: "Nyanya, kusa da Nyanya Park",
-            map_link: "https://maps.google.com/?q=Nyanya,+Abuja",
-            distance_to_bus_stop: 0.1
-        },
-        main_route: {
-            description: "Take a bus from Nyanya Park to Utako. ~7 km.",
-            hausa_description: "Hau bus daga Nyanya Park zuwa Utako. ~7 km.",
-            transport: ["Bus"],
-            fares: ["150-250"],
-            time: "25 mins",
-            hausa_time: "Minti 25",
-            traffic: "Moderate",
-            hausa_traffic: "Matsakaici"
-        },
-        alternative_route: {
-            description: "Via Mararaba to Utako. ~8 km.",
-            hausa_description: "Ta Mararaba zuwa Utako. ~8 km.",
-            transport: ["Keke", "Bus"],
-            fares: ["200-300"],
-            time: "30 mins",
-            hausa_time: "Minti 30",
-            traffic: "Heavy during rush",
-            hausa_traffic: "Nauyi a lokacin cunkoso"
-        },
-        ehailing_advisory: {
-            description: "Use Indrive for cheap rides.",
-            hausa_description: "Yi amfani da Indrive don tafiye-tafiye masu rahusa."
-        },
-        alighting_points: {
-            description: "Utako Market, walk 100m.",
-            hausa_description: "Kasuwar Utako, tafi mita 100.",
-            distance_to_destination: 0.1,
-            single_mode: true
-        },
-        end_address_details: {
-            description: "Utako, near Utako Market",
-            hausa_description: "Utako, kusa da Kasuwar Utako",
-            map_link: "https://maps.google.com/?q=Utako,+Abuja",
-            distance_from_bus_stop: 0.1,
-            security_concerns: false
-        }
-    },
-    "lugbe to area 1": {
-        start_address_details: {
-            description: "Lugbe, near FHA Bus Stop",
-            hausa_description: "Lugbe, kusa da Tashar FHA",
-            map_link: "https://maps.google.com/?q=Lugbe,+Abuja",
-            distance_to_bus_stop: 0.2
-        },
-        main_route: {
-            description: "Take a bus from FHA Bus Stop to Area 1. ~6 km.",
-            hausa_description: "Hau bus daga Tashar FHA zuwa Area 1. ~6 km.",
-            transport: ["Bus"],
-            fares: ["150-250"],
-            time: "20 mins",
-            hausa_time: "Minti 20",
-            traffic: "Moderate",
-            hausa_traffic: "Matsakaici"
-        },
-        alternative_route: {
-            description: "Via Airport Road to Area 1. ~7 km.",
-            hausa_description: "Ta Hanyar Airport zuwa Area 1. ~7 km.",
-            transport: ["Keke", "Bus"],
-            fares: ["200-300"],
-            time: "25 mins",
-            hausa_time: "Minti 25",
-            traffic: "Light",
-            hausa_traffic: "Sauƙi"
-        },
-        ehailing_advisory: {
-            description: "Use Bolt for quick trips.",
-            hausa_description: "Yi amfani da Bolt don tafiye-tafiye cikin sauri."
-        },
-        alighting_points: {
-            description: "Area 1 Roundabout, walk 150m.",
-            hausa_description: "Area 1 Roundabout, tafi mita 150.",
-            distance_to_destination: 0.15,
-            single_mode: true
-        },
-        end_address_details: {
-            description: "Area 1, near Area 1 Roundabout",
-            hausa_description: "Area 1, kusa da Area 1 Roundabout",
-            map_link: "https://maps.google.com/?q=Area+1,+Abuja",
-            distance_from_bus_stop: 0.15,
-            security_concerns: false
-        }
-    },
-    "apo to wuse": {
-        start_address_details: {
-            description: "Apo, near Apo Roundabout",
-            hausa_description: "Apo, kusa da Apo Roundabout",
-            map_link: "https://maps.google.com/?q=Apo,+Abuja",
-            distance_to_bus_stop: 0.2
-        },
-        main_route: {
-            description: "Board a bus from Apo Roundabout to Wuse Market. ~5 km.",
-            hausa_description: "Hau bus daga Apo Roundabout zuwa Kasuwar Wuse. ~5 km.",
-            transport: ["Bus", "Shared Taxi"],
-            fares: ["100-200"],
-            time: "18 mins",
-            hausa_time: "Minti 18",
-            traffic: "Moderate",
-            hausa_traffic: "Matsakaici"
-        },
-        alternative_route: {
-            description: "Via Gudu to Wuse. ~6 km.",
-            hausa_description: "Ta Gudu zuwa Wuse. ~6 km.",
-            transport: ["Keke", "Bus"],
-            fares: ["150-250"],
-            time: "22 mins",
-            hausa_time: "Minti 22",
-            traffic: "Light",
-            hausa_traffic: "Sauƙi"
-        },
-        ehailing_advisory: {
-            description: "Use Uber for comfort.",
-            hausa_description: "Yi amfani da Uber don jin daɗi."
-        },
-        alighting_points: {
-            description: "Wuse Market, walk 100m.",
-            hausa_description: "Kasuwar Wuse, tafi mita 100.",
-            distance_to_destination: 0.1,
-            single_mode: true
-        },
-        end_address_details: {
-            description: "Wuse, near Wuse Market",
-            hausa_description: "Wuse, kusa da Kasuwar Wuse",
-            map_link: "https://maps.google.com/?q=Wuse,+Abuja",
-            distance_from_bus_stop: 0.1,
-            security_concerns: false
-        }
-    },
-    "gwarinpa to gwarinpa": {
-        start_address_details: {
-            description: "Gwarinpa, near Estate Gate",
-            hausa_description: "Gwarinpa, kusa da Ƙofar Estate",
-            map_link: "https://maps.google.com/?q=Gwarinpa,+Abuja",
-            distance_to_bus_stop: 0
-        },
-        main_route: {
-            description: "You're already in Gwarinpa.",
-            hausa_description: "Kana riga a Gwarinpa.",
-            transport: [],
-            fares: [],
-            time: "0 mins",
-            hausa_time: "Minti 0",
-            traffic: "None",
-            hausa_traffic: "Babu"
-        },
-        alternative_route: {
-            description: "No alternative route needed.",
-            hausa_description: "Babu wata hanya da ake bukata.",
-            transport: [],
-            fares: [],
-            time: "0 mins",
-            hausa_time: "Minti 0",
-            traffic: "None",
-            hausa_traffic: "Babu"
-        },
-        ehailing_advisory: {
-            description: "No e-hailing needed.",
-            hausa_description: "Babu bukatar e-hailing."
-        },
-        alighting_points: {
-            description: "You're at your destination.",
-            hausa_description: "Kana wurin da kake so.",
-            distance_to_destination: 0,
-            single_mode: true
-        },
-        end_address_details: {
-            description: "Gwarinpa, near Estate Gate",
-            hausa_description: "Gwarinpa, kusa da Ƙofar Estate",
-            map_link: "https://maps.google.com/?q=Gwarinpa,+Abuja",
-            distance_from_bus_stop: 0,
-            security_concerns: false
-        }
-    },
-    // Added more permutations from sources, e.g., "berger to nyanya"
     "berger to nyanya": {
         start_address_details: {
             description: "Berger, near Berger Junction",
@@ -450,7 +134,6 @@ const routes = {
             security_concerns: false
         }
     },
-    // More added from sources
     "idu to airport": {
         start_address_details: {
             description: "Idu, near Idu Station",
@@ -541,7 +224,6 @@ const routes = {
             security_concerns: false
         }
     },
-    // Reverse permutation
     "asokoro to wuse": {
         start_address_details: {
             description: "Asokoro, near AYA Roundabout",
@@ -587,7 +269,6 @@ const routes = {
             security_concerns: false
         }
     },
-    // ... Add reverse and other permutations for all defined routes. For example, "kubwa to berger", "maitama to garki", etc.
     "kubwa to berger": {
         start_address_details: {
             description: "Kubwa, near Kubwa Market",
@@ -632,9 +313,7 @@ const routes = {
             distance_from_bus_stop: 0.1,
             security_concerns: false
         }
-    },
-    // Continue adding for all routes and their reverses. For areas like "gwarinpa to asokoro", if not direct, the dynamic generator will handle.
-    // Full list would be long; in practice, add as needed or use graph for all permutations.
+    }
 };
 
 // Build graph for dynamic permutations
@@ -647,18 +326,94 @@ Object.keys(routes).forEach(key => {
     const reverseKey = `${end} to ${start}`;
     if (!routes[reverseKey]) {
         if (!graph[end]) graph[end] = {};
-        graph[end][start] = { ...routes[key], main_route: { ...routes[key].main_route, description: routes[key].main_route.description.replace(start, end).replace(end, start) } }; // Simplified reverse
+        graph[end][start] = {
+            ...routes[key],
+            start_address_details: { ...routes[key].end_address_details },
+            end_address_details: { ...routes[key].start_address_details },
+            main_route: {
+                ...routes[key].main_route,
+                description: routes[key].main_route.description.replace(start, end).replace(end, start),
+                hausa_description: routes[key].main_route.hausa_description.replace(start, end).replace(end, start)
+            },
+            alternative_route: {
+                ...routes[key].alternative_route,
+                description: routes[key].alternative_route.description.replace(start, end).replace(end, start),
+                hausa_description: routes[key].alternative_route.hausa_description.replace(start, end).replace(end, start)
+            }
+        };
     }
 });
 
-// BFS for path finding (shortest by transits)
+// Variables
+let selectedLanguage = localStorage.getItem('language') || 'english';
+const chatArea = document.getElementById("chat-area");
+const inputForm = document.getElementById("input-form");
+const textInput = document.getElementById("textInput");
+const langBtn = document.getElementById("lang-btn");
+const suggestionsDiv = document.getElementById("suggestions");
+const clearBtn = document.getElementById("clear-btn");
+const loadingDiv = document.getElementById("loading");
+let typingTimeout = null;
+
+// Helper Functions
+function levenshteinDistance(s, t) {
+    if (!s.length) return t.length;
+    if (!t.length) return s.length;
+    const arr = [];
+    for (let i = 0; i <= t.length; i++) {
+        arr[i] = [i];
+        for (let j = 1; j <= s.length; j++) {
+            arr[i][j] = i === 0 ? j : Math.min(
+                arr[i - 1][j] + 1,
+                arr[i][j - 1] + 1,
+                arr[i - 1][j - 1] + (s[j - 1] === t[i - 1] ? 0 : 1)
+            );
+        }
+    }
+    return arr[t.length][s.length];
+}
+
+function normalizeInput(input) {
+    return input.toLowerCase()
+        .replace(/from\s+/gi, '')
+        .replace(/\s+to\s+/gi, ' to ')
+        .replace(/[^a-z\s]/g, '')
+        .trim();
+}
+
+function renderMessage(message, sender) {
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble ' + (sender === 'user' ? 'user-bubble' : 'bot-bubble');
+    bubble.innerHTML = message;
+    const timestamp = document.createElement('div');
+    timestamp.className = 'timestamp';
+    timestamp.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    bubble.appendChild(timestamp);
+    chatArea.appendChild(bubble);
+    chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+function getRouteSuggestions(input) {
+    const normalized = normalizeInput(input);
+    if (!normalized || normalized.split(' ').filter(word => word).length < 2) return [];
+    return Object.keys(routes)
+        .map(key => ({
+            key,
+            dist: levenshteinDistance(normalized, key)
+        }))
+        .filter(item => item.dist <= Math.max(4, normalized.length / 2))
+        .sort((a, b) => a.dist - b.dist)
+        .slice(0, 5)
+        .map(item => item.key);
+}
+
 function findPath(start, end) {
     if (graph[start] && graph[start][end]) return [[start, end]];
     const queue = [[start, [start]]];
     const visited = new Set();
     while (queue.length) {
         const [current, path] = queue.shift();
-        if (visited.has(current) ) continue;
+        if (visited.has(current)) continue;
         visited.add(current);
         if (current === end) return path;
         for (const neighbor in graph[current] || {}) {
@@ -668,7 +423,6 @@ function findPath(start, end) {
     return null;
 }
 
-// Update getRouteKey to use dynamic path if direct not found
 function getRouteKey(input) {
     const normalized = normalizeInput(input);
     if (!normalized) return null;
@@ -687,7 +441,7 @@ function getRouteKey(input) {
             levenshteinDistance(inputWords[inputWords.length - 1], keyWords[0])
         );
         const endDist = Math.min(
-            levenshteinDistance(inputWords[0], keyWords[1]),
+            leveshteinDistance(inputWords[0], keyWords[1]),
             levenshteinDistance(inputWords[inputWords.length - 1], keyWords[1])
         );
         const totalDist = startDist + endDist;
@@ -704,14 +458,12 @@ function getRouteKey(input) {
     const start = inputWords[0];
     const end = inputWords[inputWords.length - 1];
     const path = findPath(start, end);
-    if (path) return path; // Return path array for transits
+    if (path) return path;
     return null;
 }
 
-// Update formatRoute to handle path array for transits
 function formatRoute(routeOrPath, lang) {
     if (Array.isArray(routeOrPath)) {
-        // Transit path
         let response = lang === 'hausa' ? "Babu hanya kai tsaye, amma zaka yi transit ta wadannan hanyoyi:<br>" : "No direct route, but you can transit via these adjoining routes:<br>";
         for (let i = 0; i < routeOrPath.length - 1; i++) {
             const start = routeOrPath[i];
@@ -721,7 +473,6 @@ function formatRoute(routeOrPath, lang) {
         }
         return response;
     } else {
-        // Direct route (existing formatRoute logic)
         const isHausa = lang === 'hausa';
         const start = routeOrPath.start_address_details.description.split(',')[0];
         const end = routeOrPath.end_address_details.description.split(',')[0];
@@ -763,22 +514,70 @@ function formatRoute(routeOrPath, lang) {
             ? `<b>Adireshin Ƙarshe:</b> ${routeOrPath.end_address_details.hausa_description} <a href="${routeOrPath.end_address_details.map_link}" target="_blank">[Duba Google Maps]</a><br>`
             : `<b>Destination:</b> ${routeOrPath.end_address_details.description} <a href="${routeOrPath.end_address_details.map_link}" target="_blank">[Check Google Maps]</a><br>`;
 
-        response += isHausa ? "Na gode! Kana bukatar ƙarin taimako?" : "All set! Need more help?";
+        response += isHausa ? "Na gode! Kana bukata ƙarin taimako?" : "All set! Need more help?";
         return response;
     }
 }
 
-// ... (rest of the code, with inputForm.addEventListener updated to handle path)
+function showSuggestions(input) {
+    clearTimeout(typingTimeout);
+    typingTimeout = setTimeout(() => {
+        const suggestions = getRouteSuggestions(input);
+        suggestionsDiv.innerHTML = "";
+        if (suggestions.length > 0) {
+            suggestionsDiv.classList.remove("hidden");
+            suggestions.forEach((key, idx) => {
+                const item = document.createElement("div");
+                item.className = "suggestion-item" + (idx === 0 ? " active" : "");
+                item.textContent = key.replace(/\b\w/g, l => l.toUpperCase());
+                item.onclick = () => {
+                    textInput.value = key;
+                    suggestionsDiv.classList.add("hidden");
+                    textInput.focus();
+                    inputForm.dispatchEvent(new Event("submit"));
+                };
+                suggestionsDiv.appendChild(item);
+            });
+        } else {
+            suggestionsDiv.classList.add("hidden");
+        }
+    }, 300);
+}
+
+// Event Listeners
+textInput.addEventListener("input", (e) => {
+    showSuggestions(e.target.value);
+});
+
+textInput.addEventListener("keydown", (e) => {
+    const items = suggestionsDiv.querySelectorAll(".suggestion-item");
+    let idx = Array.from(items).findIndex(it => it.classList.contains("active"));
+    if (["ArrowDown", "ArrowUp"].includes(e.key) && items.length) {
+        e.preventDefault();
+        items.forEach(it => it.classList.remove("active"));
+        if (e.key === "ArrowDown") idx = (idx + 1) % items.length;
+        if (e.key === "ArrowUp") idx = (idx - 1 + items.length) % items.length;
+        items[idx].classList.add("active");
+        items[idx].scrollIntoView({ block: "nearest" });
+    }
+    if (e.key === "Enter" && idx > -1 && items.length) {
+        e.preventDefault();
+        textInput.value = items[idx].textContent;
+        suggestionsDiv.classList.add("hidden");
+        inputForm.dispatchEvent(new Event("submit"));
+    }
+});
+
 inputForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const input = textInput.value.trim();
     if (!input) return;
-    console.log("Processing input:", input); // Debug log
+    console.log("Processing input:", input);
     renderMessage(input, "user");
     loadingDiv.style.display = 'block';
     try {
         const routeKeyOrPath = getRouteKey(input);
-        console.log("Matched route key or path:", routeKeyOrPath); // Debug log
+        console.log("Matched route key or path:", routeKeyOrPath);
         let reply = "";
         if (routeKeyOrPath) {
             reply = formatRoute(routeKeyOrPath, selectedLanguage);
@@ -792,7 +591,7 @@ inputForm.addEventListener("submit", function (e) {
             renderMessage(reply, "bot");
         }, 400);
     } catch (error) {
-        console.error("Error in submit handler:", error); // Debug log
+        console.error("Error in submit handler:", error);
         loadingDiv.style.display = 'none';
         renderMessage(
             selectedLanguage === "english"
@@ -805,4 +604,37 @@ inputForm.addEventListener("submit", function (e) {
     suggestionsDiv.classList.add("hidden");
 });
 
-// ... (other code as before)
+langBtn.addEventListener("change", (e) => {
+    selectedLanguage = e.target.value;
+    localStorage.setItem('language', selectedLanguage);
+    renderMessage(
+        selectedLanguage === "english"
+            ? "Switched to English."
+            : "An sauya zuwa Hausa.",
+        "bot"
+    );
+    textInput.focus();
+});
+
+if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+        chatArea.innerHTML = "";
+        renderMessage(
+            selectedLanguage === "english"
+                ? "Chat cleared! Ask for directions, e.g., <i>from Wuse to Asokoro</i>."
+                : "An share sako! Tambayi hanya, misali, <i>daga Wuse zuwa Asokoro</i>.",
+            "bot"
+        );
+        textInput.focus();
+    });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    langBtn.value = selectedLanguage;
+    renderMessage(
+        selectedLanguage === "english"
+            ? "Hello! Ask me for public transport directions in Abuja. For example, type: <i>from Wuse to Asokoro</i>."
+            : "Sannu! Tambaye ni game da hanyoyin sufuri a Abuja. Misali, rubuta: <i>daga Wuse zuwa Asokoro</i>.",
+        "bot"
+    );
+});
