@@ -5,50 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abuja Commuter Chatbot</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chat-area {
+            height: 28rem;
+            overflow-y: auto;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-bubble { max-width: 80%; margin: 0.5rem; padding: 0.5rem 1rem; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.07); position: relative; }
+        .user-bubble { background: #dcf8c6; color: #000; margin-left: auto; border-bottom-right-radius: 0; }
+        .bot-bubble { background: #fff; color: #111; margin-right: auto; border-bottom-left-radius: 0; }
+        .timestamp { font-size: 0.7rem; color: #8b8b8b; margin-top: 0.25rem; text-align: right; }
+        @media (max-width: 640px) {
+            .chat-area { height: 15rem; }
+        }
+    </style>
 </head>
-<body class="bg-green-100 flex items-center justify-center h-screen">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h1 class="text-2xl font-bold text-center mb-4 text-green-700">Abuja Commuter Chatbot 🚍</h1>
-        <p class="text-center text-gray-600 mb-4">Ask about transport routes (e.g., "from Wuse to Asokoro" or "Wuse to Asokoro")</p>
-        <input
-            id="textInput"
-            type="text"
-            placeholder="Type '[from] Wuse to Asokoro'..."
-            class="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-        >
-        <p id="result" class="text-center text-gray-700"></p>
+<body class="bg-green-100 flex items-center justify-center min-h-screen">
+    <div class="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center mb-2 text-green-700">Abuja Commuter Chatbot 🚍</h1>
+        <div id="chat-area" class="chat-area mb-4"></div>
+        <form id="input-form" autocomplete="off" class="flex items-center space-x-2 relative">
+            <input
+                id="textInput"
+                type="text"
+                placeholder="Type a route, eg. 'from Wuse to Asokoro'..."
+                aria-label="Type your route"
+                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                autofocus
+                autocomplete="off"
+            />
+            <button type="button" id="lang-btn" class="px-2 py-1 bg-gray-200 rounded text-xs" title="Switch Language">EN/HA</button>
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Send</button>
+            <div id="suggestions" class="suggestion-list hidden"></div>
+        </form>
     </div>
-    <script>
-        const input = document.getElementById('textInput');
-        const result = document.getElementById('result');
-
-        // Expanded place-to-place transport responses (case-insensitive)
-        const responses = {
-            'wuse to asokoro': 'How far? From Wuse to Asokoro, grab a taxi from Wuse Market (₦500-₦700, 15 mins) or a bus from Banex (₦200, 20-25 mins). 🚖🚍',
-            'garki to maitama': 'No wahala! From Garki to Maitama, take a keke from Area 1 (₦150-₦200, 10 mins) or a taxi from Garki Market (₦400-₦600, 12 mins). 🚲🚖',
-            'asokoro to wuse': 'E don set! From Asokoro to Wuse, hop on a taxi at AYA Roundabout (₦500-₦700, 15 mins) or a bus from Asokoro Junction (₦200, 20-25 mins). 🚖🚍',
-            'maitama to airport': 'You dey go airport? From Maitama, take an airport shuttle from Maitama Junction (₦1000-₦1500, 30 mins) or book a Bolt (₦2000-₦2500, 25 mins). ✈️🚗',
-            'kubwa to lugbe': 'From Kubwa to Lugbe, jump on a bus at Kubwa Phase 2 (₦300-₦400, 25-30 mins) or a taxi (₦800-₦1000, 20 mins). Sharp sharp! 🚍🚖',
-            'nyanya to central area': 'No stress! From Nyanya to Central Area, take a bus from Nyanya Junction (₦250-₦350, 20-25 mins) or a keke (₦200, 15 mins). 🚍🚲'
-        };
-
-        input.addEventListener('input', () => {
-            let userInput = input.value.toLowerCase().trim();
-            
-            // Flexible parsing: handle "from X to Y", "X to Y", or "X Y"
-            userInput = userInput.replace(/\s*(from\s+)?(.*)\s+to\s+(.*)/i, '$2 to $3').replace(/\s+/g, ' ');
-            
-            const response = responses[userInput] || 'Oga, that route no dey here o! Try "from Wuse to Asokoro" or "Kubwa to Lugbe".';
-            
-            result.textContent = response;
-            if (responses[userInput]) {
-                result.classList.remove('text-red-500');
-                result.classList.add('text-green-700');
-            } else {
-                result.classList.remove('text-green-700');
-                result.classList.add('text-red-500');
-            }
-        });
-    </script>
+    <script src="chatbot.js"></script>
 </body>
 </html>
