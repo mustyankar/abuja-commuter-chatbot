@@ -1,56 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abuja Commuter Chatbot</title>
+    <title>Shekwoni Abuja Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic&display=swap" rel="stylesheet">
+    <title>Abuja Commuter Chatbot</title>
 <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(to bottom, #f0f9ff, #dbeafe); 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            padding: 0.5rem;
+        }
+        .hausa { 
+            font-family: 'Noto Sans Arabic', Arial, sans-serif; 
+        }
+        .chat-bubble { 
+            max-width: 80%; 
+            margin: 0.5rem; 
+            padding: 0.5rem 1rem; 
+            border-radius: 0.75rem; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+        .user-bubble { 
+            background: #dcf8c6; 
+            color: #000; 
+            margin-left: auto; 
+            border-bottom-right-radius: 0; 
+        }
+        .bot-bubble { 
+            background: #ffffff; 
+            color: #000; 
+            margin-right: auto; 
+            border-bottom-left-radius: 0; 
+        }
+        .timestamp { 
+            font-size: 0.75rem; 
+            color: #6b7280; 
+            margin-top: 0.25rem; 
+            text-align: right; 
+        }
+        .spinner { 
+            border: 2px solid #f3f3f3; 
+            border-top: 2px solid #3b82f6; 
+            border-radius: 50%; 
+            width: 1.25rem; 
+            height: 1.25rem; 
+            animation: spin 1s linear infinite; 
+            margin: 0.5rem auto; 
+        }
+        @keyframes spin { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
+        }
+        @keyframes slideIn {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        #chat-box::-webkit-scrollbar { 
+            width: 0.4rem; 
+        }
+        #chat-box::-webkit-scrollbar-thumb { 
+            background: #3b82f6; 
+            border-radius: 0.2rem; 
+        }
+        @media (max-width: 640px) {
+            #chat-container { max-width: 100%; }
+            .chat-bubble { max-width: 85%; font-size: 0.875rem; }
+            #user-input { font-size: 0.875rem; }
+            #send-btn, #toggle-lang-btn, #change-lang-btn { font-size: 0.875rem; padding: 0.5rem; }
+        }
+    </style>
 </head>
+<body>
+    <div id="chat-container" class="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden" role="region" aria-label="Shekwoni Abuja Guide Chatbot">
+        <div id="language-selection" class="p-3 bg-gray-100 border-b border-gray-200 sm:p-4" role="radiogroup" aria-label="Select language">
+            <p id="lang-prompt" class="text-center text-gray-700 font-medium text-sm sm:text-base mb-2">Select your language</p>
+            <div class="flex justify-center space-x-3 sm:space-x-4">
+                <label class="flex items-center">
+                    <input type="radio" name="language" value="english" checked class="mr-1 sm:mr-2" tabindex="0">
+                    <span class="text-gray-700 text-sm sm:text-base">English</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="radio" name="language" value="hausa" class="mr-1 sm:mr-2" tabindex="0">
+                    <span class="text-gray-700 text-sm sm:text-base">Hausa</span>
+                </label>
+            </div>
+            <button id="change-lang-btn" class="mt-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 w-full text-sm sm:text-base" aria-label="Confirm language selection" tabindex="0">Confirm</button>
+        </div>
+        <div id="chat-box" class="h-80 sm:h-96 overflow-y-auto p-3 sm:p-4" role="log" aria-live="polite"></div>
+        <div id="input-container" class="p-3 sm:p-4 bg-gray-50 border-t border-gray-200 flex items-center space-x-2">
+            <button id="toggle-lang-btn" class="px-2 py-1.5 sm:px-3 sm:py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition duration-200 text-sm sm:text-base" aria-label="Change language" style="display: none;">Switch Language</button>
+            <input type="text" id="user-input" class="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base" placeholder="Type your message..." aria-label="Enter your route query">
+            <button id="send-btn" class="px-2 py-1.5 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 text-sm sm:text-base" aria-label="Send message">Send</button>
+        </div>
 <body class="bg-green-100 flex items-center justify-center h-screen">
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-<div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h1 class="text-2xl font-bold text-center mb-4 text-green-700">Abuja Commuter Chatbot 🚍</h1>
-        <p class="text-center text-gray-600 mb-4">Ask about transport routes (e.g., "from Wuse to Asokoro")</p>
-        <h1 class="text-2xl font-bold text-center mb-4">Case-Insensitive Input</h1>
-<input
-id="textInput"
-type="text"
-            placeholder="Type 'from [place] to [place]'..."
+        <p class="text-center text-gray-600 mb-4">Ask about transport routes (e.g., "from Wuse to Asokoro" or "Wuse to Asokoro")</p>
+        <input
+            id="textInput"
+            type="text"
+            placeholder="Type '[from] Wuse to Asokoro'..."
             class="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="Type 'from Wuse to Asokoro'..."
-            class="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
->
-<p id="result" class="text-center text-gray-700"></p>
+        >
+        <p id="result" class="text-center text-gray-700"></p>
 </div>
-<script>
-const input = document.getElementById('textInput');
-const result = document.getElementById('result');
+    <script src="chatbot.js"></script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'971bdeb79b14337c',t:'MTc1NTYyOTc3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>
+        const input = document.getElementById('textInput');
+        const result = document.getElementById('result');
 
-// Sample place-to-place transport responses (case-insensitive)
-const responses = {
-            'from wuse to asokoro': 'From Wuse to Asokoro: Take a taxi from Wuse Market (₦500-₦700, 15 mins) or a bus from Banex (₦200, 20-25 mins). 🚖🚍',
-            'from wuse to asokoro': 'From Wuse to Asokoro: Taxi from Wuse Market (₦500-₦700, 15 mins) or bus from Banex (₦200, 20-25 mins). 🚖🚍',
-'from garki to maitama': 'From Garki to Maitama: Keke napep from Area 1 (₦150-₦200, 10 mins) or taxi from Garki Market (₦400-₦600, 12 mins). 🚲🚖',
-'from asokoro to wuse': 'From Asokoro to Wuse: Taxi from AYA Roundabout (₦500-₦700, 15 mins) or bus from Asokoro Junction (₦200, 20-25 mins). 🚖🚍',
-'from maitama to airport': 'From Maitama to Airport: Airport shuttle from Maitama Junction (₦1000-₦1500, 30 mins) or Bolt ride (₦2000-₦2500, 25 mins). ✈️🚗'
-};
+        // Expanded place-to-place transport responses (case-insensitive)
+        const responses = {
+            'wuse to asokoro': 'How far? From Wuse to Asokoro, grab a taxi from Wuse Market (₦500-₦700, 15 mins) or a bus from Banex (₦200, 20-25 mins). 🚖🚍',
+            'garki to maitama': 'No wahala! From Garki to Maitama, take a keke from Area 1 (₦150-₦200, 10 mins) or a taxi from Garki Market (₦400-₦600, 12 mins). 🚲🚖',
+            'asokoro to wuse': 'E don set! From Asokoro to Wuse, hop on a taxi at AYA Roundabout (₦500-₦700, 15 mins) or a bus from Asokoro Junction (₦200, 20-25 mins). 🚖🚍',
+            'maitama to airport': 'You dey go airport? From Maitama, take an airport shuttle from Maitama Junction (₦1000-₦1500, 30 mins) or book a Bolt (₦2000-₦2500, 25 mins). ✈️🚗',
+            'kubwa to lugbe': 'From Kubwa to Lugbe, jump on a bus at Kubwa Phase 2 (₦300-₦400, 25-30 mins) or a taxi (₦800-₦1000, 20 mins). Sharp sharp! 🚍🚖',
+            'nyanya to central area': 'No stress! From Nyanya to Central Area, take a bus from Nyanya Junction (₦250-₦350, 20-25 mins) or a keke (₦200, 15 mins). 🚍🚲'
+        };
 
-input.addEventListener('input', () => {
-const userInput = input.value.toLowerCase().trim();
-            const response = responses[userInput] || 'Sorry, I don’t recognize that route. Try "from Wuse to Asokoro" or "from Garki to Maitama".';
-            const response = responses[userInput] || 'No match. Try "from Wuse to Asokoro" or "from Garki to Maitama".';
-
-result.textContent = response;
-if (responses[userInput]) {
-result.classList.remove('text-red-500');
+        input.addEventListener('input', () => {
+            let userInput = input.value.toLowerCase().trim();
+            
+            // Flexible parsing: handle "from X to Y", "X to Y", or "X Y"
+            userInput = userInput.replace(/\s*(from\s+)?(.*)\s+to\s+(.*)/i, '$2 to $3').replace(/\s+/g, ' ');
+            
+            const response = responses[userInput] || 'Oga, that route no dey here o! Try "from Wuse to Asokoro" or "Kubwa to Lugbe".';
+            
+            result.textContent = response;
+            if (responses[userInput]) {
+                result.classList.remove('text-red-500');
                 result.classList.add('text-green-700');
-                result.classList.add('text-green-500');
-} else {
+            } else {
                 result.classList.remove('text-green-700');
-                result.classList.remove('text-green-500');
-result.classList.add('text-red-500');
-}
-});
-</script>
+                result.classList.add('text-red-500');
+            }
+        });
+    </script>
 </body>
 </html>
