@@ -332,6 +332,26 @@ function chatbotResponse(userInput, selectedLanguage = "english") {
 // --- DOM & Event Handling ---
 let selectedLanguage = "english";
 
+// Language toggle function
+document.getElementById("toggle-lang-btn").onclick = function () {
+    selectedLanguage = selectedLanguage === "english" ? "hausa" : "english";
+    const chatBox = document.getElementById("chat-box");
+    const messages = chatBox.getElementsByClassName("chat-bubble");
+    for (let msg of messages) {
+        if (msg.classList.contains("bot-bubble")) {
+            msg.classList.toggle("hausa", selectedLanguage === "hausa");
+            msg.textContent = msg.textContent; // Forces re-render to apply styles
+        }
+    }
+    showMessage(
+        selectedLanguage === "hausa"
+            ? "Harshe ya canza zuwa Hausa!"
+            : "Language changed to English!",
+        "bot",
+        selectedLanguage
+    );
+};
+
 // Language selection
 document.getElementById("change-lang-btn").onclick = function () {
     const selected = document.querySelector('input[name="language"]:checked');
@@ -375,10 +395,3 @@ document.getElementById("user-input").addEventListener("keypress", function (eve
         document.getElementById("send-btn").click();
     }
 });
-
-document.getElementById("toggle-lang-btn").onclick = function () {
-    document.getElementById("language-selection").style.display = "";
-    document.getElementById("chat-box").style.display = "none";
-    document.getElementById("input-container").style.display = "none";
-    document.getElementById("toggle-lang-btn").style.display = "none";
-};
