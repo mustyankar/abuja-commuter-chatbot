@@ -132,3 +132,42 @@
         .error {
             color: #dc3545;
         }
+        @media (max-width: 600px) {
+            #chat-container {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+            }
+            .chat-bubble {
+                max-width: 80%;
+            }
+            #input-area {
+                flex-direction: column;
+                padding: 5px;
+            }
+            #user-input {
+                border-radius: 5px;
+                margin-bottom: 5px;
+                width: 100%;
+            }
+            #send-btn, #lang-toggle {
+                width: 100%;
+                margin: 5px 0;
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="welcome-message"></div>
+    <div id="chat-container">
+        <div id="chat-box"></div>
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="Type your route (e.g., From Wuse 2 to Asokoro)">
+            <button id="send-btn">Send</button>
+            <input type="checkbox" id="lang-toggle">
+        </div>
+    </div>
+    <script src="chatbot.js"></script>
+</body>
+</html>
