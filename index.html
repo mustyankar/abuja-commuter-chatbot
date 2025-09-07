@@ -67,6 +67,7 @@
             padding: 10px;
             background-color: #fff;
             border-top: 1px solid #ddd;
+            align-items: center; /* Added for vertical alignment */
         }
         #user-input {
             flex: 1;
@@ -82,21 +83,21 @@
             border: none;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
+            margin-right: 10px; /* Added for spacing */
         }
         #send-btn:hover {
             background-color: #0056b3;
         }
         #lang-toggle {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 60px;
-            height: 30px;
+            width: 50px;
+            height: 25px;
             appearance: none;
             background: #ccc;
-            border-radius: 15px;
+            border-radius: 12.5px;
             cursor: pointer;
             outline: none;
+            position: relative;
+            margin: 0 5px; /* Adjusted for spacing */
             transition: background 0.3s;
         }
         #lang-toggle:checked {
@@ -105,27 +106,27 @@
         #lang-toggle::before {
             content: "H";
             position: absolute;
-            left: 5px;
-            top: 5px;
-            font-size: 1em;
+            left: 4px;
+            top: 3px;
+            font-size: 0.9em;
             color: #fff;
             transition: transform 0.3s;
         }
         #lang-toggle::after {
             content: "E";
             position: absolute;
-            right: 5px;
-            top: 5px;
-            font-size: 1em;
+            right: 4px;
+            top: 3px;
+            font-size: 0.9em;
             color: #fff;
             transition: transform 0.3s;
         }
         #lang-toggle:checked::before {
-            transform: translateX(-30px);
+            transform: translateX(-22px);
             color: #007bff;
         }
         #lang-toggle:checked::after {
-            transform: translateX(30px);
+            transform: translateX(22px);
             color: #ccc;
         }
         .error {
@@ -140,6 +141,20 @@
             .chat-bubble {
                 max-width: 80%;
             }
+            #input-area {
+                flex-direction: column;
+                padding: 5px;
+            }
+            #user-input {
+                border-radius: 5px;
+                margin-bottom: 5px;
+                width: 100%;
+            }
+            #send-btn, #lang-toggle {
+                width: 100%;
+                margin: 5px 0;
+                border-radius: 5px;
+            }
         }
     </style>
 </head>
@@ -150,9 +165,9 @@
         <div id="input-area">
             <input type="text" id="user-input" placeholder="Type your route (e.g., From Wuse 2 to Asokoro)">
             <button id="send-btn">Send</button>
+            <input type="checkbox" id="lang-toggle">
         </div>
     </div>
-    <input type="checkbox" id="lang-toggle">
     <script src="chatbot.js"></script>
 </body>
 </html>
