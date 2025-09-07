@@ -67,7 +67,7 @@
             padding: 10px;
             background-color: #fff;
             border-top: 1px solid #ddd;
-            align-items: center;
+            align-items: center; /* Added for vertical alignment */
         }
         #user-input {
             flex: 1;
@@ -83,7 +83,7 @@
             border: none;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
-            margin-right: 10px;
+            margin-right: 10px; /* Added for spacing */
         }
         #send-btn:hover {
             background-color: #0056b3;
@@ -97,7 +97,7 @@
             cursor: pointer;
             outline: none;
             position: relative;
-            margin: 0 5px;
+            margin: 0 5px; /* Adjusted for spacing */
             transition: background 0.3s;
         }
         #lang-toggle:checked {
@@ -150,24 +150,4 @@
                 margin-bottom: 5px;
                 width: 100%;
             }
-            #send-btn, #lang-toggle {
-                width: 100%;
-                margin: 5px 0;
-                border-radius: 5px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div id="welcome-message"></div>
-    <div id="chat-container">
-        <div id="chat-box"></div>
-        <div id="input-area">
-            <input type="text" id="user-input" placeholder="Type your route (e.g., From Wuse 2 to Asokoro)">
-            <button id="send-btn">Send</button>
-            <input type="checkbox" id="lang-toggle">
-        </div>
-    </div>
-    <script src="chatbot.js"></script>
-</body>
-</html>
+            #send-btn, #
