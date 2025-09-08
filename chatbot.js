@@ -51,7 +51,25 @@ const routes = {
     // ...
 };
 
-// [Rest of the chatbot.js code, including minor tweak to chatbotResponse]
+// Fuzzy matching function (unchanged)
+function suggestLocation(words) {
+    const locationKeywords = {
+        "wuse": ["wuse", "wuse2"],
+        "asokoro": ["asokoro"],
+        "maitama": ["maitama"],
+        "nyanya": ["nyanya"],
+        "gwagwalada": ["gwagwalada"]
+    };
+
+    for (let key in locationKeywords) {
+        if (words.some(word => locationKeywords[key].includes(word))) {
+            return `wuse2-${key}`; // Assuming wuse2 as a common start point for simplicity
+        }
+    }
+    return null;
+}
+
+// Chatbot response function (unchanged)
 function chatbotResponse(input) {
     const lang = document.getElementById('lang-toggle').checked ? 'hausa' : 'en';
     let response = "Sorry, I couldn't understand your request. Please try again or use a format like 'From Wuse 2 to Asokoro'.";
@@ -77,4 +95,51 @@ function chatbotResponse(input) {
     return response;
 }
 
-// [Rest of the code (fuzzy matching, suggestLocation, showMessage, event listeners) remains unchanged]
+// Show message function (unchanged)
+function showMessage(message, sender) {
+    const chatBox = document.getElementById('chat-box');
+    const bubble = document.createElement('div');
+    bubble.classList.add('chat-bubble', sender === 'user' ? 'user-bubble' : 'bot-bubble');
+    bubble.textContent = message;
+    chatBox.appendChild(bubble);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    const timestamp = document.createElement('div');
+    timestamp.classList.add('timestamp');
+    timestamp.textContent = new Date().toLocaleTimeString();
+    bubble.appendChild(timestamp);
+}
+
+// Event listeners with debug and safeguard
+document.addEventListener('DOMContentLoaded', () => {
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const langToggle = document.getElementById('lang-toggle');
+
+    if (!userInput || !sendBtn || !langToggle) {
+        console.error('One or more DOM elements not found:', { userInput, sendBtn, langToggle });
+        return;
+    }
+
+    sendBtn.addEventListener('click', () => {
+        const input = userInput.value.trim();
+        if (input) {
+            showMessage(input, 'user');
+            const response = chatbotResponse(input);
+            userInput.value = '';
+        }
+    });
+
+    userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && userInput.value.trim()) {
+            showMessage(userInput.value.trim(), 'user');
+            const response = chatbotResponse(userInput.value.trim());
+            userInput.value = '';
+        }
+    });
+
+    langToggle.addEventListener('change', () => {
+        const chatBox = document.getElementById('chat-box');
+        if (chatBox) chatBox.innerHTML = ''; // Clear chat on language switch
+        showMessage("Language switched. Ask me anything!", 'bot');
+    });
+});
