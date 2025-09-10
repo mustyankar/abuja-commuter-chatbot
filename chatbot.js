@@ -51,21 +51,23 @@ const routes = {
     // ...
 };
 
-// Fuzzy matching function
+// Improved fuzzy matching function
 function suggestLocation(words) {
-    const locationKeywords = {
-        "wuse": ["wuse", "wuse2"],
-        "asokoro": ["asokoro"],
-        "maitama": ["maitama"],
-        "nyanya": ["nyanya"],
-        "gwagwalada": ["gwagwalada"]
+    console.log('Input words:', words);
+    const locationPairs = {
+        "wuse2-asokoro": ["wuse", "asokoro"],
+        "maitama-nyanya": ["maitama", "nyanya"],
+        "wuse2-gwagwalada": ["wuse", "gwagwalada"]
     };
 
-    for (let key in locationKeywords) {
-        if (words.some(word => locationKeywords[key].includes(word))) {
-            return `wuse2-${key}`; // Simplified for testing; adjust if needed
+    for (let routeKey in locationPairs) {
+        const [start, end] = locationPairs[routeKey];
+        if (words.includes(start) && words.includes(end)) {
+            console.log(`Matched route: ${routeKey}`);
+            return routeKey;
         }
     }
+    console.log('No route matched');
     return null;
 }
 
@@ -113,7 +115,7 @@ function showMessage(message, sender) {
     bubble.appendChild(timestamp);
 }
 
-// Event listeners with enhanced debugging
+// Event listeners with debugging
 document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
