@@ -51,7 +51,7 @@ const routes = {
     // ...
 };
 
-// Fuzzy matching function (unchanged)
+// Fuzzy matching function
 function suggestLocation(words) {
     const locationKeywords = {
         "wuse": ["wuse", "wuse2"],
@@ -63,15 +63,15 @@ function suggestLocation(words) {
 
     for (let key in locationKeywords) {
         if (words.some(word => locationKeywords[key].includes(word))) {
-            return `wuse2-${key}`; // Assuming wuse2 as a common start point for simplicity
+            return `wuse2-${key}`; // Simplified for testing; adjust if needed
         }
     }
     return null;
 }
 
-// Chatbot response function (unchanged)
+// Chatbot response function
 function chatbotResponse(input) {
-    const lang = document.getElementById('lang-toggle').checked ? 'hausa' : 'en';
+    const lang = document.getElementById('lang-toggle')?.checked ? 'hausa' : 'en';
     let response = "Sorry, I couldn't understand your request. Please try again or use a format like 'From Wuse 2 to Asokoro'.";
     const words = input.toLowerCase().replace(/[^a-zA-Z0-9\s]/g, '').split(/\s+/);
     const routeKey = suggestLocation(words);
@@ -95,9 +95,13 @@ function chatbotResponse(input) {
     return response;
 }
 
-// Show message function (unchanged)
+// Show message function
 function showMessage(message, sender) {
     const chatBox = document.getElementById('chat-box');
+    if (!chatBox) {
+        console.error('Chat box not found');
+        return;
+    }
     const bubble = document.createElement('div');
     bubble.classList.add('chat-bubble', sender === 'user' ? 'user-bubble' : 'bot-bubble');
     bubble.textContent = message;
@@ -109,37 +113,46 @@ function showMessage(message, sender) {
     bubble.appendChild(timestamp);
 }
 
-// Event listeners with debug and safeguard
+// Event listeners with enhanced debugging
 document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
     const langToggle = document.getElementById('lang-toggle');
 
     if (!userInput || !sendBtn || !langToggle) {
-        console.error('One or more DOM elements not found:', { userInput, sendBtn, langToggle });
+        console.error('Missing DOM elements:', { userInput, sendBtn, langToggle });
         return;
     }
 
     sendBtn.addEventListener('click', () => {
+        console.log('Send button clicked');
         const input = userInput.value.trim();
         if (input) {
             showMessage(input, 'user');
             const response = chatbotResponse(input);
+            console.log('Response:', response);
             userInput.value = '';
+        } else {
+            console.log('No input provided');
         }
     });
 
     userInput.addEventListener('keypress', (e) => {
+        console.log('Key pressed:', e.key);
         if (e.key === 'Enter' && userInput.value.trim()) {
             showMessage(userInput.value.trim(), 'user');
             const response = chatbotResponse(userInput.value.trim());
+            console.log('Response:', response);
             userInput.value = '';
         }
     });
 
     langToggle.addEventListener('change', () => {
+        console.log('Language toggle changed');
         const chatBox = document.getElementById('chat-box');
-        if (chatBox) chatBox.innerHTML = ''; // Clear chat on language switch
-        showMessage("Language switched. Ask me anything!", 'bot');
+        if (chatBox) {
+            chatBox.innerHTML = '';
+            showMessage("Language switched. Ask me anything!", 'bot');
+        }
     });
 });
